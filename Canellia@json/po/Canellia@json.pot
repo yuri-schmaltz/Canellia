@@ -1,0 +1,1287 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-24 10:49+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: 4.0/applet.js:63
+msgid "Initializing"
+msgstr ""
+
+#: 4.0/applet.js:81 5.8/applet.js:75
+msgid "Find files..."
+msgstr ""
+
+#: 4.0/applet.js:290
+msgid "Please wait..."
+msgstr ""
+
+#: 4.0/applet.js:885 5.8/applet.js:917 5.8/applet.js:1161
+msgid "Applications"
+msgstr ""
+
+#: 4.0/applet.js:889 5.8/applet.js:921
+msgid "Documents"
+msgstr ""
+
+#: 4.0/applet.js:893 5.8/applet.js:925
+msgid "Videos"
+msgstr ""
+
+#: 4.0/applet.js:897 5.8/applet.js:929
+msgid "Images"
+msgstr ""
+
+#: 4.0/applet.js:901 5.8/applet.js:933
+msgid "Music"
+msgstr ""
+
+#: 4.0/applet.js:910 5.8/applet.js:942
+msgid "No recent Items"
+msgstr ""
+
+#: 4.0/applet.js:957 5.8/applet.js:993
+msgid "Settings"
+msgstr ""
+
+#: 4.0/applet.js:1095
+msgid "Applications and files"
+msgstr ""
+
+#: 4.0/applet.js:1098 5.8/applet.js:1167
+msgid "Other search results"
+msgstr ""
+
+#: 4.0/applet.js:1101 5.8/applet.js:1170
+msgid "Browser bookmarks"
+msgstr ""
+
+#: 4.0/applet.js:1104 5.8/applet.js:1173
+msgid "Browser history"
+msgstr ""
+
+#: 4.0/applet.js:1107 4.0/categoriesview.js:305 5.8/applet.js:1176
+#: 5.8/categoriesview.js:323
+msgid "Emoji"
+msgstr ""
+
+#: 4.0/applet.js:1161 4.0/applet.js:1299 4.0/applet.js:1786 5.8/applet.js:1223
+msgid "Click to copy"
+msgstr ""
+
+#: 4.0/applet.js:1600 5.8/applet.js:1677
+msgid "Clear List"
+msgstr ""
+
+#: 4.0/applet.js:1634 4.0/applet.js:1635 5.8/applet.js:1714 5.8/applet.js:1715
+msgid "Trash"
+msgstr ""
+
+#: 4.0/applet.js:1644 4.0/applet.js:1645 5.8/applet.js:1726 5.8/applet.js:1727
+msgid "Computer"
+msgstr ""
+
+#: 4.0/appsview.js:298 4.0/sidebar.js:111 5.8/appsview.js:330
+#: 5.8/sidebar.js:132
+msgid "Error while opening file:"
+msgstr ""
+
+#: 4.0/appsview.js:443 5.8/appsview.js:533
+msgid "Too many entries - showing first 1000 entries only"
+msgstr ""
+
+#. 4.0->settings-schema.json->open-on-category->options
+#. 5.8->settings-schema.json->open-on-category->options
+#: 4.0/categoriesview.js:283 5.8/categoriesview.js:301
+msgid "All applications"
+msgstr ""
+
+#: 4.0/categoriesview.js:301 5.8/categoriesview.js:319
+msgid "Favorites"
+msgstr ""
+
+#. 4.0->settings-schema.json->open-on-category->options
+#. 5.8->settings-schema.json->open-on-category->options
+#: 4.0/categoriesview.js:302 5.8/categoriesview.js:320
+msgid "Places"
+msgstr ""
+
+#. 4.0->settings-schema.json->open-on-category->options
+#. 5.8->settings-schema.json->open-on-category->options
+#: 4.0/categoriesview.js:303 5.8/categoriesview.js:321
+msgid "Recent"
+msgstr ""
+
+#. 4.0->settings-schema.json->open-on-category->options
+#. 5.8->settings-schema.json->open-on-category->options
+#: 4.0/categoriesview.js:304 5.8/categoriesview.js:322
+msgid "Favorite apps"
+msgstr ""
+
+#: 4.0/contextmenu.js:111 5.8/contextmenu.js:126
+msgid "light skin tone"
+msgstr ""
+
+#: 4.0/contextmenu.js:112 5.8/contextmenu.js:127
+msgid "medium-light skin tone"
+msgstr ""
+
+#: 4.0/contextmenu.js:113 5.8/contextmenu.js:128
+msgid "medium skin tone"
+msgstr ""
+
+#: 4.0/contextmenu.js:114 5.8/contextmenu.js:129
+msgid "medium-dark skin tone"
+msgstr ""
+
+#: 4.0/contextmenu.js:115 5.8/contextmenu.js:130
+msgid "dark skin tone"
+msgstr ""
+
+#: 4.0/contextmenu.js:134 5.8/contextmenu.js:149
+msgid "Remove category"
+msgstr ""
+
+#: 4.0/contextmenu.js:148 5.8/contextmenu.js:163
+msgid "Reset category order"
+msgstr ""
+
+#: 4.0/contextmenu.js:171 5.8/contextmenu.js:186
+msgid "List settings apps separately"
+msgstr ""
+
+#: 4.0/contextmenu.js:178 5.8/contextmenu.js:193
+msgid "Single list style"
+msgstr ""
+
+#: 4.0/contextmenu.js:187 5.8/contextmenu.js:202
+msgid "Hide hidden files"
+msgstr ""
+
+#. 4.0->settings-schema.json->show-hidden-files->description
+#. 5.8->settings-schema.json->show-hidden-files->description
+#: 4.0/contextmenu.js:194 5.8/contextmenu.js:209
+msgid "Show hidden files"
+msgstr ""
+
+#: 4.0/contextmenu.js:250 4.0/contextmenu.js:258 5.8/contextmenu.js:262
+msgid "Run with NVIDIA GPU"
+msgstr ""
+
+#: 4.0/contextmenu.js:264 5.8/contextmenu.js:275
+msgid "Add to panel"
+msgstr ""
+
+#: 4.0/contextmenu.js:283 5.8/contextmenu.js:296
+msgid "Add to desktop"
+msgstr ""
+
+#: 4.0/contextmenu.js:297 4.0/contextmenu.js:393 5.8/contextmenu.js:313
+#: 5.8/contextmenu.js:408
+msgid "Remove from favorites"
+msgstr ""
+
+#: 4.0/contextmenu.js:301 4.0/contextmenu.js:398 5.8/contextmenu.js:320
+#: 5.8/contextmenu.js:415
+msgid "Add to favorites"
+msgstr ""
+
+#: 4.0/contextmenu.js:308 5.8/contextmenu.js:330
+msgid "Uninstall"
+msgstr ""
+
+#: 4.0/contextmenu.js:316 5.8/contextmenu.js:341
+msgid "App Info"
+msgstr ""
+
+#: 4.0/contextmenu.js:325 5.8/contextmenu.js:350
+msgid "Properties"
+msgstr ""
+
+#: 4.0/contextmenu.js:343 5.8/contextmenu.js:368
+msgid "This file is no longer available"
+msgstr ""
+
+#: 4.0/contextmenu.js:351 5.8/contextmenu.js:376
+msgid "Open with"
+msgstr ""
+
+#: 4.0/contextmenu.js:372 5.8/contextmenu.js:397
+msgid "Other application..."
+msgstr ""
+
+#: 4.0/contextmenu.js:414 5.8/contextmenu.js:428
+msgid "Add folder as category"
+msgstr ""
+
+#: 4.0/contextmenu.js:431 5.8/contextmenu.js:445 4.0/search.py:48
+#: 5.8/search.py:48
+msgid "Open containing folder"
+msgstr ""
+
+#: 4.0/contextmenu.js:447 4.0/contextmenu.js:460 5.8/contextmenu.js:461
+#: 5.8/contextmenu.js:474
+msgid "Move to trash"
+msgstr ""
+
+#: 4.0/contextmenu.js:453 5.8/contextmenu.js:467
+msgid "Error while moving file to trash:"
+msgstr ""
+
+#: 4.0/emoji.js:7739 5.8/emoji.js:8
+msgid "Smileys & Emotion"
+msgstr ""
+
+#: 4.0/emoji.js:7740 5.8/emoji.js:689
+msgid "People & Body"
+msgstr ""
+
+#: 4.0/emoji.js:7741 5.8/emoji.js:2253
+msgid "Animals & Nature"
+msgstr ""
+
+#: 4.0/emoji.js:7742 5.8/emoji.js:2873
+msgid "Food & Drink"
+msgstr ""
+
+#: 4.0/emoji.js:7743 5.8/emoji.js:3421
+msgid "Travel & Places"
+msgstr ""
+
+#: 4.0/emoji.js:7744 5.8/emoji.js:4297
+msgid "Activities"
+msgstr ""
+
+#: 4.0/emoji.js:7745 5.8/emoji.js:4641
+msgid "Objects"
+msgstr ""
+
+#: 4.0/emoji.js:7746 5.8/emoji.js:5701
+msgid "Symbols"
+msgstr ""
+
+#: 4.0/emoji.js:7747 5.8/emoji.js:6601
+msgid "Flags"
+msgstr ""
+
+#: 4.0/sidebar.js:251 5.8/sidebar.js:265
+msgid "Quit"
+msgstr ""
+
+#: 4.0/sidebar.js:252 5.8/sidebar.js:266
+msgid "Shutdown the computer"
+msgstr ""
+
+#: 4.0/sidebar.js:260 5.8/sidebar.js:275
+msgid "Logout"
+msgstr ""
+
+#: 4.0/sidebar.js:261 5.8/sidebar.js:276
+msgid "Leave the session"
+msgstr ""
+
+#: 4.0/sidebar.js:269 5.8/sidebar.js:285
+msgid "Lock screen"
+msgstr ""
+
+#: 4.0/sidebar.js:270 5.8/sidebar.js:286
+msgid "Lock the screen"
+msgstr ""
+
+#: 5.8/applet.js:1164
+msgid "Files"
+msgstr ""
+
+#: 5.8/applet.js:1194 5.8/applet.js:1200
+msgid "Calculator: "
+msgstr ""
+
+#: 5.8/applet.js:1375 5.8/applet.js:1872
+msgid "Click to insert emoji"
+msgstr ""
+
+#: 4.0/mint-remove-application.py:34
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr ""
+
+#: 4.0/mint-remove-application.py:75
+msgid "The following packages will be removed:"
+msgstr ""
+
+#: 4.0/mint-remove-application.py:82
+msgid "Packages to be removed"
+msgstr ""
+
+#: 4.0/mint-remove-application.py:143
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr ""
+
+#: 4.0/mint-remove-application.py:149
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr ""
+
+#: 4.0/search.py:43 5.8/search.py:43
+msgid "Open"
+msgstr ""
+
+#. 4.0->settings-schema.json->search->title
+#. 4.0->settings-schema.json->search-search->title
+#. 5.8->settings-schema.json->search->title
+#. 5.8->settings-schema.json->search-search->title
+#: 4.0/search.py:85 5.8/search.py:85
+msgid "Search"
+msgstr ""
+
+#: 4.0/search.py:106 5.8/search.py:106
+msgid "Start in"
+msgstr ""
+
+#: 4.0/search.py:107 5.8/search.py:107
+msgid "Select a folder"
+msgstr ""
+
+#: 4.0/search.py:113 5.8/search.py:113
+msgid "Follow symlinks"
+msgstr ""
+
+#: 4.0/search.py:117 5.8/search.py:117
+msgid "Search hidden"
+msgstr ""
+
+#: 4.0/search.py:121 5.8/search.py:121
+msgid "Use regular expressions"
+msgstr ""
+
+#: 4.0/search.py:125 5.8/search.py:125
+msgid "Stop"
+msgstr ""
+
+#: 4.0/search.py:140 5.8/search.py:140
+msgid "File"
+msgstr ""
+
+#: 4.0/search.py:156 5.8/search.py:156
+msgid "Path"
+msgstr ""
+
+#: 4.0/search.py:184 5.8/search.py:184
+msgid "Searching..."
+msgstr ""
+
+#: 4.0/search.py:198 4.0/search.py:199 5.8/search.py:198 5.8/search.py:199
+msgid "Search Stopped"
+msgstr ""
+
+#: 4.0/search.py:215 5.8/search.py:215
+msgid "Searching: "
+msgstr ""
+
+#: 4.0/search.py:220 5.8/search.py:220
+msgid "Error: insufficient permissions to read folder "
+msgstr ""
+
+#: 4.0/search.py:252 5.8/search.py:252
+msgid "Search Completed"
+msgstr ""
+
+#: 4.0/search.py:259 5.8/search.py:259
+msgid "Skipping"
+msgstr ""
+
+#: 4.0/search.py:259 5.8/search.py:259
+msgid " - directory already searched"
+msgstr ""
+
+#. metadata.json->name
+msgid "Canellia"
+msgstr ""
+
+#. metadata.json->description
+msgid ""
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
+msgstr ""
+
+#. 4.0->settings-schema.json->layout->title
+#. 4.0->settings-schema.json->menu-layout->title
+#. 5.8->settings-schema.json->layout->title
+#. 5.8->settings-schema.json->menu-layout->title
+msgid "Layout"
+msgstr ""
+
+#. 4.0->settings-schema.json->behaviour->title
+#. 5.8->settings-schema.json->behaviour->title
+msgid "Behavior"
+msgstr ""
+
+#. 4.0->settings-schema.json->appearance->title
+#. 5.8->settings-schema.json->appearance->title
+msgid "Appearance"
+msgstr ""
+
+#. 4.0->settings-schema.json->tips->title
+#. 4.0->settings-schema.json->tips-section->title
+#. 5.8->settings-schema.json->tips->title
+#. 5.8->settings-schema.json->tips-section->title
+msgid "Tips"
+msgstr ""
+
+#. 4.0->settings-schema.json->menu-content->title
+#. 5.8->settings-schema.json->menu-content->title
+msgid "Content"
+msgstr ""
+
+#. 4.0->settings-schema.json->panel-behave->title
+#. 4.0->settings-schema.json->panel-appear->title
+#. 5.8->settings-schema.json->panel-behave->title
+#. 5.8->settings-schema.json->panel-appear->title
+msgid "Panel"
+msgstr ""
+
+#. 4.0->settings-schema.json->menu-behave->title
+#. 4.0->settings-schema.json->menu-icons->title
+#. 5.8->settings-schema.json->menu-behave->title
+#. 5.8->settings-schema.json->menu-icons->title
+msgid "Menu"
+msgstr ""
+
+#. 4.0->settings-schema.json->applications-view-mode->description
+#. 5.8->settings-schema.json->applications-view-mode->description
+msgid "Applications view mode"
+msgstr ""
+
+#. 4.0->settings-schema.json->applications-view-mode->options
+#. 5.8->settings-schema.json->applications-view-mode->options
+msgid "List"
+msgstr ""
+
+#. 4.0->settings-schema.json->applications-view-mode->options
+#. 5.8->settings-schema.json->applications-view-mode->options
+msgid "Grid"
+msgstr ""
+
+#. 4.0->settings-schema.json->applications-view-mode->tooltip
+#. 5.8->settings-schema.json->applications-view-mode->tooltip
+msgid "View applications as list or grid"
+msgstr ""
+
+#. 4.0->settings-schema.json->show-sidebar->description
+#. 5.8->settings-schema.json->show-sidebar->description
+msgid "Show sidebar"
+msgstr ""
+
+#. 4.0->settings-schema.json->show-sidebar->tooltip
+#. 5.8->settings-schema.json->show-sidebar->tooltip
+msgid "Show the sidebar in the menu"
+msgstr ""
+
+#. 4.0->settings-schema.json->sidebar-placement->description
+#. 5.8->settings-schema.json->sidebar-placement->description
+msgid "Sidebar location"
+msgstr ""
+
+#. 4.0->settings-schema.json->sidebar-placement->options
+#. 5.8->settings-schema.json->sidebar-placement->options
+msgid "Top"
+msgstr ""
+
+#. 4.0->settings-schema.json->sidebar-placement->options
+#. 5.8->settings-schema.json->sidebar-placement->options
+msgid "Bottom"
+msgstr ""
+
+#. 4.0->settings-schema.json->sidebar-placement->options
+#. 5.8->settings-schema.json->sidebar-placement->options
+msgid "Left"
+msgstr ""
+
+#. 4.0->settings-schema.json->sidebar-placement->options
+#. 5.8->settings-schema.json->sidebar-placement->options
+msgid "Right"
+msgstr ""
+
+#. 4.0->settings-schema.json->sidebar-placement->tooltip
+#. 5.8->settings-schema.json->sidebar-placement->tooltip
+msgid "Choose where to show the sidebar"
+msgstr ""
+
+#. 4.0->settings-schema.json->sidebar-favorites->description
+#. 5.8->settings-schema.json->sidebar-favorites->description
+msgid "Show favorites on sidebar"
+msgstr ""
+
+#. 4.0->settings-schema.json->sidebar-favorites->options
+#. 4.0->settings-schema.json->description-placement->options
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->sidebar-favorites->options
+#. 5.8->settings-schema.json->description-placement->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "None"
+msgstr ""
+
+#. 4.0->settings-schema.json->sidebar-favorites->options
+#. 5.8->settings-schema.json->sidebar-favorites->options
+msgid "Apps only"
+msgstr ""
+
+#. 4.0->settings-schema.json->sidebar-favorites->options
+#. 5.8->settings-schema.json->sidebar-favorites->options
+msgid "Files only"
+msgstr ""
+
+#. 4.0->settings-schema.json->sidebar-favorites->options
+#. 5.8->settings-schema.json->sidebar-favorites->options
+msgid "Apps and files"
+msgstr ""
+
+#. 4.0->settings-schema.json->sidebar-favorites->tooltip
+#. 5.8->settings-schema.json->sidebar-favorites->tooltip
+msgid "Show your favorite apps and file icons on the sidebar"
+msgstr ""
+
+#. 4.0->settings-schema.json->description-placement->description
+#. 5.8->settings-schema.json->description-placement->description
+msgid "Application description placement"
+msgstr ""
+
+#. 4.0->settings-schema.json->description-placement->options
+#. 5.8->settings-schema.json->description-placement->options
+msgid "Tooltips"
+msgstr ""
+
+#. 4.0->settings-schema.json->description-placement->options
+#. 5.8->settings-schema.json->description-placement->options
+msgid "Under titles"
+msgstr ""
+
+#. 4.0->settings-schema.json->description-placement->tooltip
+#. 5.8->settings-schema.json->description-placement->tooltip
+msgid "Choose where to show application descriptions"
+msgstr ""
+
+#. 4.0->settings-schema.json->show-categories->description
+#. 5.8->settings-schema.json->show-categories->description
+msgid "Show categories"
+msgstr ""
+
+#. 4.0->settings-schema.json->show-categories->tooltip
+#. 5.8->settings-schema.json->show-categories->tooltip
+msgid "Show list of application categories"
+msgstr ""
+
+#. 4.0->settings-schema.json->show-places-category->description
+#. 5.8->settings-schema.json->show-places-category->description
+msgid "Show bookmarks and places"
+msgstr ""
+
+#. 4.0->settings-schema.json->show-places-category->tooltip
+#. 5.8->settings-schema.json->show-places-category->tooltip
+msgid "Show bookmarks and places category in the menu"
+msgstr ""
+
+#. 4.0->settings-schema.json->show-recents-category->description
+#. 5.8->settings-schema.json->show-recents-category->description
+msgid "Show recent items"
+msgstr ""
+
+#. 4.0->settings-schema.json->show-recents-category->tooltip
+#. 5.8->settings-schema.json->show-recents-category->tooltip
+msgid "Show recent items category in the menu"
+msgstr ""
+
+#. 4.0->settings-schema.json->show-favorite-apps-category->description
+#. 5.8->settings-schema.json->show-favorite-apps-category->description
+msgid "Show favorite apps category"
+msgstr ""
+
+#. 4.0->settings-schema.json->show-favorite-apps-category->tooltip
+#. 5.8->settings-schema.json->show-favorite-apps-category->tooltip
+msgid "Show your favorite apps category in the menu"
+msgstr ""
+
+#. 4.0->settings-schema.json->show-home-folder-category->description
+#. 5.8->settings-schema.json->show-home-folder-category->description
+msgid "Show home folder"
+msgstr ""
+
+#. 4.0->settings-schema.json->show-home-folder-category->tooltip
+#. 5.8->settings-schema.json->show-home-folder-category->tooltip
+msgid "Show home folder category in the menu"
+msgstr ""
+
+#. 4.0->settings-schema.json->show-emoji-category->description
+#. 5.8->settings-schema.json->show-emoji-category->description
+msgid "Show emoji category"
+msgstr ""
+
+#. 4.0->settings-schema.json->show-emoji-category->tooltip
+#. 5.8->settings-schema.json->show-emoji-category->tooltip
+msgid "Show emoji category in the menu"
+msgstr ""
+
+#. 4.0->settings-schema.json->menu-editor-button->description
+#. 5.8->settings-schema.json->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr ""
+
+#. 4.0->settings-schema.json->overlay-key->description
+#. 5.8->settings-schema.json->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr ""
+
+#. 4.0->settings-schema.json->activate-on-hover->description
+#. 5.8->settings-schema.json->activate-on-hover->description
+msgid "Open menu on hover"
+msgstr ""
+
+#. 4.0->settings-schema.json->activate-on-hover->tooltip
+#. 5.8->settings-schema.json->activate-on-hover->tooltip
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr ""
+
+#. 4.0->settings-schema.json->hover-delay->units
+#. 5.8->settings-schema.json->hover-delay->units
+msgid "milliseconds"
+msgstr ""
+
+#. 4.0->settings-schema.json->hover-delay->description
+#. 5.8->settings-schema.json->hover-delay->description
+msgid "Menu hover delay"
+msgstr ""
+
+#. 4.0->settings-schema.json->enable-animation->description
+#. 5.8->settings-schema.json->enable-animation->description
+msgid "Use menu animations"
+msgstr ""
+
+#. 4.0->settings-schema.json->enable-animation->tooltip
+#. 5.8->settings-schema.json->enable-animation->tooltip
+msgid "Animate the menu on open and close"
+msgstr ""
+
+#. 4.0->settings-schema.json->category-click->description
+#. 5.8->settings-schema.json->category-click->description
+msgid "Activate categories on click"
+msgstr ""
+
+#. 4.0->settings-schema.json->category-click->tooltip
+#. 5.8->settings-schema.json->category-click->tooltip
+msgid "Activate categories on click instead of on hover"
+msgstr ""
+
+#. 4.0->settings-schema.json->open-on-category->description
+#. 5.8->settings-schema.json->open-on-category->description
+msgid "Open menu on category:"
+msgstr ""
+
+#. 4.0->settings-schema.json->open-on-category->tooltip
+#. 5.8->settings-schema.json->open-on-category->tooltip
+msgid "Always open the menu with this category selected"
+msgstr ""
+
+#. 4.0->settings-schema.json->open-on-category->options
+#. 5.8->settings-schema.json->open-on-category->options
+msgid "Last used category"
+msgstr ""
+
+#. 4.0->settings-schema.json->enable-autoscroll->description
+#. 5.8->settings-schema.json->enable-autoscroll->description
+msgid "Enable autoscrolling"
+msgstr ""
+
+#. 4.0->settings-schema.json->enable-autoscroll->tooltip
+#. 5.8->settings-schema.json->enable-autoscroll->tooltip
+msgid "Autoscroll the application list on mouse hover"
+msgstr ""
+
+#. 4.0->settings-schema.json->show-hidden-files->tooltip
+#. 5.8->settings-schema.json->show-hidden-files->tooltip
+msgid "Show hidden files in folder view"
+msgstr ""
+
+#. 4.0->settings-schema.json->enable-emoji-search->description
+#. 5.8->settings-schema.json->enable-emoji-search->description
+msgid "Emoji search"
+msgstr ""
+
+#. 4.0->settings-schema.json->enable-emoji-search->tooltip
+#. 5.8->settings-schema.json->enable-emoji-search->tooltip
+msgid "Show emojis in search results"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->description
+#. 5.8->settings-schema.json->web-search-option->description
+msgid "Web search option"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->tooltip
+#. 5.8->settings-schema.json->web-search-option->tooltip
+msgid "Show an internet search option in search results"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-suggestions->description
+#. 5.8->settings-schema.json->web-suggestions->description
+msgid "Web search suggestions"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-suggestions->tooltip
+#. 5.8->settings-schema.json->web-suggestions->tooltip
+msgid ""
+"With web search option, also show search suggestions. (Note: Search "
+"suggestions are provided by DuckDuckGo)"
+msgstr ""
+
+#. 4.0->settings-schema.json->enable-home-folder-search->description
+#. 5.8->settings-schema.json->enable-home-folder-search->description
+msgid "Search home folder"
+msgstr ""
+
+#. 4.0->settings-schema.json->enable-home-folder-search->tooltip
+#. 5.8->settings-schema.json->enable-home-folder-search->tooltip
+msgid "When searching, also search my home folder for files"
+msgstr ""
+
+#. 4.0->settings-schema.json->enable-web-history-search->description
+#. 5.8->settings-schema.json->enable-web-history-search->description
+msgid "Web history search"
+msgstr ""
+
+#. 4.0->settings-schema.json->enable-web-history-search->tooltip
+#. 5.8->settings-schema.json->enable-web-history-search->tooltip
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
+"Note: Firefox/LibreWolf history is not currently supported."
+msgstr ""
+
+#. 4.0->settings-schema.json->enable-web-bookmarks-search->description
+#. 5.8->settings-schema.json->enable-web-bookmarks-search->description
+msgid "Web bookmarks search"
+msgstr ""
+
+#. 4.0->settings-schema.json->enable-web-bookmarks-search->tooltip
+#. 5.8->settings-schema.json->enable-web-bookmarks-search->tooltip
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, "
+"Firefox, Chromium, Opera, Vivaldi, Brave, LibreWolf)\n"
+"Note: To search Firefox/LibreWolf bookmarks you will need to install package "
+"gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or "
+"package libgda6 (Arch based distributions) and restart your computer."
+msgstr ""
+
+#. 4.0->settings-schema.json->enable-wikipedia-search->description
+msgid "Wikipedia search"
+msgstr ""
+
+#. 4.0->settings-schema.json->enable-wikipedia-search->tooltip
+msgid "Show some Wikipedia results"
+msgstr ""
+
+#. 4.0->settings-schema.json->wikipedia-language->description
+#. 4.0->settings-schema.json->wikipedia-language->tooltip
+msgid "Wikipedia language"
+msgstr ""
+
+#. 4.0->settings-schema.json->search-help->description
+#. 5.8->settings-schema.json->search-help->description
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled "
+"them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. "
+"Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' "
+"for web bookmarks search.\n"
+msgstr ""
+
+#. 4.0->settings-schema.json->menu-icon-custom->description
+#. 5.8->settings-schema.json->menu-icon-custom->description
+msgid "Use a custom icon"
+msgstr ""
+
+#. 4.0->settings-schema.json->menu-icon-custom->tooltip
+#. 5.8->settings-schema.json->menu-icon-custom->tooltip
+msgid "Use a custom icon in the panel"
+msgstr ""
+
+#. 4.0->settings-schema.json->menu-icon->description
+#. 4.0->settings-schema.json->menu-icon->tooltip
+#. 5.8->settings-schema.json->menu-icon->description
+#. 5.8->settings-schema.json->menu-icon->tooltip
+msgid "Panel icon"
+msgstr ""
+
+#. 4.0->settings-schema.json->menu-icon-size-custom->description
+#. 5.8->settings-schema.json->menu-icon-size-custom->description
+msgid "Use a custom icon size"
+msgstr ""
+
+#. 4.0->settings-schema.json->menu-icon-size-custom->tooltip
+#. 5.8->settings-schema.json->menu-icon-size-custom->tooltip
+msgid "Use a custom size for the panel icon"
+msgstr ""
+
+#. 4.0->settings-schema.json->menu-icon-size->description
+#. 5.8->settings-schema.json->menu-icon-size->description
+msgid "Panel icon size (pixels)"
+msgstr ""
+
+#. 4.0->settings-schema.json->menu-icon-size->tooltip
+#. 5.8->settings-schema.json->menu-icon-size->tooltip
+msgid "Choose a custom size for the panel icon"
+msgstr ""
+
+#. 4.0->settings-schema.json->menu-label->description
+#. 5.8->settings-schema.json->menu-label->description
+msgid "Panel text"
+msgstr ""
+
+#. 4.0->settings-schema.json->menu-label->tooltip
+#. 5.8->settings-schema.json->menu-label->tooltip
+msgid "Text to show beside the panel icon"
+msgstr ""
+
+#. 4.0->settings-schema.json->category-icon-size->description
+#. 4.0->settings-schema.json->category-icon-size->tooltip
+#. 5.8->settings-schema.json->category-icon-size->description
+#. 5.8->settings-schema.json->category-icon-size->tooltip
+msgid "Category icon size (pixels)"
+msgstr ""
+
+#. 4.0->settings-schema.json->apps-list-icon-size->description
+#. 4.0->settings-schema.json->apps-list-icon-size->tooltip
+#. 5.8->settings-schema.json->apps-list-icon-size->description
+#. 5.8->settings-schema.json->apps-list-icon-size->tooltip
+msgid "Applications list icon size (pixels)"
+msgstr ""
+
+#. 4.0->settings-schema.json->apps-grid-icon-size->description
+#. 4.0->settings-schema.json->apps-grid-icon-size->tooltip
+#. 5.8->settings-schema.json->apps-grid-icon-size->description
+#. 5.8->settings-schema.json->apps-grid-icon-size->tooltip
+msgid "Applications grid icon size (pixels)"
+msgstr ""
+
+#. 4.0->settings-schema.json->sidebar-icon-size->description
+#. 4.0->settings-schema.json->sidebar-icon-size->tooltip
+#. 5.8->settings-schema.json->sidebar-icon-size->description
+#. 5.8->settings-schema.json->sidebar-icon-size->tooltip
+msgid "Sidebar icon size (pixels)"
+msgstr ""
+
+#. 4.0->settings-schema.json->use-box-style->description
+#. 5.8->settings-schema.json->use-box-style->description
+msgid "Use sidebar box style"
+msgstr ""
+
+#. 4.0->settings-schema.json->use-box-style->tooltip
+#. 5.8->settings-schema.json->use-box-style->tooltip
+msgid "Use a sidebar box style"
+msgstr ""
+
+#. 4.0->settings-schema.json->use-tile-style->description
+#. 5.8->settings-schema.json->use-tile-style->description
+msgid "Use tile style"
+msgstr ""
+
+#. 4.0->settings-schema.json->use-tile-style->tooltip
+#. 5.8->settings-schema.json->use-tile-style->tooltip
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
+msgstr ""
+
+#. 4.0->settings-schema.json->info1->description
+#. 5.8->settings-schema.json->info1->description
+msgid ""
+"\n"
+"• Drag on the menu edge to change the menu size."
+msgstr ""
+
+#. 4.0->settings-schema.json->info2->description
+#. 5.8->settings-schema.json->info3->description
+msgid ""
+"\n"
+"• Drag and drop menu categories to change their order."
+msgstr ""
+
+#. 4.0->settings-schema.json->info3->description
+#. 5.8->settings-schema.json->info4->description
+msgid ""
+"\n"
+"• Folders can be set up and removed as menu categories by right-clicking on "
+"them."
+msgstr ""
+
+#. 4.0->settings-schema.json->info4->description
+#. 5.8->settings-schema.json->info5->description
+msgid ""
+"\n"
+"• Additional key option:\n"
+"ctrl-d — Open .desktop file of currently highlighted app in default text "
+"editor.\n"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "Custom"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-search-custom-url->description
+msgid "URL for custom search"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-search-custom-url->tooltip
+msgid "Enter the URL that is prepended to the search query."
+msgstr ""
+
+#. 5.8->settings-schema.json->info2->description
+msgid ""
+"\n"
+"• Drag and drop apps, files, and folders onto the sidebar."
+msgstr ""
+
+#: settings-schema.json MenuEditorPage.py
+msgid "Menu editor"
+msgstr ""
+
+#: settings-schema.json MenuEditorPage.py
+msgid "Retry"
+msgstr ""
+
+#: settings-schema.json MenuEditorPage.py
+msgid ""
+"The menu editor could not be loaded. Check that cinnamon-menu-editor is "
+"installed, then try again."
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Visible"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Hidden"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Categories"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Reload"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Search applications or commands"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "New application"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "New category"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Move to…"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Add to category…"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Duplicate"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Remove"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Show"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Hide"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Restore selected"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Undo"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Redo"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Discard"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Apply"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Name"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Description"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Command"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Icon"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Desktop categories"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Working directory"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Run in terminal"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Choose icon…"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Stage changes"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Test launcher"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Operation failed:"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Invalid properties:"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid ""
+"Unable to load menus. Check that Cinnamon menu support is installed, then "
+"reload."
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Some launchers could not be read."
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "The menu changed externally. Saving will check for conflicts."
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Pending changes:"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "No pending changes"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Properties edited. Apply to save your changes."
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Cancel"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Create"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Category name"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Add"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Move"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Continue"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid ""
+"System applications will be hidden for your user. Custom launchers will be "
+"removed. Installed programs remain installed."
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Changes saved. Backup:"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Save failed:"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Discard pending changes and reload the menu?"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Choose"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Launcher started"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "There are unsaved menu changes."
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "A valid command is required"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Another menu editor is saving changes"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Cinnamon could not load its application menu"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "File is too large"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Files changed outside this editor. Reload before applying"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Invalid command"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Invalid menu XML"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Invalid menu filename"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Missing [Desktop Entry] group"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Name is required"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "No system version is available for"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "No system version is available for this category"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Only application launchers can be edited"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Only one file or URL field code is allowed"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Path is outside the user menu directories"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Recovery conflict; backup retained at"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Save failed and changes were rolled back"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Save failed; recovery required at"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Select a category to restore"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Symbolic links cannot be edited"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "The application menu has no root directory"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "The launcher is invalid or its executable is unavailable"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "The menu XML must have a Menu root"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "The root category cannot be edited"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Unknown destination category"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Unknown parent category"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Unsupported command field code"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Unsupported launcher property"
+msgstr ""
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "XML entities are not supported"
+msgstr ""

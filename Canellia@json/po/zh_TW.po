@@ -1,0 +1,732 @@
+# CANELLIA
+# This file is put in the public domain.
+# jaszhix, 2017
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Canellia@json 5.4.14\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-08-06 22:42-0400\n"
+"PO-Revision-Date: 2025-08-31 00:27+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Initializing"
+msgstr "正在初始化"
+
+msgid "Find files..."
+msgstr "尋找檔案..."
+
+msgid "Please wait..."
+msgstr "請稍候..."
+
+msgid "Applications"
+msgstr "應用程式"
+
+msgid "Documents"
+msgstr "文件"
+
+msgid "Videos"
+msgstr "影片"
+
+msgid "Images"
+msgstr "圖片"
+
+msgid "Music"
+msgstr "音樂"
+
+msgid "No recent Items"
+msgstr "沒有最近的紀錄"
+
+msgid "Settings"
+msgstr "設定"
+
+msgid "files"
+msgstr "檔案"
+
+msgid "Other search results"
+msgstr "其他搜尋結果"
+
+msgid "Browser bookmarks"
+msgstr "瀏覽器書籤"
+
+msgid "Browser history"
+msgstr "瀏覽器歷史紀錄"
+
+msgid "Emoji"
+msgstr "表情符號"
+
+msgid "Click to copy"
+msgstr "點選以複製"
+
+msgid "Clear List"
+msgstr "清除清單"
+
+msgid "Trash"
+msgstr "資源回收筒"
+
+msgid "Computer"
+msgstr "電腦"
+
+msgid "Error while opening file:"
+msgstr "開啟檔案時發生錯誤："
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "清單內容過多 — 僅顯示前 1000 筆"
+
+msgid "All applications"
+msgstr "所有應用程式"
+
+msgid "Favorites"
+msgstr "我的最愛"
+
+msgid "Places"
+msgstr "位置"
+
+msgid "Recent"
+msgstr "最近使用"
+
+msgid "Favorite apps"
+msgstr "最愛的應用程式"
+
+msgid "light skin tone"
+msgstr "淺膚色"
+
+msgid "medium-light skin tone"
+msgstr "中淺膚色"
+
+msgid "medium skin tone"
+msgstr "中膚色"
+
+msgid "medium-dark skin tone"
+msgstr "中深膚色"
+
+msgid "dark skin tone"
+msgstr "深膚色"
+
+msgid "Remove category"
+msgstr "移除分類"
+
+msgid "Reset category order"
+msgstr "重設分類順序"
+
+msgid "List settings apps separately"
+msgstr "將設定類應用程式分開列出"
+
+msgid "Single list style"
+msgstr "單一清單樣式"
+
+msgid "Hide hidden files"
+msgstr "不顯示隱藏檔案"
+
+msgid "Show hidden files"
+msgstr "顯示隱藏檔案"
+
+msgid "Run with NVIDIA GPU"
+msgstr "使用 NVIDIA GPU 執行"
+
+msgid "Add to panel"
+msgstr "新增至面板"
+
+msgid "Add to desktop"
+msgstr "新增至桌面"
+
+msgid "Remove from favorites"
+msgstr "從我的最愛中移除"
+
+msgid "Add to favorites"
+msgstr "新增至我的最愛"
+
+msgid "Uninstall"
+msgstr "解除安裝"
+
+msgid "App Info"
+msgstr "應用程式資訊"
+
+msgid "This file is no longer available"
+msgstr "此檔案已無法使用"
+
+msgid "Open with"
+msgstr "開啟方式"
+
+msgid "Other application..."
+msgstr "其他應用程式..."
+
+msgid "Add folder as category"
+msgstr "新增資料夾為分類"
+
+msgid "Open containing folder"
+msgstr "開啟所在資料夾"
+
+msgid "Move to trash"
+msgstr "移至資源回收筒"
+
+msgid "Error while moving file to trash:"
+msgstr "移動檔案至資源回收筒時發生錯誤："
+
+msgid "Smileys & Emotion"
+msgstr "笑臉與表情"
+
+msgid "People & Body"
+msgstr "人物與身體"
+
+msgid "Animals & Nature"
+msgstr "動物與自然"
+
+msgid "Food & Drink"
+msgstr "食物與飲品"
+
+msgid "Travel & Places"
+msgstr "旅行與地點"
+
+msgid "Activities"
+msgstr "活動"
+
+msgid "Objects"
+msgstr "物件"
+
+msgid "Symbols"
+msgstr "符號"
+
+msgid "Flags"
+msgstr "旗幟"
+
+msgid "Quit"
+msgstr "離開"
+
+msgid "Shutdown the computer"
+msgstr "關閉電腦"
+
+msgid "Logout"
+msgstr "登出"
+
+msgid "Leave the session"
+msgstr "離開此工作階段"
+
+msgid "Lock screen"
+msgstr "鎖定螢幕"
+
+msgid "Lock the screen"
+msgstr "鎖定螢幕"
+
+msgid "Type to search..."
+msgstr "輸入以搜尋..."
+
+msgid "No description available"
+msgstr "沒有可用的描述"
+
+msgid "Recent files"
+msgstr "最近使用的檔案"
+
+msgid "Bookmarks"
+msgstr "書籤"
+
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "Firefox 與 Midori 書籤需要 gir1.2-gda-5.0 套件。"
+
+msgid "No recent files"
+msgstr "沒有最近使用的檔案"
+
+msgid "Account details"
+msgstr "帳號詳細資料"
+
+msgid "Grid View"
+msgstr "網格檢視"
+
+msgid "List View"
+msgstr "清單檢視"
+
+msgid "Switch to grid view"
+msgstr "切換為網格檢視"
+
+msgid "Switch to list view"
+msgstr "切換為清單檢視"
+
+msgid "Home"
+msgstr "家目錄"
+
+msgid "Browse network"
+msgstr "瀏覽網路"
+
+msgid "Applications and files"
+msgstr "應用程式與檔案"
+
+msgid "Open"
+msgstr "開啟"
+
+msgid "Search"
+msgstr "搜尋"
+
+msgid "Start in"
+msgstr "起始於"
+
+msgid "Select a folder"
+msgstr "選擇資料夾"
+
+msgid "Follow symlinks"
+msgstr "跟隨符號連結"
+
+msgid "Search hidden"
+msgstr "搜尋隱藏檔案"
+
+msgid "Use regular expressions"
+msgstr "使用正規表示式"
+
+msgid "Stop"
+msgstr "停止"
+
+msgid "File"
+msgstr "檔案"
+
+msgid "Path"
+msgstr "路徑"
+
+msgid "Searching..."
+msgstr "正在搜尋..."
+
+msgid "Search Stopped"
+msgstr "搜尋已停止"
+
+msgid "Searching: "
+msgstr "正在搜尋："
+
+msgid "Error: insufficient permissions to read folder "
+msgstr "錯誤：讀取資料夾的權限不足 "
+
+msgid "Search Completed"
+msgstr "搜尋完成"
+
+msgid "Skipping"
+msgstr "略過"
+
+msgid " - directory already searched"
+msgstr " - 目錄已搜尋"
+
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr "此選項未與任何套件關聯。仍要從選單移除嗎？"
+
+msgid "The following packages will be removed:"
+msgstr "將移除下列套件："
+
+msgid "Packages to be removed"
+msgstr "將被移除的套件"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "無法移除套件 %s，因為有其他套件需要它。"
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "套件 %s 是下列套件的相依套件："
+
+msgid "Canellia"
+msgstr "Canellia"
+
+msgid ""
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
+msgstr ""
+"一個彈性的選單，提供網格或清單版面配置選項、檔案瀏覽器和表情符號搜尋功能。"
+
+msgid "Layout"
+msgstr "版面配置"
+
+msgid "Behavior"
+msgstr "行為"
+
+msgid "Appearance"
+msgstr "外觀"
+
+msgid "Tips"
+msgstr "提示"
+
+msgid "Content"
+msgstr "內容"
+
+msgid "Panel"
+msgstr "面板"
+
+msgid "Menu"
+msgstr "選單"
+
+msgid "Applications view mode"
+msgstr "應用程式檢視模式"
+
+msgid "List"
+msgstr "清單"
+
+msgid "Grid"
+msgstr "網格"
+
+msgid "View applications as list or grid"
+msgstr "以清單或網格檢視應用程式"
+
+msgid "Show sidebar"
+msgstr "顯示側邊欄"
+
+msgid "Show the sidebar in the menu"
+msgstr "在選單中顯示側邊欄"
+
+msgid "Sidebar location"
+msgstr "側邊欄位置"
+
+msgid "Top"
+msgstr "頂端"
+
+msgid "Bottom"
+msgstr "底端"
+
+msgid "Left"
+msgstr "左側"
+
+msgid "Right"
+msgstr "右側"
+
+msgid "Choose where to show the sidebar"
+msgstr "選擇側邊欄要顯示的位置"
+
+msgid "Show favorites on sidebar"
+msgstr "在側邊欄顯示我的最愛"
+
+msgid "None"
+msgstr "無"
+
+msgid "Apps only"
+msgstr "僅應用程式"
+
+msgid "Files only"
+msgstr "僅檔案"
+
+msgid "Apps and files"
+msgstr "應用程式與檔案"
+
+msgid "Show your favorite apps and file icons on the sidebar"
+msgstr "在側邊欄顯示最愛的應用程式與檔案圖示"
+
+msgid "Application description placement"
+msgstr "應用程式描述位置"
+
+msgid "Tooltips"
+msgstr "工具提示"
+
+msgid "Under titles"
+msgstr "標題下方"
+
+msgid "Choose where to show application descriptions"
+msgstr "選擇應用程式描述要顯示的位置"
+
+msgid "Show categories"
+msgstr "顯示分類"
+
+msgid "Show list of application categories"
+msgstr "顯示應用程式分類清單"
+
+msgid "Show bookmarks and places"
+msgstr "顯示書籤與位置"
+
+msgid "Show bookmarks and places category in the menu"
+msgstr "在選單中顯示書籤與位置分類"
+
+msgid "Show recent items"
+msgstr "顯示最近使用紀錄"
+
+msgid "Show recent items category in the menu"
+msgstr "在選單中顯示最近使用紀錄分類"
+
+msgid "Show favorite apps category"
+msgstr "顯示最愛的應用程式分類"
+
+msgid "Show your favorite apps category in the menu"
+msgstr "在選單中顯示最愛的應用程式分類"
+
+msgid "Show home folder"
+msgstr "顯示家目錄"
+
+msgid "Show home folder category in the menu"
+msgstr "在選單中顯示家目錄分類"
+
+msgid "Show emoji category"
+msgstr "顯示表情符號分類"
+
+msgid "Show emoji category in the menu"
+msgstr "在選單中顯示表情符號分類"
+
+msgid "Open the menu editor"
+msgstr "開啟選單編輯器"
+
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "開啟與關閉選單的鍵盤捷徑"
+
+msgid "Open menu on hover"
+msgstr "滑鼠停留時開啟選單"
+
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "當滑鼠移至面板圖示上時開啟選單"
+
+msgid "milliseconds"
+msgstr "毫秒"
+
+msgid "Menu hover delay"
+msgstr "滑鼠停留延遲時間"
+
+msgid "Use menu animations"
+msgstr "使用選單動畫"
+
+msgid "Animate the menu on open and close"
+msgstr "開啟與關閉選單時播放動畫"
+
+msgid "Activate categories on click"
+msgstr "點選時啟用分類"
+
+msgid "Activate categories on click instead of on hover"
+msgstr "點選啟用分類，而非滑鼠停留"
+
+msgid "Open menu on category:"
+msgstr "開啟選單時顯示分類："
+
+msgid "Always open the menu with this category selected"
+msgstr "一律開啟選單並選取此分類"
+
+msgid "Last used category"
+msgstr "上次使用的分類"
+
+msgid "Enable autoscrolling"
+msgstr "啟用自動捲動"
+
+msgid "Autoscroll the application list on mouse hover"
+msgstr "滑鼠停留時自動捲動應用程式清單"
+
+msgid "Show hidden files in folder view"
+msgstr "在資料夾檢視中顯示隱藏檔案"
+
+msgid "Emoji search"
+msgstr "表情符號搜尋"
+
+msgid "Show emojis in search results"
+msgstr "在搜尋結果中顯示表情符號"
+
+msgid "Web search option"
+msgstr "網路搜尋選項"
+
+msgid "Show an internet search option in search results"
+msgstr "在搜尋結果中顯示網路搜尋選項"
+
+msgid "Web search suggestions"
+msgstr "網路搜尋建議"
+
+msgid ""
+"With web search option, also show search suggestions. (Note: Search "
+"suggestions are provided by DuckDuckGo)"
+msgstr ""
+"使用網路搜尋選項時，同時顯示搜尋建議。（注意：搜尋建議由 DuckDuckGo 提供）"
+
+msgid "Search home folder"
+msgstr "搜尋家目錄"
+
+msgid "When searching, also search my home folder for files"
+msgstr "搜尋時，同時在家目錄中尋找檔案"
+
+msgid "Web history search"
+msgstr "網路歷史紀錄搜尋"
+
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"搜尋時同時搜尋瀏覽器歷史紀錄（Google Chrome、Chromium、Opera、Vivaldi、"
+"Brave）\n"
+"注意：目前不支援 Firefox 歷史紀錄。"
+
+msgid "Web bookmarks search"
+msgstr "網路書籤搜尋"
+
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, "
+"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-"
+"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
+"libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"搜尋時，同時搜尋瀏覽器的網路書籤（Google Chrome、Firefox、Chromium、Opera、"
+"Vivaldi、Brave）。\n"
+"注意：若要搜尋 Firefox 書籤，您需要安裝 gir1.2-gda-5.0 套件（Debian 系發行"
+"版，含 Ubuntu 和 Linux Mint）或 libgda 套件（Arch 系發行版）並重新啟動電腦。"
+
+msgid "Wikipedia search"
+msgstr "Wikipedia 搜尋"
+
+msgid "Show some Wikipedia results"
+msgstr "顯示部分 Wikipedia 結果"
+
+msgid "Wikipedia language"
+msgstr "Wikipedia 語言"
+
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled "
+"them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. "
+"Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' "
+"for web bookmarks search.\n"
+msgstr ""
+"\n"
+"注意：即使未在此處啟用某些搜尋選項，仍可在搜尋詞前加上前綴來使用它們。\n"
+"例如：若要搜尋表情符號，請輸入 'e heart' 來尋找愛心表情符號。同樣地，使用前"
+"綴 'f ' 進行檔案搜尋、'h ' 搜尋網路歷史紀錄，以及 'b ' 搜尋網路書籤。\n"
+
+msgid "Use a custom icon"
+msgstr "使用自訂圖示"
+
+msgid "Use a custom icon in the panel"
+msgstr "在面板中使用自訂圖示"
+
+msgid "Panel icon"
+msgstr "面板圖示"
+
+msgid "Use a custom icon size"
+msgstr "使用自訂圖示大小"
+
+msgid "Use a custom size for the panel icon"
+msgstr "為面板圖示使用自訂大小"
+
+msgid "Panel icon size (pixels)"
+msgstr "面板圖示大小（像素）"
+
+msgid "Choose a custom size for the panel icon"
+msgstr "為面板圖示選擇自訂大小"
+
+msgid "Panel text"
+msgstr "面板文字"
+
+msgid "Text to show beside the panel icon"
+msgstr "顯示在面板圖示旁的文字"
+
+msgid "Category icon size (pixels)"
+msgstr "分類圖示大小（像素）"
+
+msgid "Applications list icon size (pixels)"
+msgstr "應用程式清單圖示大小（像素）"
+
+msgid "Applications grid icon size (pixels)"
+msgstr "應用程式網格圖示大小（像素）"
+
+msgid "Sidebar icon size (pixels)"
+msgstr "側邊欄圖示大小（像素）"
+
+msgid "Use sidebar box style"
+msgstr "使用側邊欄方塊樣式"
+
+msgid "Use a sidebar box style"
+msgstr "使用側邊欄方塊樣式"
+
+msgid "Use tile style"
+msgstr "使用磁磚樣式"
+
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
+msgstr "為應用程式按鈕使用磁磚樣式（注意：可能不適用於某些佈景主題）"
+
+msgid ""
+"\n"
+"• Drag on the menu edge to change the menu size."
+msgstr ""
+"\n"
+"• 拖曳選單邊緣以變更選單大小。"
+
+msgid ""
+"\n"
+"• Drag and drop menu categories to change their order."
+msgstr ""
+"\n"
+"• 拖放選單分類以變更其順序。"
+
+msgid ""
+"\n"
+"• Folders can be set up and removed as menu categories by right-clicking on "
+"them."
+msgstr ""
+"\n"
+"• 在資料夾上點選右鍵，可將其設定或移除為選單分類。"
+
+msgid ""
+"\n"
+"• Additional key options:\n"
+"ctrl-p — Open launcher properties dialogue of currently highlighted "
+"application.\n"
+"ctrl-d — Open .desktop file of currently highlighted app in default text "
+"editor.\n"
+msgstr ""
+"\n"
+"• 其他按鍵選項：\n"
+"ctrl-p — 開啟目前選取應用程式的啟動器屬性對話框。\n"
+"ctrl-d — 在預設文字編輯器中開啟目前選取應用程式的 .desktop 檔案。\n"
+
+msgid "Search Providers"
+msgstr "搜尋提供者"
+
+msgid "No search provider extensions found"
+msgstr "找不到搜尋提供者擴充功能"
+
+msgid "Recent files settings"
+msgstr "最近使用檔案的設定"
+
+msgid "Enable autoscrolling in application list"
+msgstr "在應用程式清單中啟用自動捲動"
+
+msgid "Show web bookmarks"
+msgstr "顯示網路書籤"
+
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"在選單中顯示瀏覽器的網路書籤。\n"
+"注意：請安裝 gir1.2-gda-5.0 套件以讀取 Firefox 書籤。"
+
+msgid "Enable searching of open windows"
+msgstr "啟用已開啟視窗的搜尋"
+
+msgid "Enable search providers"
+msgstr "啟用搜尋提供者"
+
+msgid "Include search provider results in searches"
+msgstr "在搜尋中包含搜尋提供者的結果"
+
+msgid "Example Search Providers"
+msgstr "搜尋提供者範例"
+
+msgid "columns"
+msgstr "欄"
+
+msgid "Number of columns in apps grid"
+msgstr "應用程式網格的欄位數"
+
+msgid "Show application icons"
+msgstr "顯示應用程式圖示"
+
+msgid "Show category icons"
+msgstr "顯示分類圖示"
+
+msgid "Show application descriptions under titles"
+msgstr "在標題下方顯示應用程式描述"
+
+msgid "Show tooltips"
+msgstr "顯示工具提示"
+
+msgid "Tooltip delay"
+msgstr "工具提示延遲"
+
+msgid "Use a custom menu height"
+msgstr "使用自訂選單高度"
+
+msgid "Custom menu height (pixels)"
+msgstr "自訂選單高度（像素）"

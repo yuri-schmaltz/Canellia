@@ -1,0 +1,9 @@
+{
+    "uuid": "Canellia@json",
+    "name": "Canellia",
+    "description": "A flexible menu with grid or list layout options, file browser and emoji search.",
+    "max-instances": -1,
+    "version": "5.6.4",
+    "multiversion": true,
+    "author": "fredcw"
+}

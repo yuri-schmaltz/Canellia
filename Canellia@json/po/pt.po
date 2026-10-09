@@ -1,0 +1,1097 @@
+# CANELLIA
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Caldas Lopes <joao.caldas.lopes@gmail.com>, 2018.
+# Hugo Carvalho <hugokarvalho@hotmail.com>, 2021, 2022, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Canellia applet\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-08-06 22:42-0400\n"
+"PO-Revision-Date: 2023-07-31 13:31+0100\n"
+"Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
+"Language-Team: \n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+msgid "Initializing"
+msgstr "A iniciar"
+
+msgid "Find files..."
+msgstr "Localizar ficheiros..."
+
+msgid "Please wait..."
+msgstr "Aguarde..."
+
+msgid "Applications"
+msgstr "Aplicativos"
+
+msgid "Documents"
+msgstr "Documentos"
+
+msgid "Videos"
+msgstr "Vídeos"
+
+msgid "Images"
+msgstr "Imagens"
+
+msgid "Music"
+msgstr "Música"
+
+msgid "No recent Items"
+msgstr "Sem itens recentes"
+
+msgid "Settings"
+msgstr ""
+
+msgid "Files"
+msgstr ""
+
+msgid "Other search results"
+msgstr "Outros resultados da pesquisa"
+
+msgid "Browser bookmarks"
+msgstr "Favoritos do navegador"
+
+msgid "Browser history"
+msgstr "Histórico do navegador"
+
+msgid "Emoji"
+msgstr "Emoji"
+
+msgid "Click to copy"
+msgstr "Clique para copiar"
+
+msgid "Clear List"
+msgstr "Limpar lista"
+
+msgid "Trash"
+msgstr "Lixo"
+
+msgid "Computer"
+msgstr "Computador"
+
+msgid "Error while opening file:"
+msgstr "Erro ao abrir ficheiro:"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Demasiadas entradas - mostrando apenas as primeiras 1000 entradas"
+
+msgid "All applications"
+msgstr "Todas as aplicações"
+
+msgid "Favorites"
+msgstr "Favoritas"
+
+msgid "Places"
+msgstr "Locais"
+
+msgid "Recent"
+msgstr "Recentes"
+
+msgid "Favorite apps"
+msgstr "Aplicações favoritas"
+
+msgid "light skin tone"
+msgstr "tom claro"
+
+msgid "medium-light skin tone"
+msgstr "tom médio-claro"
+
+msgid "medium skin tone"
+msgstr "tom médio"
+
+msgid "medium-dark skin tone"
+msgstr "tom médio-escuro"
+
+msgid "dark skin tone"
+msgstr "tom escuro"
+
+msgid "Remove category"
+msgstr "Remover categoria"
+
+msgid "Reset category order"
+msgstr "Repor ordem de categorias"
+
+msgid "List settings apps separately"
+msgstr ""
+
+msgid "Single list style"
+msgstr ""
+
+#, fuzzy
+msgid "Hide hidden files"
+msgstr "Mostrar ficheiros ocultos"
+
+msgid "Show hidden files"
+msgstr "Mostrar ficheiros ocultos"
+
+msgid "Run with NVIDIA GPU"
+msgstr "Executar com GPU NVIDIA"
+
+msgid "Add to panel"
+msgstr "Adicionar ao painel"
+
+msgid "Add to desktop"
+msgstr "Adicionar ao ambiente de trabalho"
+
+msgid "Remove from favorites"
+msgstr "Remover dos favoritos"
+
+msgid "Add to favorites"
+msgstr "Adicionar aos favoritos"
+
+msgid "Uninstall"
+msgstr "Desinstalar"
+
+msgid "App Info"
+msgstr "Informação da aplicação"
+
+msgid "This file is no longer available"
+msgstr "Este ficheiro já não está disponível"
+
+msgid "Open with"
+msgstr "Abrir com"
+
+msgid "Other application..."
+msgstr "Outras aplicações..."
+
+msgid "Add folder as category"
+msgstr "Adicionar pasta como categoria"
+
+msgid "Open containing folder"
+msgstr "Abrir pasta de conteúdo"
+
+msgid "Move to trash"
+msgstr "Mover para o lixo"
+
+msgid "Error while moving file to trash:"
+msgstr "Erro ao mover o ficheiro para o lixo:"
+
+msgid "Smileys & Emotion"
+msgstr "Sorrisos e Emoções"
+
+msgid "People & Body"
+msgstr "Pessoas e Corpo"
+
+msgid "Animals & Nature"
+msgstr "Animais e Natureza"
+
+msgid "Food & Drink"
+msgstr "Comida e Bebida"
+
+msgid "Travel & Places"
+msgstr "Viagem e Lugares"
+
+msgid "Activities"
+msgstr "Atividades"
+
+msgid "Objects"
+msgstr "Objetos"
+
+msgid "Symbols"
+msgstr "Símbolos"
+
+msgid "Flags"
+msgstr "Bandeiras"
+
+msgid "Quit"
+msgstr "Sair"
+
+msgid "Shutdown the computer"
+msgstr "Desligar o computador"
+
+msgid "Logout"
+msgstr "Terminar sessão"
+
+msgid "Leave the session"
+msgstr "Termina a sessão"
+
+msgid "Lock screen"
+msgstr "Bloquear ecrã"
+
+msgid "Lock the screen"
+msgstr "Bloqueia o ecrã"
+
+msgid "Type to search..."
+msgstr "Escreva para pesquisar..."
+
+msgid "No description available"
+msgstr "Nenhuma descrição disponível"
+
+msgid "Recent files"
+msgstr "Ficheiros recentes"
+
+msgid "Bookmarks"
+msgstr "Marcadores"
+
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr ""
+"Pacote gir1.2-gda-5.0 necessário para os marcadores do Firefox e Midori."
+
+msgid "No recent files"
+msgstr "Sem ficheiros recentes"
+
+msgid "Account details"
+msgstr "Detalhes da conta"
+
+msgid "Grid View"
+msgstr "Vista de grelha"
+
+msgid "List View"
+msgstr "Vista de lista"
+
+msgid "Switch to grid view"
+msgstr "Mudar para vista de grelha"
+
+msgid "Switch to list view"
+msgstr "Mudar para vista de lista"
+
+msgid "Home"
+msgstr "Pasta pessoal"
+
+msgid "Browse network"
+msgstr "Navegar na rede"
+
+msgid "Applications and files"
+msgstr "Aplicações e ficheiros"
+
+msgid "Open"
+msgstr "Abrir"
+
+msgid "Search"
+msgstr "Pesquisar"
+
+msgid "Start in"
+msgstr "Iniciar em"
+
+msgid "Select a folder"
+msgstr "Selecione uma pasta"
+
+msgid "Follow symlinks"
+msgstr "Siga as ligações simbólicas"
+
+msgid "Search hidden"
+msgstr "Pesquisar ocultos"
+
+msgid "Use regular expressions"
+msgstr "Usar expressões regulares"
+
+msgid "Stop"
+msgstr "Parar"
+
+msgid "File"
+msgstr "Ficheiro"
+
+msgid "Path"
+msgstr "Localização"
+
+msgid "Searching..."
+msgstr "A pesquisar..."
+
+msgid "Search Stopped"
+msgstr "Pesquisa interrompida"
+
+msgid "Searching: "
+msgstr "A pesquisar: "
+
+msgid "Error: insufficient permissions to read folder "
+msgstr "Erro: permissões insuficientes para ler a pasta "
+
+msgid "Search Completed"
+msgstr "Pesquisa concluída"
+
+msgid "Skipping"
+msgstr "A ignorar"
+
+msgid " - directory already searched"
+msgstr " - diretório já pesquisado"
+
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr ""
+"Este item de menu não está associado a nenhum pacote. Deseja removê-lo do "
+"menu mesmo assim?"
+
+msgid "The following packages will be removed:"
+msgstr "Os seguintes pacotes serão removidos:"
+
+msgid "Packages to be removed"
+msgstr "Pacotes a serem removidos"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "Não é possível remover o pacote %s, pois é exigido por outros pacotes."
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "O pacote %s é uma dependência dos seguintes pacotes:"
+
+msgid "Canellia"
+msgstr "Canellia"
+
+msgid ""
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
+msgstr ""
+"Um menu flexível com opções de disposição em grelha ou lista, navegador de "
+"ficheiros e pesquisa emoji."
+
+msgid "Layout"
+msgstr "Disposição"
+
+msgid "Behavior"
+msgstr "Comportamento"
+
+msgid "Appearance"
+msgstr "Aparência"
+
+msgid "Tips"
+msgstr "Dicas"
+
+msgid "Content"
+msgstr "Conteúdo"
+
+msgid "Panel"
+msgstr "Painel"
+
+msgid "Menu"
+msgstr "Menu"
+
+msgid "Applications view mode"
+msgstr "Modo de visualização de aplicações"
+
+msgid "List"
+msgstr "Lista"
+
+msgid "Grid"
+msgstr "Grelha"
+
+msgid "View applications as list or grid"
+msgstr "Ver aplicações como lista ou grelha"
+
+msgid "Show sidebar"
+msgstr "Mostrar barra lateral"
+
+msgid "Show the sidebar in the menu"
+msgstr "Mostrar a barra lateral no menu"
+
+msgid "Sidebar location"
+msgstr "Localização da barra lateral"
+
+msgid "Top"
+msgstr "Superior"
+
+msgid "Bottom"
+msgstr "Inferior"
+
+msgid "Left"
+msgstr "Esquerda"
+
+msgid "Right"
+msgstr "Direita"
+
+msgid "Choose where to show the sidebar"
+msgstr "Escolha onde mostrar a barra lateral"
+
+msgid "Show favorites on sidebar"
+msgstr "Mostrar favoritos na barra lateral"
+
+msgid "None"
+msgstr "Nenhum"
+
+msgid "Apps only"
+msgstr "Apenas aplicações"
+
+msgid "Files only"
+msgstr "Apenas ficheiros"
+
+msgid "Apps and files"
+msgstr "Aplicações e ficheiros"
+
+msgid "Show your favorite apps and file icons on the sidebar"
+msgstr "Mostrar os ícones de aplicações e ficheiros favoritos na barra lateral"
+
+msgid "Application description placement"
+msgstr "Posicionamento da descrição das aplicações"
+
+msgid "Tooltips"
+msgstr "Dicas"
+
+msgid "Under titles"
+msgstr "Sob os títulos"
+
+msgid "Choose where to show application descriptions"
+msgstr "Escolha onde mostrar as descrições das aplicações"
+
+msgid "Show categories"
+msgstr "Mostrar categorias"
+
+msgid "Show list of application categories"
+msgstr "Mostrar lista de categorias de aplicações"
+
+msgid "Show bookmarks and places"
+msgstr "Mostrar marcadores e locais"
+
+msgid "Show bookmarks and places category in the menu"
+msgstr "Mostrar categoria de marcadores e locais no menu"
+
+msgid "Show recent items"
+msgstr "Mostrar ficheiros recentes"
+
+msgid "Show recent items category in the menu"
+msgstr "Mostrar categoria de itens recentes no menu"
+
+msgid "Show favorite apps category"
+msgstr "Mostrar categoria de aplicações favoritas"
+
+msgid "Show your favorite apps category in the menu"
+msgstr "Mostrar a categoria de aplicações favoritas no menu"
+
+msgid "Show home folder"
+msgstr "Mostrar a pasta pessoal"
+
+msgid "Show home folder category in the menu"
+msgstr "Mostra a categoria de pasta pessoal no menu"
+
+msgid "Show emoji category"
+msgstr "Mostrar categoria de emoji"
+
+msgid "Show emoji category in the menu"
+msgstr "Mostrar categoria de emoji no menu"
+
+msgid "Open the menu editor"
+msgstr "Abrir o editor de menu"
+
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Tecla de atalho para abrir e fechar o menu"
+
+msgid "Open menu on hover"
+msgstr "Abrir menu ao passar o rato"
+
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Abrir o menu quando mover o meu rato sobre o ícone do painel"
+
+msgid "milliseconds"
+msgstr "milisegundos"
+
+msgid "Menu hover delay"
+msgstr "Atraso do menu ao pairar"
+
+msgid "Use menu animations"
+msgstr "Usar animações do menu"
+
+msgid "Animate the menu on open and close"
+msgstr "Animar o menu ao abrir e fechar"
+
+msgid "Activate categories on click"
+msgstr "Ativar categorias ao clicar"
+
+msgid "Activate categories on click instead of on hover"
+msgstr "Ativar categorias ao clicar em vez de pairar"
+
+msgid "Open menu on category:"
+msgstr "Abrir menu na categoria:"
+
+msgid "Always open the menu with this category selected"
+msgstr "Abrir sempre o menu com esta categoria selecionada"
+
+msgid "Last used category"
+msgstr "Última categoria usada"
+
+msgid "Enable autoscrolling"
+msgstr "Ativar deslocamento automático"
+
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Deslocar automaticamente a lista de aplicações no rato"
+
+msgid "Show hidden files in folder view"
+msgstr "Mostrar ficheiros ocultos na vista de pastas"
+
+msgid "Emoji search"
+msgstr "Pesquisa Emoji"
+
+msgid "Show emojis in search results"
+msgstr "Mostrar emojis nos resultados da pesquisa"
+
+msgid "Web search option"
+msgstr "Opção de pesquisa Web"
+
+msgid "Show an internet search option in search results"
+msgstr "Mostrar uma opção de pesquisa na Internet nos resultados da pesquisa"
+
+msgid "Web search suggestions"
+msgstr "Sugestões de pesquisa web"
+
+msgid ""
+"With web search option, also show search suggestions. (Note: Search "
+"suggestions are provided by DuckDuckGo)"
+msgstr ""
+"Com a opção de pesquisa na Web, também mostra sugestões de pesquisa. (Nota: "
+"as sugestões de pesquisa são fornecidas pelo DuckDuckGo)"
+
+msgid "Search home folder"
+msgstr "Pesquisar pasta principal"
+
+msgid "When searching, also search my home folder for files"
+msgstr "Ao pesquisar, pesquisar também a minha pasta pessoal por ficheiros"
+
+msgid "Web history search"
+msgstr "Pesquisa no histórico da web"
+
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
+"Note: Firefox/LibreWolf history is not currently supported."
+msgstr ""
+"Ao pesquisar, pesquise também o histórico do meu navegador (Google Chrome, "
+"Chromium, Opera, Vivaldi, Brave)\n"
+"Observação: o histórico do Firefox não é suportado no momento."
+
+msgid "Web bookmarks search"
+msgstr "Pesquisa de marcadores web"
+
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, "
+"Firefox, Chromium, Opera, Vivaldi, Brave, LibreWolf)\n"
+"Note: To search Firefox/LibreWolf bookmarks you will need to install package "
+"gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or "
+"package libgda6 (Arch based distributions) and restart your computer."
+msgstr ""
+"Ao pesquisar, pesquisar também nos marcadores do navegador (Google Chrome, "
+"Firefox, Chromium, Opera, Vivaldi, Brave, LibreWolf)\n"
+"Nota: Para pesquisar nos favoritos do Firefox terá de instalar o pacote "
+"gir1.2-gda-5.0 (distribuições baseadas em Debian inc. Ubuntu e Linux Mint) "
+"ou o pacote libgda6 (distribuições baseadas em Arch) e reiniciar o "
+"computador."
+
+msgid "Wikipedia search"
+msgstr "Pesquisa na Wikipédia"
+
+msgid "Show some Wikipedia results"
+msgstr "Mostrar alguns resultados da Wikipédia"
+
+msgid "Wikipedia language"
+msgstr "Idioma da Wikipédia"
+
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled "
+"them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. "
+"Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' "
+"for web bookmarks search.\n"
+msgstr ""
+"\n"
+"Observação: algumas opções de pesquisa ainda podem ser usadas mesmo que não "
+"as tenha ativado aqui prefixando o termo de pesquisa.\n"
+"Por exemplo: para pesquisar um emoji, digite 'e heart' para encontrar emojis "
+"de coração. Da mesma forma, use prefixos 'f ' para pesquisa de ficheiros, 'h "
+"' para histórico da web e 'b ' para pesquisa de favoritos da web.\n"
+
+msgid "Use a custom icon"
+msgstr "Usar um ícone personalizado"
+
+msgid "Use a custom icon in the panel"
+msgstr "Usar um ícone personalizado no painel"
+
+msgid "Panel icon"
+msgstr "Ícone do painel"
+
+msgid "Use a custom icon size"
+msgstr "Usar um tamanho de ícone personalizado"
+
+msgid "Use a custom size for the panel icon"
+msgstr "Use um tamanho personalizado para o ícone do painel"
+
+msgid "Panel icon size (pixels)"
+msgstr "Tamanho do ícone do painel (píxeis)"
+
+msgid "Choose a custom size for the panel icon"
+msgstr "Escolha um tamanho personalizado para o ícone do painel"
+
+msgid "Panel text"
+msgstr "Texto do painel"
+
+msgid "Text to show beside the panel icon"
+msgstr "Texto a ser exibido ao lado do ícone do painel"
+
+msgid "Category icon size (pixels)"
+msgstr "Tamanho do ícone da categoria (píxeis)"
+
+msgid "Applications list icon size (pixels)"
+msgstr "Tamanho do ícone da lista de aplicações (píxeis)"
+
+msgid "Applications grid icon size (pixels)"
+msgstr "Tamanho do ícone da grelha de aplicações (píxeis)"
+
+msgid "Sidebar icon size (pixels)"
+msgstr "Tamanho do ícone da barra lateral (píxeis)"
+
+msgid "Use sidebar box style"
+msgstr "Usar estilo de barra lateral tipo caixa"
+
+msgid "Use a sidebar box style"
+msgstr "Usa um estilo de barra lateral tipo caixa"
+
+msgid "Use tile style"
+msgstr "Usar estilo mosaico"
+
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
+msgstr ""
+"Usa um estilo de mosaico para os botões das aplicações (Nota: pode não "
+"funcionar em alguns temas)"
+
+msgid ""
+"\n"
+"• Drag on the menu edge to change the menu size."
+msgstr ""
+"\n"
+"• Arraste na margem do menu para alterar o tamanho do menu."
+
+msgid ""
+"\n"
+"• Drag and drop menu categories to change their order."
+msgstr ""
+"\n"
+"• Arraste e largue as categorias do menu para alterar a sua ordem."
+
+msgid ""
+"\n"
+"• Folders can be set up and removed as menu categories by right-clicking on "
+"them."
+msgstr ""
+"\n"
+"• As pastas podem ser configuradas e removidas como categorias de menu "
+"clicando com o botão direito do rato sobre elas."
+
+msgid ""
+"\n"
+"• Additional key options:\n"
+"ctrl-p — Open launcher properties dialogue of currently highlighted "
+"application.\n"
+"ctrl-d — Open .desktop file of currently highlighted app in default text "
+"editor.\n"
+msgstr ""
+"\n"
+"• Opções de teclas adicionais:\n"
+"ctrl-p — Abre a janela das propriedades do lançador da aplicação atualmente "
+"realçada.\n"
+"ctrl-d — Abre o ficheiro .desktop da aplicação atualmente realçada no editor "
+"de texto predefinido.\n"
+
+msgid "Search Providers"
+msgstr "Fornecedores de pesquisa"
+
+msgid "No search provider extensions found"
+msgstr "Não foram encontradas extensões de fornecedores de pesquisa"
+
+msgid "Recent files settings"
+msgstr "Ficheiros recentes"
+
+msgid "Enable autoscrolling in application list"
+msgstr "Ativar deslocamento automático na lista de aplicações"
+
+msgid "Show web bookmarks"
+msgstr "Mostrar os marcadores web"
+
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"Mostra os favoritos do navegador no menu.\n"
+"Nota: Instale o pacote gir1.2-gda-5.0 para ler os marcadores do firefox."
+
+msgid "Enable searching of open windows"
+msgstr "Permitir a pesquisa de janelas abertas"
+
+msgid "Enable search providers"
+msgstr "Ativar fornecedores de pesquisa"
+
+msgid "Include search provider results in searches"
+msgstr "Incluir os resultados do fornecedor de pesquisa nas pesquisas"
+
+msgid "Example Search Providers"
+msgstr "Exemplo de fornecedores de pesquisa"
+
+msgid "columns"
+msgstr "colunas"
+
+msgid "Number of columns in apps grid"
+msgstr "Número de colunas na grelha de aplicações"
+
+msgid "Show application icons"
+msgstr "Mostrar ícones de aplicações"
+
+msgid "Show category icons"
+msgstr "Mostrar ícones de categorias"
+
+msgid "Show application descriptions under titles"
+msgstr "Mostrar as descrições das aplicações sob os títulos"
+
+msgid "Show tooltips"
+msgstr "Mostrar dicas"
+
+msgid "Tooltip delay"
+msgstr "Atraso da dica"
+
+msgid "Use a custom menu height"
+msgstr "Usar uma altura de menu personalizada"
+
+msgid "Custom menu height (pixels)"
+msgstr "Altura do menu personalizado (píxeis)"
+
+#: settings-schema.json MenuEditorPage.py
+msgid "Menu editor"
+msgstr "Editor de menu"
+
+#: settings-schema.json MenuEditorPage.py
+msgid "Retry"
+msgstr "Tentar novamente"
+
+#: settings-schema.json MenuEditorPage.py
+msgid ""
+"The menu editor could not be loaded. Check that cinnamon-menu-editor is "
+"installed, then try again."
+msgstr ""
+"Não foi possível carregar o editor de menu. Verifique se cinnamon-menu-"
+"editor está instalado e tente novamente."
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Visible"
+msgstr "Visível"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Hidden"
+msgstr "Oculto"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Custom"
+msgstr "Personalizados"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Categories"
+msgstr "Categorias"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Reload"
+msgstr "Recarregar"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Search applications or commands"
+msgstr "Pesquisar aplicativos ou comandos"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "New application"
+msgstr "Novo aplicativo"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "New category"
+msgstr "Nova categoria"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Move to…"
+msgstr "Mover para…"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Add to category…"
+msgstr "Adicionar à categoria…"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Duplicate"
+msgstr "Duplicar"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Remove"
+msgstr "Remover"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Show"
+msgstr "Mostrar"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Hide"
+msgstr "Ocultar"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Restore selected"
+msgstr "Restaurar seleção"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Undo"
+msgstr "Desfazer"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Redo"
+msgstr "Refazer"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Discard"
+msgstr "Descartar"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Apply"
+msgstr "Aplicar"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Properties"
+msgstr "Propriedades"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Name"
+msgstr "Nome"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Description"
+msgstr "Descrição"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Command"
+msgstr "Comando"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Icon"
+msgstr "Ícone"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Desktop categories"
+msgstr "Categorias do lançador"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Working directory"
+msgstr "Diretório de trabalho"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Run in terminal"
+msgstr "Executar no terminal"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Choose icon…"
+msgstr "Escolher ícone…"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Stage changes"
+msgstr "Atualizar item"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Test launcher"
+msgstr "Testar lançador"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Operation failed:"
+msgstr "Falha na operação:"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Invalid properties:"
+msgstr "Propriedades inválidas:"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid ""
+"Unable to load menus. Check that Cinnamon menu support is installed, then "
+"reload."
+msgstr ""
+"Não foi possível carregar os menus. Verifique o suporte a menus do Cinnamon "
+"e tente recarregar."
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Some launchers could not be read."
+msgstr "Não foi possível ler alguns lançadores."
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "The menu changed externally. Saving will check for conflicts."
+msgstr ""
+"O menu foi alterado externamente. Ao salvar, as alterações serão verificadas."
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Pending changes:"
+msgstr "Alterações pendentes:"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "No pending changes"
+msgstr "Nenhuma alteração pendente"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Properties edited. Apply to save your changes."
+msgstr "Propriedades editadas. Clique em Aplicar para salvar."
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Create"
+msgstr "Criar"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Category name"
+msgstr "Nome da categoria"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Add"
+msgstr "Adicionar"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Move"
+msgstr "Mover"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Continue"
+msgstr "Continuar"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid ""
+"System applications will be hidden for your user. Custom launchers will be "
+"removed. Installed programs remain installed."
+msgstr ""
+"Aplicativos do sistema serão ocultados para seu usuário. Lançadores "
+"personalizados serão removidos. Os programas continuarão instalados."
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Changes saved. Backup:"
+msgstr "Alterações salvas. Cópia de segurança:"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Save failed:"
+msgstr "Falha ao salvar:"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Discard pending changes and reload the menu?"
+msgstr "Descartar alterações pendentes e recarregar o menu?"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Choose"
+msgstr "Escolher"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Launcher started"
+msgstr "Lançador iniciado"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "There are unsaved menu changes."
+msgstr "Há alterações no menu que ainda não foram salvas."
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "A valid command is required"
+msgstr "É necessário informar um comando válido"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Another menu editor is saving changes"
+msgstr "Outro editor de menu está salvando alterações"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Cinnamon could not load its application menu"
+msgstr "O Cinnamon não conseguiu carregar o menu de aplicativos"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "File is too large"
+msgstr "O arquivo é muito grande"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Files changed outside this editor. Reload before applying"
+msgstr ""
+"Arquivos foram alterados fora deste editor. Recarregue antes de aplicar"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Invalid command"
+msgstr "Comando inválido"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Invalid menu XML"
+msgstr "XML do menu inválido"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Invalid menu filename"
+msgstr "Nome de arquivo de menu inválido"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Missing [Desktop Entry] group"
+msgstr "O grupo [Desktop Entry] não foi encontrado"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Name is required"
+msgstr "É necessário informar um nome"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "No system version is available for"
+msgstr "Não há versão do sistema disponível para"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "No system version is available for this category"
+msgstr "Não há versão do sistema disponível para esta categoria"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Only application launchers can be edited"
+msgstr "Somente lançadores de aplicativos podem ser editados"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Only one file or URL field code is allowed"
+msgstr "É permitido somente um código de arquivo ou URL no comando"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Path is outside the user menu directories"
+msgstr "O caminho está fora dos diretórios de menu do usuário"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Recovery conflict; backup retained at"
+msgstr "Conflito na recuperação; cópia de segurança mantida em"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Save failed and changes were rolled back"
+msgstr "Falha ao salvar; as alterações foram revertidas"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Save failed; recovery required at"
+msgstr "Falha ao salvar; recuperação necessária em"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Select a category to restore"
+msgstr "Selecione uma categoria para restaurar"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Symbolic links cannot be edited"
+msgstr "Links simbólicos não podem ser editados"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "The application menu has no root directory"
+msgstr "O menu de aplicativos não tem diretório raiz"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "The launcher is invalid or its executable is unavailable"
+msgstr "O lançador é inválido ou o executável não está disponível"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "The menu XML must have a Menu root"
+msgstr "O XML do menu deve ter uma raiz Menu"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "The root category cannot be edited"
+msgstr "A categoria raiz não pode ser editada"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Unknown destination category"
+msgstr "Categoria de destino desconhecida"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Unknown parent category"
+msgstr "Categoria pai desconhecida"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Unsupported command field code"
+msgstr "Código de campo não suportado no comando"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "Unsupported launcher property"
+msgstr "Propriedade do lançador não suportada"
+
+#: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
+msgid "XML entities are not supported"
+msgstr "Entidades XML não são suportadas"

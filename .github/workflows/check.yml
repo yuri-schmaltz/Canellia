@@ -1,0 +1,15 @@
+name: Checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: sudo apt-get update && sudo apt-get install -y gettext python3-gi gir1.2-gtk-3.0 gir1.2-cmenu-3.0 xvfb
+      - run: python3 scripts/check.py
+      - run: xvfb-run -a python3 tests/gtk_menu_editor_smoke.py
