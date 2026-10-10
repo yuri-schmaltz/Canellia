@@ -1,4 +1,4 @@
-# Validação de lançadores — 9 de outubro de 2026
+# Validação de lançadores — 9 e 10 de outubro de 2026
 
 Os testes usam diretórios XDG temporários. Os menus, lançadores e preferências
 reais do usuário não são modificados pelos cenários. As duas implementações

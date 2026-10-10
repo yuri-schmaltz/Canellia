@@ -1,6 +1,6 @@
 # Canellia 5.7.0 — validação de robustez
 
-Executado em 9 de outubro de 2026, Cinnamon 6.6.9, X11, monitor 1920 × 1080.
+Executado em 9 e 10 de outubro de 2026, Cinnamon 6.6.9, X11, monitor 1920 × 1080.
 A versão foi instalada e recarregada na sessão real.
 
 151 testes automatizados passaram: 86 Python, 23 JavaScript e 42 GTK/CMenu
@@ -29,7 +29,8 @@ com `G_DEBUG=fatal-criticals`: nenhum aviso crítico GTK/GDK é tolerado.
 - Favoritos Firefox/LibreWolf sem libgda, incluindo perfis nativos/Flatpak,
   dados confirmados em WAL, URLs inválidas e bases danificadas.
 - Metadados de categorias e backups versionados, com leitura do formato anterior.
-- Gravação atômica das preferências e traduções dos novos controles em português.
+- Gravação atômica das preferências e traduções dos novos controles em português,
+  com catálogos por versão para evitar traduções antigas em cache.
 - Validação dos novos módulos e auxiliares no instalador e na integração contínua.
 
 ## Sessão real

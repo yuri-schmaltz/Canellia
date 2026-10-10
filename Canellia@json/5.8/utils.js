@@ -8,13 +8,17 @@ const ByteArray = imports.byteArray;
 const Cinnamon = imports.gi.Cinnamon;
 const {addTween} = imports.ui.tweener;
 Gettext.bindtextdomain('Canellia@json', GLib.get_user_data_dir() + '/locale');
+// Versioned catalogs avoid retaining translations cached before an update.
+const TRANSLATION_DOMAIN = __meta.version ? 'Canellia@json-' + __meta.version : 'Canellia@json';
+Gettext.bindtextdomain(TRANSLATION_DOMAIN, GLib.get_user_data_dir() + '/locale');
 
 function _(str) {
     let cinnamonTranslation = Gettext.gettext(str);
     if (cinnamonTranslation !== str) {
         return cinnamonTranslation;
     }
-    return Gettext.dgettext('Canellia@json', str);
+    const translation = Gettext.dgettext(TRANSLATION_DOMAIN, str);
+    return translation !== str ? translation : Gettext.dgettext('Canellia@json', str);
 }
 
 const wordWrap = text => (String(text ?? '').match( /.{1,80}(\s|$|-|=|\+|_|&|\\)|\S+?(\s|$|-|=|\+|_|&|\\)/g ) || []).join('\n');

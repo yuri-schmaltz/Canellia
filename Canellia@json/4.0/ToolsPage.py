@@ -225,7 +225,7 @@ class ToolsPage(SettingsPage):
 
     def _restore_preferences(self):
         folder = Path(os.environ.get('XDG_STATE_HOME', str(Path.home()/'.local/state'))) / 'canellia/settings-backups'
-        backups = sorted(folder.glob('*.json'), reverse=True)
+        backups = sorted(folder.glob('*.json'), key=lambda path: (path.stat().st_mtime_ns, path.name), reverse=True)
         if not backups:
             raise tools.ProfileError(_('No preferences backup is available.'))
         self._apply_profile(json.loads(backups[0].read_text()))

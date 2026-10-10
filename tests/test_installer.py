@@ -238,6 +238,8 @@ os.execv({real_mv!r}, [{real_mv!r}] + sys.argv[1:])
         self.assertEqual(translation.gettext('Menu editor'), 'Editor de menu')
         self.assertEqual(translation.gettext('Stage changes'), 'Atualizar item')
         self.assertEqual(translation.gettext('Apply'), 'Aplicar')
+        versioned = gettext.translation('Canellia@json-' + self.version, self.data/'locale', languages=['pt_BR'])
+        self.assertEqual(versioned.gettext('No results found'), 'Nenhum resultado encontrado')
 
     def test_missing_subprocess_helper_preserves_installation(self):
         self.existing()

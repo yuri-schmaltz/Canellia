@@ -40,7 +40,7 @@
     {
       "name": "no_results_status",
       "result": {
-        "message": "No results found"
+        "message": "Nenhum resultado encontrado"
       }
     },
     {
@@ -58,7 +58,7 @@
         "favorites": 4,
         "stored": 5,
         "buttons": 109,
-        "duration_ms": 1333
+        "duration_ms": 1372
       }
     },
     {
@@ -68,6 +68,6 @@
       }
     }
   ],
-  "started": "2026-10-10T02:52:46Z",
+  "started": "2026-10-10T03:01:25Z",
   "status": "passed"
 }

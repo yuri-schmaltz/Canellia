@@ -208,6 +208,7 @@ if not (temporary / 'skip').exists():
             output = temporary / 'translations' / catalog.stem / 'LC_MESSAGES' / 'Canellia@json.mo'
             output.parent.mkdir(parents=True, exist_ok=True)
             subprocess.run(['msgfmt', '--check', '-o', str(output), str(catalog)], check=True)
+            shutil.copyfile(output, output.with_name('Canellia@json-' + incoming['version'] + '.mo'))
     else:
         print('msgfmt is unavailable; existing translations will be kept.', file=sys.stderr)
 print(f"Validated Canellia {incoming['version']}.")

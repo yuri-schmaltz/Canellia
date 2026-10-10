@@ -479,6 +479,13 @@ class RealMenuTests(unittest.TestCase):
         self.page._restore_preferences()
         self.assertEqual(handler.get_value('applications-view-mode'), 1)
         self.assertEqual(len(list(backups[0].parent.glob('*.json'))), 2)
+        # Random suffixes and same-second timestamps must not determine recency.
+        recent = backups[0].parent/'0000-most-recent.json'
+        recent.write_text(json.dumps(module.tools.preset('grid', handler.settings)))
+        newest = max(path.stat().st_mtime_ns for path in recent.parent.glob('*.json'))
+        os.utime(recent, ns=(newest+1, newest+1))
+        self.page._restore_preferences()
+        self.assertEqual(handler.get_value('custom-menu-width'), 900)
         handler.save_settings()
         self.page._scan()
         self.assertGreaterEqual(len(self.page.issues), 2)

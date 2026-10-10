@@ -214,3 +214,11 @@ For strict GTK validation, use `bash scripts/run_gtk_suite.sh`. It opens real
 windows in an isolated Xvfb/Xephyr display and treats GLib critical warnings as
 errors. This avoids the GDK origin warnings caused by Gtk.OffscreenWindow while
 preserving full widget and screenshot coverage. Xephyr requires an X11 session.
+
+CI uses pinned v7 commits of the official [checkout](https://github.com/actions/checkout)
+and [setup-node](https://github.com/actions/setup-node) actions. The test runtime
+remains Node.js 22; automatic package-manager caching is disabled.
+
+The installer publishes base and versioned gettext catalogs. Applet modules use
+the versioned domain with a base-domain fallback, so translations added by an
+update become available without restarting Cinnamon or changing system locale.

@@ -50,11 +50,13 @@ def main():
                 favorites:global.settings.get_strv('favorite-apps')};
             return {loaded:true};''')
         setup = True
-        check('open_and_grid', '''a.menu.open(false);a.setActiveCategory('all');
+        check('open_and_grid', '''a.menu.close(false);a.on_applet_clicked();a.setActiveCategory('all');
             const grid=a.display.appsView.getGridValues();
             if(!a.menu.isOpen || grid.columns<1 || !Number.isFinite(grid.columnWidth)) throw new Error('Invalid menu grid');
             return {columns:grid.columns,visible:a.display.appsView.getActiveButtons().length};''')
+        wait_for('return a.menu.actor.mapped;')
         subprocess.run(['xdotool', 'key', '--clearmodifiers', 'ctrl+f'], check=True)
+        wait_for('const focus=global.stage.get_key_focus(),view=a.display.searchView;return focus===view.searchEntry || focus===view.searchEntryText;')
         check('keyboard_search_focus', "const focus=global.stage.get_key_focus(),view=a.display.searchView;if(focus!==view.searchEntry && focus!==view.searchEntryText) throw new Error('Ctrl+F did not focus search');return {focused:true};")
         check('exact_application_search', '''const apps=a.apps.listApplications('all');
             if(!apps.length) throw new Error('No installed applications');

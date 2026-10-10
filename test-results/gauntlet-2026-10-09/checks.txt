@@ -3,8 +3,8 @@ test_helper_cli_emits_valid_json_for_unknown_browser (test_firefox_bookmarks.Fir
 test_invalid_missing_or_corrupt_data_is_an_empty_result (test_firefox_bookmarks.FirefoxBookmarksTests.test_invalid_missing_or_corrupt_data_is_an_empty_result) ... Canellia: bookmarks lookup failed: file is not a database
 Canellia: bookmarks lookup failed: file is not a database
 ok
-test_favicon_cache_failure_does_not_discard_history (test_helpers.HelperTests.test_favicon_cache_failure_does_not_discard_history) ... Canellia: favicon lookup failed: [Errno 17] File exists: '/tmp/tmptmfyd73j/blocked-4.0'
-Canellia: favicon lookup failed: [Errno 17] File exists: '/tmp/tmptmfyd73j/blocked-5.8'
+test_favicon_cache_failure_does_not_discard_history (test_helpers.HelperTests.test_favicon_cache_failure_does_not_discard_history) ... Canellia: favicon lookup failed: [Errno 17] File exists: '/tmp/tmpv3x_k3nx/blocked-4.0'
+Canellia: favicon lookup failed: [Errno 17] File exists: '/tmp/tmpv3x_k3nx/blocked-5.8'
 ok
 test_favicons_largest_bitmap_and_profile_isolation (test_helpers.HelperTests.test_favicons_largest_bitmap_and_profile_isolation) ... ok
 test_file_search_cancellation_and_missing_root (test_helpers.HelperTests.test_file_search_cancellation_and_missing_root) ... ok
@@ -90,124 +90,124 @@ test_stop_never_joins_worker_or_renders_stale_results (test_search_window.Search
 test_worker_never_touches_gtk (test_search_window.SearchWindowTests.test_worker_never_touches_gtk) ... ok
 
 ----------------------------------------------------------------------
-Ran 86 tests in 13.058s
+Ran 86 tests in 13.697s
 
 OK
 TAP version 13
 # Subtest: 4.0: arithmetic precedence, functions and constants
 ok 1 - 4.0: arithmetic precedence, functions and constants
   ---
-  duration_ms: 2.517045
+  duration_ms: 4.164542
   ...
 # Subtest: 4.0: scripts, invalid and unbounded expressions are rejected
 ok 2 - 4.0: scripts, invalid and unbounded expressions are rejected
   ---
-  duration_ms: 0.874381
+  duration_ms: 1.434524
   ...
 # Subtest: 5.8: arithmetic precedence, functions and constants
 ok 3 - 5.8: arithmetic precedence, functions and constants
   ---
-  duration_ms: 1.870748
+  duration_ms: 2.800915
   ...
 # Subtest: 5.8: scripts, invalid and unbounded expressions are rejected
 ok 4 - 5.8: scripts, invalid and unbounded expressions are rejected
   ---
-  duration_ms: 0.639484
+  duration_ms: 1.124228
   ...
 # Subtest: 4.0: 1000 seeded arithmetic trees agree with their mathematical model
 ok 5 - 4.0: 1000 seeded arithmetic trees agree with their mathematical model
   ---
-  duration_ms: 25.825686
+  duration_ms: 45.761022
   ...
 # Subtest: 5.8: 1000 seeded arithmetic trees agree with their mathematical model
 ok 6 - 5.8: 1000 seeded arithmetic trees agree with their mathematical model
   ---
-  duration_ms: 25.250405
+  duration_ms: 34.079751
   ...
 # Subtest: 4.0: helper errors, malformed JSON and timeout always settle
 ok 7 - 4.0: helper errors, malformed JSON and timeout always settle
   ---
-  duration_ms: 24.922443
+  duration_ms: 23.868681
   ...
 # Subtest: 4.0: malformed bookmarks do not block healthy browser results
 ok 8 - 4.0: malformed bookmarks do not block healthy browser results
   ---
-  duration_ms: 22.099943
+  duration_ms: 17.870699
   ...
 # Subtest: 4.0: history ignores obsolete searches and deduplicates profiles
 ok 9 - 4.0: history ignores obsolete searches and deduplicates profiles
   ---
-  duration_ms: 4.509624
+  duration_ms: 3.641141
   ...
 # Subtest: 4.0: removal cancels timers and recent files sort newest first
 ok 10 - 4.0: removal cancels timers and recent files sort newest first
   ---
-  duration_ms: 25.068619
+  duration_ms: 25.658003
   ...
 # Subtest: 5.8: helper errors, malformed JSON and timeout always settle
 ok 11 - 5.8: helper errors, malformed JSON and timeout always settle
   ---
-  duration_ms: 16.277633
+  duration_ms: 15.8434
   ...
 # Subtest: 5.8: malformed bookmarks do not block healthy browser results
 ok 12 - 5.8: malformed bookmarks do not block healthy browser results
   ---
-  duration_ms: 3.598799
+  duration_ms: 3.122646
   ...
 # Subtest: 5.8: history ignores obsolete searches and deduplicates profiles
 ok 13 - 5.8: history ignores obsolete searches and deduplicates profiles
   ---
-  duration_ms: 3.006731
+  duration_ms: 4.078678
   ...
 # Subtest: 5.8: removal cancels timers and recent files sort newest first
 ok 14 - 5.8: removal cancels timers and recent files sort newest first
   ---
-  duration_ms: 23.825207
+  duration_ms: 24.21502
   ...
 # Subtest: 5.8: obsolete folder enumerations complete and close before returning
 ok 15 - 5.8: obsolete folder enumerations complete and close before returning
   ---
-  duration_ms: 10.502117
+  duration_ms: 8.653554
   ...
 # Subtest: 4.0: exact names outrank prefixes and ignore accents
 ok 16 - 4.0: exact names outrank prefixes and ignore accents
   ---
-  duration_ms: 3.627858
+  duration_ms: 3.263104
   ...
 # Subtest: 5.8: exact names outrank prefixes and ignore accents
 ok 17 - 5.8: exact names outrank prefixes and ignore accents
   ---
-  duration_ms: 2.451915
+  duration_ms: 2.018722
   ...
 # Subtest: 4.0: Firefox bookmarks work without libgda and tolerate corrupt profile entries
 ok 18 - 4.0: Firefox bookmarks work without libgda and tolerate corrupt profile entries
   ---
-  duration_ms: 2.374115
+  duration_ms: 1.950879
   ...
 # Subtest: 5.8: Firefox bookmarks work without libgda and tolerate corrupt profile entries
 ok 19 - 5.8: Firefox bookmarks work without libgda and tolerate corrupt profile entries
   ---
-  duration_ms: 1.517645
+  duration_ms: 1.209478
   ...
 # Subtest: 4.0: favorite insertion, reordering, append and self-drop preserve identities
 ok 20 - 4.0: favorite insertion, reordering, append and self-drop preserve identities
   ---
-  duration_ms: 4.277299
+  duration_ms: 3.464113
   ...
 # Subtest: 5.8: favorite insertion, reordering, append and self-drop preserve identities
 ok 21 - 5.8: favorite insertion, reordering, append and self-drop preserve identities
   ---
-  duration_ms: 4.167333
+  duration_ms: 3.242366
   ...
 # Subtest: 4.0: blank, missing and escaped tooltip text remains safe
 ok 22 - 4.0: blank, missing and escaped tooltip text remains safe
   ---
-  duration_ms: 1.782531
+  duration_ms: 1.442567
   ...
 # Subtest: 5.8: blank, missing and escaped tooltip text remains safe
 ok 23 - 5.8: blank, missing and escaped tooltip text remains safe
   ---
-  duration_ms: 1.385012
+  duration_ms: 1.124247
   ...
 1..23
 # tests 23
@@ -217,5 +217,5 @@ ok 23 - 5.8: blank, missing and escaped tooltip text remains safe
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 238.253219
+# duration_ms 231.810336
 All checks passed. Desktop smoke testing remains required before a release.
