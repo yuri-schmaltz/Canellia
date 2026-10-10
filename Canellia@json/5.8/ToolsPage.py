@@ -264,6 +264,21 @@ class ToolsPage(SettingsPage):
         self.preview_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         box.pack_start(self._scroll(self.preview_box), True, True, 0)
 
+    @staticmethod
+    def _preview_image(icon, size):
+        theme = Gtk.IconTheme.get_default()
+        for name in (icon, 'application-x-executable', 'image-missing'):
+            if not theme.has_icon(name):
+                continue
+            try:
+                pixbuf = theme.load_icon(name, size, Gtk.IconLookupFlags.FORCE_SIZE)
+                # Own the bitmap rather than sharing GTK's cached icon surface.
+                # This also avoids Cairo MIME-surface reuse on older GTK builds.
+                return Gtk.Image.new_from_pixbuf(pixbuf.copy())
+            except GLib.Error:
+                continue
+        return Gtk.Image()
+
     def _render_preview(self):
         for child in self.preview_box.get_children():
             child.destroy()
@@ -288,8 +303,7 @@ class ToolsPage(SettingsPage):
         icon_size = get('apps-list-icon-size') if get('applications-view-mode') == 0 else get('apps-grid-icon-size')
         for name, icon in [('Files', 'system-file-manager'), ('Calculator', 'accessories-calculator'), ('Editor', 'accessories-text-editor'), ('Internet', 'web-browser'), ('Terminal', 'utilities-terminal'), ('Preferences', 'preferences-system')]:
             tile = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL if get('applications-view-mode') == 0 else Gtk.Orientation.VERTICAL, spacing=6)
-            image = Gtk.Image.new_from_icon_name(icon, Gtk.IconSize.DIALOG)
-            image.set_pixel_size(min(max(round(icon_size * scale), 16), 96))
+            image = self._preview_image(icon, min(max(round(icon_size * scale), 16), 96))
             tile.pack_start(image, False, False, 0)
             tile.pack_start(Gtk.Label(label=_(name)), False, False, 0)
             grid.add(tile)

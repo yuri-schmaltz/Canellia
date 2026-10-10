@@ -491,6 +491,10 @@ class RealMenuTests(unittest.TestCase):
         self.assertGreaterEqual(len(self.page.issues), 2)
         self.assertTrue(self.page.preview_box.get_children())
         self.assertIsNotNone(self.window.get_pixbuf())
+        for _ in range(24):
+            self.page._render_preview()
+            drain()
+            self.assertIsNotNone(self.window.get_pixbuf())
 
     def test_public_tree_reads_categories_and_round_trips_move(self):
         model = self.source.load()

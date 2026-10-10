@@ -222,3 +222,9 @@ remains Node.js 22; automatic package-manager caching is disabled.
 The installer publishes base and versioned gettext catalogs. Applet modules use
 the versioned domain with a base-domain fallback, so translations added by an
 update become available without restarting Cinnamon or changing system locale.
+
+Strict headless GTK tests set `NO_AT_BRIDGE=1` because their isolated data roots
+do not provide a desktop accessibility bus. Widget accessibility properties
+remain available; live desktop checks use the normal session bridge. Preview
+images own copied pixbufs rather than sharing cached GTK icon surfaces; repeated
+redraws are covered on both entrypoints and the Ubuntu 22.04 CI environment.

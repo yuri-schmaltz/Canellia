@@ -2,9 +2,7 @@ test_batch_moving_mixed_custom_and_system_launchers_after_restart (__main__.Real
 test_category_can_be_shown_again_after_hiding_and_reload (__main__.RealMenuTests.test_category_can_be_shown_again_after_hiding_and_reload) ... ok
 test_category_removal_does_not_change_other_categories_or_launcher (__main__.RealMenuTests.test_category_removal_does_not_change_other_categories_or_launcher) ... ok
 test_create_category_and_launcher_are_visible_after_reload (__main__.RealMenuTests.test_create_category_and_launcher_are_visible_after_reload) ... ok
-test_drag_payload_moves_selected_apps_and_copy_retains_source (__main__.RealMenuTests.test_drag_payload_moves_selected_apps_and_copy_retains_source) ... /home/yuri/Documentos/cinammon_menu/Canellia/Canellia@json/4.0/MenuEditorPage.py:205: DeprecationWarning: Gtk.Widget.set_margin_left is deprecated
-  box.set_margin_left(8)
-ok
+test_drag_payload_moves_selected_apps_and_copy_retains_source (__main__.RealMenuTests.test_drag_payload_moves_selected_apps_and_copy_retains_source) ... ok
 test_duplicate_edit_delete_and_restore_complete_lifecycle (__main__.RealMenuTests.test_duplicate_edit_delete_and_restore_complete_lifecycle) ... ok
 test_edit_hide_remove_restore_preserves_system_files (__main__.RealMenuTests.test_edit_hide_remove_restore_preserves_system_files) ... ok
 test_external_conflict_preserves_pending_edit (__main__.RealMenuTests.test_external_conflict_preserves_pending_edit) ... Unable to save menu changes
@@ -17,11 +15,9 @@ Traceback (most recent call last):
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/home/yuri/Documentos/cinammon_menu/Canellia/Canellia@json/4.0/menuEditorCore.py", line 386, in commit
     raise EditorError('Files changed outside this editor. Reload before applying: ' + str(path))
-_canellia_editor_12ddc75154ab.menuEditorCore.EditorError: Files changed outside this editor. Reload before applying: /tmp/canellia-gtk-lrcs7yx2/system-data/applications/editor.desktop
+_canellia_editor_12ddc75154ab.menuEditorCore.EditorError: Files changed outside this editor. Reload before applying: /tmp/canellia-gtk-d54dxwef/system-data/applications/editor.desktop
 ok
-test_failure_then_reload_recovers_and_destroy_disconnects (__main__.RealMenuTests.test_failure_then_reload_recovers_and_destroy_disconnects) ... /home/yuri/Documentos/cinammon_menu/Canellia/Canellia@json/4.0/MenuEditorPage.py:755: DeprecationWarning: Gtk.Widget.set_margin_right is deprecated
-  self.set_margin_right(8)
-ok
+test_failure_then_reload_recovers_and_destroy_disconnects (__main__.RealMenuTests.test_failure_then_reload_recovers_and_destroy_disconnects) ... ok
 test_file_icons_and_invalid_icons_have_safe_fallback (__main__.RealMenuTests.test_file_icons_and_invalid_icons_have_safe_fallback) ... ok
 test_flatpak_alias_is_canonicalized_and_not_duplicated (__main__.RealMenuTests.test_flatpak_alias_is_canonicalized_and_not_duplicated) ... ok
 test_invalid_form_is_preserved_when_selection_changes (__main__.RealMenuTests.test_invalid_form_is_preserved_when_selection_changes) ... ok
@@ -51,18 +47,14 @@ test_tools_profiles_preview_and_diagnostics_use_isolated_settings (__main__.Real
 test_unsaved_close_cancel_discard_and_apply (__main__.RealMenuTests.test_unsaved_close_cancel_discard_and_apply) ... ok
 
 ----------------------------------------------------------------------
-Ran 21 tests in 22.481s
+Ran 21 tests in 22.547s
 
 OK
 test_batch_moving_mixed_custom_and_system_launchers_after_restart (__main__.RealMenuTests.test_batch_moving_mixed_custom_and_system_launchers_after_restart) ... ok
 test_category_can_be_shown_again_after_hiding_and_reload (__main__.RealMenuTests.test_category_can_be_shown_again_after_hiding_and_reload) ... ok
 test_category_removal_does_not_change_other_categories_or_launcher (__main__.RealMenuTests.test_category_removal_does_not_change_other_categories_or_launcher) ... ok
 test_create_category_and_launcher_are_visible_after_reload (__main__.RealMenuTests.test_create_category_and_launcher_are_visible_after_reload) ... ok
-test_drag_payload_moves_selected_apps_and_copy_retains_source (__main__.RealMenuTests.test_drag_payload_moves_selected_apps_and_copy_retains_source) ... /home/yuri/Documentos/cinammon_menu/Canellia/Canellia@json/5.8/MenuEditorPage.py:754: DeprecationWarning: Gtk.Widget.set_margin_left is deprecated
-  self.set_margin_left(8)
-/home/yuri/Documentos/cinammon_menu/Canellia/Canellia@json/5.8/MenuEditorPage.py:755: DeprecationWarning: Gtk.Widget.set_margin_right is deprecated
-  self.set_margin_right(8)
-ok
+test_drag_payload_moves_selected_apps_and_copy_retains_source (__main__.RealMenuTests.test_drag_payload_moves_selected_apps_and_copy_retains_source) ... ok
 test_duplicate_edit_delete_and_restore_complete_lifecycle (__main__.RealMenuTests.test_duplicate_edit_delete_and_restore_complete_lifecycle) ... ok
 test_edit_hide_remove_restore_preserves_system_files (__main__.RealMenuTests.test_edit_hide_remove_restore_preserves_system_files) ... ok
 test_external_conflict_preserves_pending_edit (__main__.RealMenuTests.test_external_conflict_preserves_pending_edit) ... Unable to save menu changes
@@ -75,7 +67,7 @@ Traceback (most recent call last):
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/home/yuri/Documentos/cinammon_menu/Canellia/Canellia@json/5.8/menuEditorCore.py", line 386, in commit
     raise EditorError('Files changed outside this editor. Reload before applying: ' + str(path))
-_canellia_editor_cb27a0680be1.menuEditorCore.EditorError: Files changed outside this editor. Reload before applying: /tmp/canellia-gtk-ymgp2vo5/system-data/applications/editor.desktop
+_canellia_editor_cb27a0680be1.menuEditorCore.EditorError: Files changed outside this editor. Reload before applying: /tmp/canellia-gtk-1gow4gte/system-data/applications/editor.desktop
 ok
 test_failure_then_reload_recovers_and_destroy_disconnects (__main__.RealMenuTests.test_failure_then_reload_recovers_and_destroy_disconnects) ... ok
 test_file_icons_and_invalid_icons_have_safe_fallback (__main__.RealMenuTests.test_file_icons_and_invalid_icons_have_safe_fallback) ... ok
@@ -107,6 +99,6 @@ test_tools_profiles_preview_and_diagnostics_use_isolated_settings (__main__.Real
 test_unsaved_close_cancel_discard_and_apply (__main__.RealMenuTests.test_unsaved_close_cancel_discard_and_apply) ... ok
 
 ----------------------------------------------------------------------
-Ran 21 tests in 22.990s
+Ran 21 tests in 22.354s
 
 OK

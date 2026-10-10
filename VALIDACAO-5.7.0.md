@@ -31,6 +31,8 @@ com `G_DEBUG=fatal-criticals`: nenhum aviso crítico GTK/GDK é tolerado.
 - Metadados de categorias e backups versionados, com leitura do formato anterior.
 - Gravação atômica das preferências e traduções dos novos controles em português,
   com catálogos por versão para evitar traduções antigas em cache.
+- Prévia com bitmaps independentes, evitando reutilização de superfícies Cairo
+  durante atualizações repetidas; 24 redesenhos adicionais por implementação.
 - Validação dos novos módulos e auxiliares no instalador e na integração contínua.
 
 ## Sessão real

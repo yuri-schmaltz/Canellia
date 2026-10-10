@@ -3,7 +3,7 @@
 set -euo pipefail
 canellia_repo=$(cd -- "$(dirname -- "$0")/.." && pwd)
 if command -v xvfb-run >/dev/null 2>&1; then
-    exec xvfb-run -a env CANELLIA_REAL_WINDOWS=1 G_DEBUG=fatal-criticals python3 "$canellia_repo/tests/gtk_menu_editor_smoke.py"
+    exec xvfb-run -a env NO_AT_BRIDGE=1 CANELLIA_REAL_WINDOWS=1 G_DEBUG=fatal-criticals python3 "$canellia_repo/tests/gtk_menu_editor_smoke.py"
 fi
 if ! command -v Xephyr >/dev/null 2>&1; then
     echo 'Install Xvfb or Xephyr to run strict GTK integration tests.' >&2
@@ -23,7 +23,7 @@ canellia_display_pid=$!
 trap 'kill "$canellia_display_pid" 2>/dev/null || true; rm -f "$canellia_log"' EXIT
 for canellia_attempt in {1..50}; do
     if [[ -S /tmp/.X11-unix/X${canellia_display#:} ]]; then
-        DISPLAY="$canellia_display" CANELLIA_REAL_WINDOWS=1 G_DEBUG=fatal-criticals python3 "$canellia_repo/tests/gtk_menu_editor_smoke.py"
+        DISPLAY="$canellia_display" env NO_AT_BRIDGE=1 CANELLIA_REAL_WINDOWS=1 G_DEBUG=fatal-criticals python3 "$canellia_repo/tests/gtk_menu_editor_smoke.py"
         exit 0
     fi
     if ! kill -0 "$canellia_display_pid" 2>/dev/null; then

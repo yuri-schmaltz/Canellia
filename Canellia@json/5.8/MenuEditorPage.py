@@ -202,7 +202,7 @@ class _EditorHost:
     def _properties(self):
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
         box.set_size_request(200, -1)
-        box.set_margin_left(8)
+        box.set_margin_start(8)
         box.pack_start(Gtk.Label(label=_('Properties'), xalign=0), False, False, 0)
         self.fields, self.field_rows = {}, {}
         for key, label in [('Name', 'Name'), ('Comment', 'Description'), ('Exec', 'Command'), ('Icon', 'Icon'), ('Categories', 'Desktop categories'), ('Path', 'Working directory')]:
@@ -751,8 +751,8 @@ class _EditorHost:
 class MenuEditorPage(SettingsPage, _EditorHost):
     def __init__(self, info, settings):
         SettingsPage.__init__(self)
-        self.set_margin_left(8)
-        self.set_margin_right(8)
+        self.set_margin_start(8)
+        self.set_margin_end(8)
         self.set_spacing(8)
         self.set_vexpand(True)
         self._init_editor()
@@ -771,7 +771,7 @@ class MenuEditorWidget(SettingsWidget, _EditorHost):
         parent = self.get_parent()
         while parent is not None:
             if isinstance(parent, SettingsPage):
-                parent.set_margin_left(8)
-                parent.set_margin_right(8)
+                parent.set_margin_start(8)
+                parent.set_margin_end(8)
                 break
             parent = parent.get_parent()
