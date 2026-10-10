@@ -22,7 +22,11 @@ def parent():
                        XDG_DATA_HOME=str(root / 'data'), XDG_DATA_DIRS=str(root / 'system-data'),
                        XDG_STATE_HOME=str(root / 'state'), XDG_CACHE_HOME=str(root / 'cache'),
                        XDG_MENU_PREFIX='cinnamon-', LANG='C.UTF-8', LC_ALL='C.UTF-8')
-            subprocess.run([sys.executable, __file__, '--child', version], env=env, check=True)
+            command = [sys.executable, __file__, '--child', version]
+            if os.environ.get('CANELLIA_DEBUG_GDB'):
+                command = ['gdb', '--batch', '--return-child-result', '-ex', 'set debuginfod enabled off',
+                           '-ex', 'run', '-ex', 'thread apply all bt 32', '--args'] + command
+            subprocess.run(command, env=env, check=True)
 
 
 if '--child' not in sys.argv:
