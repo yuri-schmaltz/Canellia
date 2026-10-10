@@ -97,18 +97,30 @@ class RealMenuTests(unittest.TestCase):
     def setUp(self):
         for key in ('XDG_CONFIG_HOME', 'XDG_DATA_HOME', 'XDG_STATE_HOME', 'XDG_CONFIG_DIRS', 'XDG_DATA_DIRS'):
             path = Path(os.environ[key])
-            shutil.rmtree(path, ignore_errors=True)
-            path.mkdir(parents=True)
+            if key == 'XDG_DATA_DIRS' and path.exists():
+                # GTK caches theme surfaces for the process lifetime. Keep the
+                # shared, immutable test theme while resetting menu fixtures.
+                for child in path.iterdir():
+                    if child.name == 'icons':
+                        continue
+                    if child.is_dir() and not child.is_symlink():
+                        shutil.rmtree(child)
+                    else:
+                        child.unlink()
+            else:
+                shutil.rmtree(path, ignore_errors=True)
+            path.mkdir(parents=True, exist_ok=True)
         self.system = Path(os.environ['XDG_DATA_DIRS'])
         (self.system / 'mime').symlink_to('/usr/share/mime')
         icons = self.system / 'icons/CanelliaTest/16x16/actions'
-        icons.mkdir(parents=True)
-        (icons.parent.parent / 'index.theme').write_text('[Icon Theme]\nName=CanelliaTest\nDirectories=16x16/actions\n[16x16/actions]\nSize=16\nType=Fixed\nContext=Actions\n')
-        from gi.repository import GdkPixbuf
-        pixbuf = GdkPixbuf.Pixbuf.new(GdkPixbuf.Colorspace.RGB, True, 8, 16, 16)
-        pixbuf.fill(0x4d8ceaff)
-        for name in ('image-missing', 'folder', 'accessories-text-editor', 'application-x-executable', 'view-grid-symbolic', 'edit-find-symbolic', 'edit-clear-symbolic'):
-            pixbuf.savev(str(icons / (name + '.png')), 'png', [], [])
+        if not icons.exists():
+            icons.mkdir(parents=True)
+            (icons.parent.parent / 'index.theme').write_text('[Icon Theme]\nName=CanelliaTest\nDirectories=16x16/actions\n[16x16/actions]\nSize=16\nType=Fixed\nContext=Actions\n')
+            from gi.repository import GdkPixbuf
+            pixbuf = GdkPixbuf.Pixbuf.new(GdkPixbuf.Colorspace.RGB, True, 8, 16, 16)
+            pixbuf.fill(0x4d8ceaff)
+            for name in ('image-missing', 'folder', 'accessories-text-editor', 'application-x-executable', 'view-grid-symbolic', 'edit-find-symbolic', 'edit-clear-symbolic'):
+                pixbuf.savev(str(icons / (name + '.png')), 'png', [], [])
         (self.system / 'applications').mkdir()
         (self.system / 'desktop-directories').mkdir()
         (self.system / 'applications/editor.desktop').write_text(APP)

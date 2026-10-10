@@ -11,6 +11,6 @@ jobs:
         with:
           node-version: '22'
           package-manager-cache: false
-      - run: sudo apt-get update && sudo apt-get install -y gettext python3-gi gir1.2-gtk-3.0 gir1.2-cmenu-3.0 xvfb gdb
+      - run: sudo apt-get update && sudo apt-get install -y gettext python3-gi gir1.2-gtk-3.0 gir1.2-cmenu-3.0 xvfb
       - run: python3 scripts/check.py
-      - run: CANELLIA_DEBUG_GDB=1 bash scripts/run_gtk_suite.sh
+      - run: bash scripts/run_gtk_suite.sh

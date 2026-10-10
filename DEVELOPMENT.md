@@ -228,3 +228,8 @@ do not provide a desktop accessibility bus. Widget accessibility properties
 remain available; live desktop checks use the normal session bridge. Preview
 images own copied pixbufs rather than sharing cached GTK icon surfaces; repeated
 redraws are covered on both entrypoints and the Ubuntu 22.04 CI environment.
+
+The GTK fixture theme stays immutable for each process; launcher/menu files are
+still reset per test. This prevents teardown from invalidating surfaces still
+cached by GTK. Optional `CANELLIA_DEBUG_GDB=1` collects a native backtrace when
+GDB is installed; routine CI runs without a debugger.
