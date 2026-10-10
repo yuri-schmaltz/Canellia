@@ -1,9 +1,9 @@
 {
     "uuid": "Canellia@json",
     "name": "Canellia",
-    "description": "A flexible menu with grid or list layout options, file browser and emoji search.",
+    "description": "Um menu para Cinnamon com pesquisa, favoritos, editor integrado e opções de aparência.",
     "max-instances": -1,
     "version": "5.7.0",
     "multiversion": true,
-    "author": "fredcw"
+    "author": "yuri-schmaltz"
 }

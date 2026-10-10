@@ -1,83 +1,79 @@
-![screenshot](screenshot.png)
+# Canellia
 
-Canellia
-========
-_Version: 5.7.0 (local)_ — integrated editing, recovery tools and safer search
+Um menu para o Cinnamon que ajuda você a encontrar aplicativos, organizar
+categorias e deixar a área de trabalho do seu jeito.
 
-Canellia is a full featured alternative to the standard Cinnamon menu with grid layout, an integrated menu editor and customisation options.
+**Versão 5.7.0** · [Sobre o projeto](ABOUT.md) · [Licença](LICENSE.md)
 
-The applet UUID and translation domain are `Canellia@json`.
+![Menu Canellia em execução](screenshot.png)
 
-### To install or update this checkout:
+## O que você pode fazer
 
-Run in a Cinnamon session (Python 3.8+ and `flock` required):
+- Navegar pelos aplicativos em grade ou lista e organizar seus favoritos.
+- Criar, editar, duplicar e testar lançadores no editor de menu integrado.
+- Mover aplicativos entre categorias ou adicioná-los a mais de uma categoria.
+- Ajustar dimensões do menu, tamanhos dos ícones e posição da barra lateral.
+- Pesquisar aplicativos, arquivos, emojis e conteúdo da web, conforme as opções ativadas.
+- Fazer contas como `2+3*4`, `sqrt(16)` e `sin(PI/2)` diretamente na pesquisa.
+- Usar a aba **Ferramentas** para revisar problemas, restaurar backups,
+  importar e exportar perfis ou conferir uma prévia da aparência.
+
+A calculadora aceita operações e funções matemáticas específicas. Os ângulos
+são expressos em radianos; o texto digitado não é executado como JavaScript.
+
+## Instalação
+
+O Canellia é um applet para o ambiente de trabalho **Cinnamon**. Na pasta do
+projeto, execute o comando abaixo em uma sessão Cinnamon:
 
 ```sh
 bash install.sh --local --force
 ```
 
-The local mode installs this checkout, including the robustness fixes. Running
-`bash install.sh` without flags also installs this checkout. Remote installs require
-explicit `--archive HTTPS_URL --metadata-url HTTPS_URL` arguments for a Canellia package.
-Installation validates files before replacing the applet and restores the
-previous installation if activation fails.
+O instalador precisa de Python 3.8 ou superior e do comando `flock`. Os recursos
+do menu e do editor usam os componentes do Cinnamon, GTK e PyGObject. A versão
+5.7.0 foi validada em Cinnamon 6.6.9, com X11.
 
-For architecture, automated checks and desktop release validation, see
-[DEVELOPMENT.md](DEVELOPMENT.md). Run `python3 scripts/check.py` with Node.js 22+
-and gettext installed to execute the regression suite.
+Esse comando também atualiza uma instalação existente. O instalador verifica
+os arquivos antes da substituição e restaura a instalação anterior se a
+ativação falhar. Se o applet ainda não estiver no painel, abra **Applets** nas
+configurações do Cinnamon e adicione **Canellia**.
 
-### Features
+## Organize seu menu
 
- * Own menu editor in the first settings tab, with search, filters, multiple
-   selection, drag/move/add to categories, inline properties, icon choice,
-   launcher creation/testing and individual restore. Changes are staged until
-   Apply, with Discard, Undo/Redo, conflict checks and automatic backups.
- * The Tips tab has been removed.
+Abra as configurações do Canellia e entre na primeira aba, **Editor de menu**.
+Escolha uma categoria ou procure um aplicativo para editar suas propriedades.
 
- * Fuzzy searching for app names, with accent-insensitive matching and exact
-   names ranked above partial matches.
- * The editor displays file and theme icons. Removed system launchers stay
-   available through the Hidden filter for restoration. Flatpak launcher aliases
-   share one canonical desktop ID.
- * Filesystem browser and home directory file search.
- * Emoji browser & search.
- * Customisation options:
-   * Resizable.
-   * View apps in a list or grid.
-   * Options on where to show session and favorite app buttons.
-   * Change icon sizes.
- * Browser bookmarks and history search
- * Web search suggestions & Wikipedia search.
- * Built in calculator with calculator history. This is evaluated as a javascript expression so all javascript operators and Math functions are valid, including constants: E, PI and functions (trig) sin, asin, sinh, asinh, cos, tan, etc. and cbrt, exp, floor, log, log10, pow, random, round, sqrt, etc. All angles are in radians. (see [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators) for list of operators and [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math) for list of constants and functions)
+As alterações ficam pendentes até você clicar em **Aplicar**. Use **Desfazer**,
+**Refazer** ou **Descartar** enquanto organiza os itens. A aplicação das mudanças
+cria backups, disponíveis na aba **Ferramentas**.
 
+Ocultar ou remover um item do menu não desinstala o aplicativo. Lançadores do
+sistema ocultos continuam disponíveis pelo filtro **Ocultos** para restauração.
+O diagnóstico apresenta problemas para revisão, sem excluir aplicativos
+automaticamente.
 
-----
+## Atalhos úteis
 
-#### Key navigation (optional)
- * `Return/Enter` — Activate currently highlighted item (same as left clicking on item.)
- * `Ctrl-Enter/Menu key` — Open/close context menu of currently highlighted item.
- * `Arrow keys/pg up/pg down` — navigate between items.
- * `Tab/Shift-Tab` — navigate between apps ⇨ categories ⇨ sidebar.
- * `Esc` — Close menu or context menu.
+| Atalho | Ação |
+| --- | --- |
+| `Ctrl+F` | Focar a pesquisa do menu |
+| `Enter` | Abrir o item selecionado |
+| Setas | Navegar entre os itens |
+| `Tab` / `Shift+Tab` | Navegar entre aplicativos, categorias e barra lateral |
+| `Ctrl+Enter` / tecla Menu | Abrir o menu de contexto |
+| `Ctrl+PageUp` / `Ctrl+PageDown` | Trocar páginas de aplicativos |
+| `Esc` | Fechar o menu de contexto ou o menu principal |
 
-#### Expert features (optional)
- * `Shift-Enter` — Run currently highlighted application as root user.
- * `Ctrl-d` — Open .desktop file of currently highlighted app in default text editor (opens file in user mode.)
+## Ajude a melhorar
 
-## Tools and recovery
+Encontrou um problema ou tem uma ideia? Abra uma
+[issue no GitHub](https://github.com/yuri-schmaltz/Canellia/issues).
+Conte o que aconteceu, como reproduzir e quais versões do Cinnamon e do
+Canellia você utiliza. Capturas ajudam; confira se não mostram dados pessoais.
 
-The first settings tab edits menus. The Tools tab adds launcher diagnostics,
-checked backup restoration, preference profiles (Compact/Grid/List), JSON
-import/export and a scaled appearance preview. Diagnostics report possible
-problems for review; they never uninstall applications or delete launchers.
-Profiles preserve menu edits and internal category state. Each application of a
-profile saves the previous preferences for restoration.
+Para trabalhar no código, veja o [guia de desenvolvimento](DEVELOPMENT.md).
+O [relatório de validação](VALIDACAO-5.7.0.md) registra os cenários verificados
+e os limites da versão atual. Resultados locais de testes não são versionados.
 
-Large application lists use pages of 200 items without discarding remaining
-items. Use the Previous/Next links or Ctrl+PageUp/Ctrl+PageDown. Ctrl+F focuses
-search. Application names have accessible labels and exact-name search takes
-priority. The calculator accepts arithmetic, powers, parentheses, named math
-functions and constants; it never executes input as JavaScript.
-
-Firefox and LibreWolf bookmarks use read-only SQLite snapshots through Python,
-including committed WAL data and native/Flatpak profiles. libgda is not required.
+O identificador técnico do applet é `Canellia@json`.

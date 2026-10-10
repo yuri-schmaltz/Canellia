@@ -1,34 +1,44 @@
-Original development by Jason Hicks (https://github.com/jaszhix) and Fred CW (https://github.com/fredcw).
+Canellia — menu de aplicativos para Cinnamon
+Versão 5.7.0
 
-search.png file is from Adwaita icon theme
+Manutenção atual: yuri-schmaltz
+https://github.com/yuri-schmaltz/Canellia
 
-duckgo_icon.png, ask.png, brave.png, yahoo_icon.png, ecosia.png, bing_icon.png and qwant.png logos are copyright of their respective owners.
+Licença do código: GNU GPLv3. Consulte COPYING no repositório.
+Informações do projeto: ABOUT.md. Resumo da licença: LICENSE.md.
 
-search.py taken from placesCenter@scollins cinnamon applet https://github.com/linuxmint/cinnamon-spices-applets/tree/master/placesCenter%40scollins
+DESENVOLVIMENTO E CONTRIBUIÇÕES
 
-Additional keywords in emoji.js are from emojilib (https://github.com/muan/emojilib) License: MIT
+Desenvolvimento original: Jason Hicks (https://github.com/jaszhix)
+e Fred CW (https://github.com/fredcw).
 
-Web search suggestions uses DuckDuckGo public API
+O projeto deriva de Gnomenu, de The Panacea Projects:
+https://github.com/The-Panacea-Projects/Gnomenu
 
+Inclui contribuições e código dos menus Mint e Axe, além de:
+- gnome-shell-extensions: http://git.gnome.org/browse/gnome-shell-extensions/
+- places status indicator: http://git.gnome.org/gnome-shell-extensions
+- recent items extension: http://www.bananenfisch.net/gnome
+- applications menu: https://extensions.gnome.org/extension/6/applications-menu/
+- search bookmarks: https://extensions.gnome.org/extension/557/search-bookmarks/
+- SearchBookmarks, de bmh1980 (código de pesquisa de favoritos).
+- placesCenter@scollins (origem de search.py):
+  https://github.com/linuxmint/cinnamon-spices-applets/tree/master/placesCenter%40scollins
 
------------------
-Old Credits file:
------------------
-Forked from Gnomenu by The Panacea Projects - https://github.com/The-Panacea-Projects/Gnomenu.
+RECURSOS E SERVIÇOS
 
-A large part of this code was copied from the Mint menu and Axe menu extensions. Many thanks to those developers for their great extensions and laying the foundation for this project.
+search.png é proveniente do tema de ícones Adwaita.
+Palavras-chave adicionais de emoji.js vêm de emojilib, sob licença MIT:
+https://github.com/muan/emojilib
 
-Some parts of this code also come from:
-gnome-shell-extensions -  http://git.gnome.org/browse/gnome-shell-extensions/
-places status indicator extension - http://git.gnome.org/gnome-shell-extensions
-recent items extension - http://www.bananenfisch.net/gnome
-applications menu extension - https://extensions.gnome.org/extension/6/applications-menu/
-search bookmarks extension - https://extensions.gnome.org/extension/557/search-bookmarks/
+Os logotipos duckgo_icon.png, ask.png, brave.png, yahoo_icon.png,
+ecosia.png, bing_icon.png e qwant.png pertencem aos respectivos titulares.
+As sugestões de pesquisa na web utilizam o serviço público DuckDuckGo.
 
-Translators (Cinnamon)
-NikoKrause
-aust30000
-giwhub
-muzena
-eson57
-Alan01
+TRADUÇÕES
+
+Contribuições de tradução do Cinnamon:
+NikoKrause, aust30000, giwhub, muzena, eson57 e Alan01.
+
+Obrigado a todas as pessoas que contribuem com código, traduções,
+testes e sugestões para o projeto e suas dependências.
