@@ -10,8 +10,7 @@ reais do usuário não são modificados pelos cenários. As duas implementaçõe
 (21 para cada implementação). As 360 operações combinadas e os 72 ciclos de
 salvamento/recarregamento estão incluídos nos testes de GTK/CMenu.
 
-Registros: [verificações gerais](test-results/gauntlet-2026-10-09/checks.txt) e
-[GTK/CMenu](test-results/gauntlet-2026-10-09/gtk-cmenu.txt).
+Os registros e as capturas locais são artefatos gerados, excluídos do Git.
 Os registros incluem mensagens esperadas de conflitos simulados; nenhuma
 asserção falhou. A rodada final usa janelas reais em tela isolada, com avisos
 críticos tratados como falhas. Veja a [validação 5.7.0](VALIDACAO-5.7.0.md).

@@ -1,6 +1,0 @@
-KeybindingWidgets session type: x11
-NATIVE_TAB_OK diagnostico
-NATIVE_TAB_OK backups
-NATIVE_TAB_OK perfis
-NATIVE_TAB_OK previa
-NATIVE_SETTINGS_OK: six tabs, launcher selection, diagnostics, isolated profile and preview; user preferences unchanged

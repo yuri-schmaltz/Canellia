@@ -1,3 +1,6 @@
 __pycache__/
 *.py[cod]
 favicon_cache/
+
+# Generated validation logs and screenshots
+/test-results/

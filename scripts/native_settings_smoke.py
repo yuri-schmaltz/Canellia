@@ -15,7 +15,7 @@ import tempfile
 import time
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT = ROOT / 'test-results/gauntlet-2026-10-09/screenshots'
+OUTPUT = ROOT / 'test-results/native-settings/screenshots'
 NATIVE = Path('/usr/share/cinnamon/cinnamon-settings')
 sys.path.insert(0, str(NATIVE))
 sys.path.insert(0, str(NATIVE / 'bin'))

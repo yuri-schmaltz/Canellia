@@ -1,2 +1,0 @@
-KeybindingWidgets session type: x11
-PROPERTIES_OK: production entrypoint selects launcher; no pending edits

@@ -11,8 +11,8 @@ com `G_DEBUG=fatal-criticals`: nenhum aviso crítico GTK/GDK é tolerado.
 
 A suíte estrita também passou em quatro execuções consecutivas no Ubuntu 22.04
 e na [integração contínua](https://github.com/yuri-schmaltz/Canellia/actions/runs/38021856920),
-sem depurador. Os registros das quatro execuções estão em
-[Ubuntu GTK](test-results/gauntlet-2026-10-09/ubuntu-gtk-repetitions.txt).
+sem depurador. Resultados e capturas locais são artefatos gerados e não são
+versionados no repositório.
 
 ## Entregas
 
@@ -55,19 +55,6 @@ prévia e aplicação de perfil em preferências temporárias. O comando de
 Propriedades selecionou o lançador e não criou edições pendentes. Os testes de
 perfis também verificaram recusa de valores inválidos, conflitos externos e
 restauração das preferências anteriores.
-
-## Evidências
-
-- [Verificações gerais](test-results/gauntlet-2026-10-09/checks.txt)
-- [GTK/CMenu estrito](test-results/gauntlet-2026-10-09/gtk-cmenu.txt)
-- [Execução real](test-results/gauntlet-2026-10-09/runtime.json)
-- [Janela nativa](test-results/gauntlet-2026-10-09/native-settings.txt)
-- [Propriedades](test-results/gauntlet-2026-10-09/properties.txt)
-- [Instalação](test-results/gauntlet-2026-10-09/install.txt)
-- Capturas: [diagnóstico](test-results/gauntlet-2026-10-09/screenshots/diagnostico.png),
-  [backups](test-results/gauntlet-2026-10-09/screenshots/backups.png),
-  [perfis](test-results/gauntlet-2026-10-09/screenshots/perfis.png) e
-  [prévia](test-results/gauntlet-2026-10-09/screenshots/previa.png).
 
 ## Reprodução e limites
 
