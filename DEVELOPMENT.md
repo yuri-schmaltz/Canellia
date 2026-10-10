@@ -233,3 +233,9 @@ The GTK fixture theme stays immutable for each process; launcher/menu files are
 still reset per test. This prevents teardown from invalidating surfaces still
 cached by GTK. Optional `CANELLIA_DEBUG_GDB=1` collects a native backtrace when
 GDB is installed; routine CI runs without a debugger.
+
+Window snapshots wait for the frame clock’s `after-paint` signal and synchronize
+the display before reading pixels. Capturing a still-painting window triggered
+an intermittent native Cairo assertion on Ubuntu 22.04; normal, debugger-free
+repeated integration runs cover this timing condition. The isolated theme also
+provides GTK’s combo-box arrow, so the fixture does not depend on system icons.

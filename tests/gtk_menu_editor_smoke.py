@@ -136,7 +136,7 @@ class RealMenuTests(unittest.TestCase):
             from gi.repository import GdkPixbuf
             pixbuf = GdkPixbuf.Pixbuf.new(GdkPixbuf.Colorspace.RGB, True, 8, 16, 16)
             pixbuf.fill(0x4d8ceaff)
-            for name in ('image-missing', 'folder', 'accessories-text-editor', 'application-x-executable', 'view-grid-symbolic', 'edit-find-symbolic', 'edit-clear-symbolic'):
+            for name in ('image-missing', 'folder', 'accessories-text-editor', 'application-x-executable', 'view-grid-symbolic', 'edit-find-symbolic', 'edit-clear-symbolic', 'pan-down-symbolic'):
                 pixbuf.savev(str(icons / (name + '.png')), 'png', [], [])
         (self.system / 'applications').mkdir()
         (self.system / 'desktop-directories').mkdir()

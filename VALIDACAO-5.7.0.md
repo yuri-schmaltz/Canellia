@@ -9,6 +9,11 @@ A versão foi instalada e recarregada na sessão real.
 com sementes reproduzíveis. A suíte GTK usa janelas reais em uma tela isolada,
 com `G_DEBUG=fatal-criticals`: nenhum aviso crítico GTK/GDK é tolerado.
 
+A suíte estrita também passou em quatro execuções consecutivas no Ubuntu 22.04
+e na [integração contínua](https://github.com/yuri-schmaltz/Canellia/actions/runs/38021856920),
+sem depurador. Os registros das quatro execuções estão em
+[Ubuntu GTK](test-results/gauntlet-2026-10-09/ubuntu-gtk-repetitions.txt).
+
 ## Entregas
 
 - Aba Ferramentas com diagnóstico de comandos, ícones e possíveis duplicatas,
@@ -32,8 +37,9 @@ com `G_DEBUG=fatal-criticals`: nenhum aviso crítico GTK/GDK é tolerado.
 - Metadados de categorias e backups versionados, com leitura do formato anterior.
 - Gravação atômica das preferências e traduções dos novos controles em português,
   com catálogos por versão para evitar traduções antigas em cache.
-- Prévia com bitmaps independentes, evitando reutilização de superfícies Cairo
-  durante atualizações repetidas; 24 redesenhos adicionais por implementação.
+- Prévia com bitmaps independentes e 24 redesenhos adicionais por implementação.
+  As capturas de teste aguardam o fim da pintura GTK: a captura antecipada
+  causava um encerramento nativo intermitente no Cairo do Ubuntu 22.04.
 - Validação dos novos módulos e auxiliares no instalador e na integração contínua.
 
 ## Sessão real
