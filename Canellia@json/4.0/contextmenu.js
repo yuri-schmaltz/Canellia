@@ -307,11 +307,11 @@ class ContextMenu {
                                                 this.close(); } ));
         }
 
-        // uninstall (Mint only)
+        // Resolve the installation independently of customized launchers.
         if (this.appThis._canUninstallApps) {
             addMenuItem( new ContextMenuItem(this.appThis, _('Uninstall'), 'edit-delete',
                 () => {
-                    Util.spawn([__meta.path + "/mint-remove-application.py", app.get_app_info().get_filename()]);
+                    Util.spawn(['python3', __meta.path + '/uninstallApplication.py', app.get_app_info().get_filename(), app.id || app.get_id()]);
                     this.appThis.menu.close();
                 }
             ));

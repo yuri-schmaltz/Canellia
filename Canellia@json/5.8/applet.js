@@ -71,7 +71,7 @@ class CanelliaApplet extends TextIconApplet {
         this.menuManager.addMenu(this.menu);
         this.signals = new SignalManager(null);
         this.appSystem = Cinnamon.AppSystem.get_default();
-        this._canUninstallApps = GLib.find_program_in_path("cinnamon-remove-application");
+        this._canUninstallApps = GLib.find_program_in_path("flatpak") || GLib.find_program_in_path("cinnamon-remove-application");
         this._pamacManagerAvailable = GLib.find_program_in_path("pamac-manager");
         const searchFilesMenuItem = new PopupIconMenuItem(_('Find files...'), 'system-search',
                                                                         St.IconType.SYMBOLIC, false);

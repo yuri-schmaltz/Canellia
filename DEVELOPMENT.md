@@ -27,6 +27,10 @@ used implicitly.
 - `menuEditorTree.py`: reads the resolved hierarchy through public `CMenu` and
   `Gio` APIs, including hidden/unallocated launchers and system fallback copies.
   It does not import `cme` or rearrange another application's GTK widgets.
+- `uninstallCore.py`, `uninstallApplication.py`: shared installation resolver and
+  GTK confirmation. Flatpak removal uses the exact ref and installation; native
+  removal delegates to Cinnamon after verifying package ownership and command
+  equivalence for overrides. No launcher deletion fallback.
 - `menuEditorCore.py`: GTK-independent model, preserved desktop fields and XML
   rules, selective undo records (60 commands), per-user overrides, validation,
   optimistic conflict checks and recoverable multi-file storage. System files

@@ -48,6 +48,12 @@ As alterações ficam pendentes até você clicar em **Aplicar**. Use **Desfazer
 **Refazer** ou **Descartar** enquanto organiza os itens. A aplicação das mudanças
 cria backups, disponíveis na aba **Ferramentas**.
 
+A ação **Desinstalar** do menu de contexto identifica Flatpaks pelo ID do
+aplicativo e permite escolher a instalação quando há mais de uma. Para pacotes
+nativos, utiliza o desinstalador do Cinnamon após verificar o lançador original.
+Personalizações com comando diferente do original exigem revisão. Erros e
+cancelamentos não excluem lançadores.
+
 Ocultar ou remover um item do menu não desinstala o aplicativo. Lançadores do
 sistema ocultos continuam disponíveis pelo filtro **Ocultos** para restauração.
 O diagnóstico apresenta problemas para revisão, sem excluir aplicativos

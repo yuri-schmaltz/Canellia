@@ -1362,3 +1362,19 @@ msgstr "O valor da preferência é muito longo"
 
 msgid "Unknown preset"
 msgstr "Predefinição desconhecida"
+
+#: uninstallApplication.py
+msgid "No managed installation was found for this launcher. To hide or remove the launcher, use the menu editor."
+msgstr "Nenhuma instalação gerenciada foi encontrada para este lançador. Para ocultar ou remover o lançador, use o editor de menu."
+
+#: uninstallApplication.py
+msgid "Uninstall application?"
+msgstr "Desinstalar aplicativo?"
+
+#: uninstallApplication.py
+msgid "Uninstalling application…"
+msgstr "Desinstalando aplicativo…"
+
+#: uninstallApplication.py
+msgid "Application removal failed. The launcher was preserved."
+msgstr "A desinstalação do aplicativo falhou. O lançador foi preservado."

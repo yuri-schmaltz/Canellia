@@ -60,7 +60,7 @@ def main():
             if isinstance(value, dict) and set(value.get('keys', [])) - schema.keys():
                 raise SystemExit('Missing layout settings: ' + version)
     # Cinnamon requires version-specific entrypoints; common helpers stay identical.
-    for name in ('process.js', 'browserHistory.js', 'browserData.py', 'getFavicons.py',
+    for name in ('uninstallCore.py', 'uninstallApplication.py', 'process.js', 'browserHistory.js', 'browserData.py', 'getFavicons.py',
                  'searchHistory.py', 'search.py', 'searchEngine.py', 'MenuEditorPage.py',
                  'menuEditorCore.py', 'menuEditorTree.py', 'settingsWindow.py', 'calculator.js', 'ToolsPage.py', 'projectTools.py', 'firefoxBookmarks.py'):
         if (ROOT / 'Canellia@json/4.0' / name).read_bytes() != (ROOT / 'Canellia@json/5.8' / name).read_bytes():

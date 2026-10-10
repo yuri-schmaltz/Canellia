@@ -326,11 +326,11 @@ class ContextMenu {
             ));
         }
 
-        // uninstall (Mint only)
+        // Resolve the installation independently of customized launchers.
         if (this.applet._canUninstallApps) {
             addMenuItem( new ContextMenuItem(this.applet, _('Uninstall'), 'edit-delete',
                 () => {
-                    Util.spawn(["cinnamon-remove-application", app.get_app_info().get_filename()]);
+                    Util.spawn(['python3', __meta.path + '/uninstallApplication.py', app.get_app_info().get_filename(), app.id || app.get_id()]);
                     this.applet.menu.close();
                 }
             ));

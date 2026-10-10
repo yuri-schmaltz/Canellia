@@ -1552,3 +1552,19 @@ msgstr ""
 
 msgid "Unknown preset"
 msgstr ""
+
+#: uninstallApplication.py
+msgid "No managed installation was found for this launcher. To hide or remove the launcher, use the menu editor."
+msgstr ""
+
+#: uninstallApplication.py
+msgid "Uninstall application?"
+msgstr ""
+
+#: uninstallApplication.py
+msgid "Uninstalling application…"
+msgstr ""
+
+#: uninstallApplication.py
+msgid "Application removal failed. The launcher was preserved."
+msgstr ""
