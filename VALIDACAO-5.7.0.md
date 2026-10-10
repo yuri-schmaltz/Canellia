@@ -3,7 +3,7 @@
 Executado em 9 e 10 de outubro de 2026, Cinnamon 6.6.9, X11, monitor 1920 × 1080.
 A versão foi instalada e recarregada na sessão real.
 
-151 testes automatizados passaram: 86 Python, 23 JavaScript e 42 GTK/CMenu
+152 testes automatizados passaram: 87 Python, 23 JavaScript e 42 GTK/CMenu
 (21 em cada implementação). Os cenários incluem 360 operações de lançadores,
 72 ciclos de salvamento/recarregamento e 2.000 expressões aritméticas geradas
 com sementes reproduzíveis. A suíte GTK usa janelas reais em uma tela isolada,
@@ -15,7 +15,8 @@ com `G_DEBUG=fatal-criticals`: nenhum aviso crítico GTK/GDK é tolerado.
   abertura do lançador correspondente no editor e prévia de aparência.
 - Restauração de backups com verificação de conteúdo e de alterações externas;
   cada restauração cria uma nova transação reversível. Recuperação verifica
-  todos os arquivos antes de escrever; registros inválidos são preservados.
+  todos os arquivos antes de escrever; registros inválidos são preservados. Caminhos com travessia de diretórios
+  são rejeitados, incluindo registros manipulados com hashes válidos.
 - Perfis Compacto, Grade e Lista, importação/exportação JSON e restauração das
   preferências anteriores. Validação de tipos, opções, limites e versões.
 - Calculadora limitada a operações matemáticas, sem execução de JavaScript.

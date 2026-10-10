@@ -1,4 +1,5 @@
 import importlib.util
+import hashlib
 import json
 from pathlib import Path
 import unittest
@@ -122,3 +123,20 @@ class ProjectToolsTests(unittest.TestCase):
         self.model.applications['editor.desktop'].document.set('DBusActivatable', True)
         self.model.edit_application('editor.desktop', {'Exec':'', 'Icon':'application-x-executable'})
         self.assertFalse(any(issue['kind'] in ('command','invalid') for issue in tools.diagnose(self.model)))
+
+    def test_backup_target_parent_traversal_cannot_delete_external_file(self):
+        outside = self.storage.data_home.parent/'outside'
+        outside.write_bytes(b'preserve external user data')
+        self.model.edit_application('editor.desktop', {'Name':'Changed'})
+        backup = self.model.apply()
+        journal = backup/'journal.json'
+        record = json.loads(journal.read_text())
+        entry = record['files'][0]
+        self.assertIsNone(entry['before_hash'])
+        entry['path'] = str(self.storage.data_home/'applications/../../outside')
+        entry['after_hash'] = hashlib.sha256(outside.read_bytes()).hexdigest()
+        journal.write_text(json.dumps(record))
+        with self.assertRaises(core.EditorError):
+            self.storage.restore_backup(backup)
+        self.assertEqual(outside.read_bytes(), b'preserve external user data')
+        self.assertEqual(self.source.read_bytes(), APP)

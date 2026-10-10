@@ -235,7 +235,7 @@ class UserStorage:
 
     def safe(self, path):
         path = Path(path).absolute()
-        if not any(path != root and root in path.parents for root in self.roots):
+        if '..' in path.parts or not any(path != root and root in path.parents for root in self.roots):
             raise EditorError('Path is outside the user menu directories: ' + str(path))
         for parent in (path,) + tuple(path.parents):
             if parent.is_symlink():

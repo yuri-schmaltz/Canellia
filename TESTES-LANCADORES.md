@@ -6,7 +6,7 @@ reais do usuário não são modificados pelos cenários. As duas implementaçõe
 
 ## Resultado final
 
-151 testes passaram: 86 de Python, 23 de JavaScript e 42 de GTK/CMenu
+152 testes passaram: 87 de Python, 23 de JavaScript e 42 de GTK/CMenu
 (21 para cada implementação). As 360 operações combinadas e os 72 ciclos de
 salvamento/recarregamento estão incluídos nos testes de GTK/CMenu.
 

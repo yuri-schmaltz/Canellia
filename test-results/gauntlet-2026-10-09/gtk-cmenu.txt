@@ -15,7 +15,7 @@ Traceback (most recent call last):
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/home/yuri/Documentos/cinammon_menu/Canellia/Canellia@json/4.0/menuEditorCore.py", line 386, in commit
     raise EditorError('Files changed outside this editor. Reload before applying: ' + str(path))
-_canellia_editor_12ddc75154ab.menuEditorCore.EditorError: Files changed outside this editor. Reload before applying: /tmp/canellia-gtk-d54dxwef/system-data/applications/editor.desktop
+_canellia_editor_12ddc75154ab.menuEditorCore.EditorError: Files changed outside this editor. Reload before applying: /tmp/canellia-gtk-0t73jf5e/system-data/applications/editor.desktop
 ok
 test_failure_then_reload_recovers_and_destroy_disconnects (__main__.RealMenuTests.test_failure_then_reload_recovers_and_destroy_disconnects) ... ok
 test_file_icons_and_invalid_icons_have_safe_fallback (__main__.RealMenuTests.test_file_icons_and_invalid_icons_have_safe_fallback) ... ok
@@ -47,7 +47,7 @@ test_tools_profiles_preview_and_diagnostics_use_isolated_settings (__main__.Real
 test_unsaved_close_cancel_discard_and_apply (__main__.RealMenuTests.test_unsaved_close_cancel_discard_and_apply) ... ok
 
 ----------------------------------------------------------------------
-Ran 21 tests in 22.547s
+Ran 21 tests in 22.058s
 
 OK
 test_batch_moving_mixed_custom_and_system_launchers_after_restart (__main__.RealMenuTests.test_batch_moving_mixed_custom_and_system_launchers_after_restart) ... ok
@@ -67,7 +67,7 @@ Traceback (most recent call last):
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/home/yuri/Documentos/cinammon_menu/Canellia/Canellia@json/5.8/menuEditorCore.py", line 386, in commit
     raise EditorError('Files changed outside this editor. Reload before applying: ' + str(path))
-_canellia_editor_cb27a0680be1.menuEditorCore.EditorError: Files changed outside this editor. Reload before applying: /tmp/canellia-gtk-1gow4gte/system-data/applications/editor.desktop
+_canellia_editor_cb27a0680be1.menuEditorCore.EditorError: Files changed outside this editor. Reload before applying: /tmp/canellia-gtk-swg_y49y/system-data/applications/editor.desktop
 ok
 test_failure_then_reload_recovers_and_destroy_disconnects (__main__.RealMenuTests.test_failure_then_reload_recovers_and_destroy_disconnects) ... ok
 test_file_icons_and_invalid_icons_have_safe_fallback (__main__.RealMenuTests.test_file_icons_and_invalid_icons_have_safe_fallback) ... ok
@@ -99,6 +99,6 @@ test_tools_profiles_preview_and_diagnostics_use_isolated_settings (__main__.Real
 test_unsaved_close_cancel_discard_and_apply (__main__.RealMenuTests.test_unsaved_close_cancel_discard_and_apply) ... ok
 
 ----------------------------------------------------------------------
-Ran 21 tests in 22.354s
+Ran 21 tests in 22.259s
 
 OK
