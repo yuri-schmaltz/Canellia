@@ -50,6 +50,23 @@ Gtk.Settings.get_default().set_property('gtk-icon-theme-name', 'CanelliaTest')
 
 class SnapshotWindow(Gtk.Window):
     def get_pixbuf(self):
+        # Mapping is not sufficient: resize/model updates queue a future paint.
+        # Reading a busy surface can abort older GDK/Cairo implementations.
+        painted = []
+        clock = self.get_frame_clock()
+        signal = clock.connect('after-paint', lambda *args: painted.append(True))
+        try:
+            self.queue_draw()
+            deadline = time.monotonic() + 2
+            context = GLib.MainContext.default()
+            while not painted and time.monotonic() < deadline:
+                while context.pending():
+                    context.iteration(False)
+                time.sleep(0.005)
+            assert painted, 'GTK did not complete its pending paint'
+            self.get_display().sync()
+        finally:
+            clock.disconnect(signal)
         return Gdk.pixbuf_get_from_window(self.get_window(), 0, 0,
             self.get_allocated_width(), self.get_allocated_height())
 
