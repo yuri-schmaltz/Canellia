@@ -185,6 +185,7 @@ const searchStrPart = (q, str, noFuzzySearch, noSubStringSearch) => {
 };
 
 const searchStr = (q, str, noFuzzySearch = false, noSubStringSearch = false) => {
+    if (q && str && graphemeBaseChars(str).toLocaleUpperCase() === q) return 1.5;
     const separatorIndex = q.indexOf(" ");
     if (separatorIndex < 1) {
         return searchStrPart(q, str, noFuzzySearch, noSubStringSearch);

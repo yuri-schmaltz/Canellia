@@ -1,0 +1,198 @@
+test_batch_moving_mixed_custom_and_system_launchers_after_restart (__main__.RealMenuTests.test_batch_moving_mixed_custom_and_system_launchers_after_restart) ... ok
+test_category_can_be_shown_again_after_hiding_and_reload (__main__.RealMenuTests.test_category_can_be_shown_again_after_hiding_and_reload) ... ok
+test_category_removal_does_not_change_other_categories_or_launcher (__main__.RealMenuTests.test_category_removal_does_not_change_other_categories_or_launcher) ... ok
+test_create_category_and_launcher_are_visible_after_reload (__main__.RealMenuTests.test_create_category_and_launcher_are_visible_after_reload) ... ok
+test_drag_payload_moves_selected_apps_and_copy_retains_source (__main__.RealMenuTests.test_drag_payload_moves_selected_apps_and_copy_retains_source) ... /home/yuri/Documentos/cinammon_menu/Canellia/Canellia@json/4.0/MenuEditorPage.py:194: DeprecationWarning: Gtk.Widget.set_margin_left is deprecated
+  box.set_margin_left(8)
+
+(gtk_menu_editor_smoke.py:3599683): Gdk-CRITICAL **: 22:57:37.590: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+ok
+test_duplicate_edit_delete_and_restore_complete_lifecycle (__main__.RealMenuTests.test_duplicate_edit_delete_and_restore_complete_lifecycle) ... ok
+test_edit_hide_remove_restore_preserves_system_files (__main__.RealMenuTests.test_edit_hide_remove_restore_preserves_system_files) ... ok
+test_external_conflict_preserves_pending_edit (__main__.RealMenuTests.test_external_conflict_preserves_pending_edit) ... 
+(gtk_menu_editor_smoke.py:3599683): Gdk-CRITICAL **: 22:57:39.947: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+Unable to save menu changes
+Traceback (most recent call last):
+  File "/home/yuri/Documentos/cinammon_menu/Canellia/Canellia@json/4.0/MenuEditorPage.py", line 572, in _apply
+    backup = self.model.apply()
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/yuri/Documentos/cinammon_menu/Canellia/Canellia@json/4.0/menuEditorCore.py", line 653, in apply
+    backup = self.storage.commit(self.pending, self.expected)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yuri/Documentos/cinammon_menu/Canellia/Canellia@json/4.0/menuEditorCore.py", line 310, in commit
+    raise EditorError('Files changed outside this editor. Reload before applying: ' + str(path))
+_canellia_editor_12ddc75154ab.menuEditorCore.EditorError: Files changed outside this editor. Reload before applying: /tmp/canellia-gtk-z0u0wokg/system-data/applications/editor.desktop
+ok
+test_failure_then_reload_recovers_and_destroy_disconnects (__main__.RealMenuTests.test_failure_then_reload_recovers_and_destroy_disconnects) ... /home/yuri/Documentos/cinammon_menu/Canellia/Canellia@json/4.0/MenuEditorPage.py:744: DeprecationWarning: Gtk.Widget.set_margin_right is deprecated
+  self.set_margin_right(8)
+ok
+test_file_icons_and_invalid_icons_have_safe_fallback (__main__.RealMenuTests.test_file_icons_and_invalid_icons_have_safe_fallback) ... ok
+test_flatpak_alias_is_canonicalized_and_not_duplicated (__main__.RealMenuTests.test_flatpak_alias_is_canonicalized_and_not_duplicated) ... ok
+test_invalid_form_is_preserved_when_selection_changes (__main__.RealMenuTests.test_invalid_form_is_preserved_when_selection_changes) ... 
+(gtk_menu_editor_smoke.py:3599683): Gdk-CRITICAL **: 22:57:41.365: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+ok
+test_nested_categories_launcher_moves_and_user_override_conflicts (__main__.RealMenuTests.test_nested_categories_launcher_moves_and_user_override_conflicts) ... ok
+test_public_tree_reads_categories_and_round_trips_move (__main__.RealMenuTests.test_public_tree_reads_categories_and_round_trips_move) ... ok
+test_real_buttons_duplicate_move_remove_cancel_and_restore (__main__.RealMenuTests.test_real_buttons_duplicate_move_remove_cancel_and_restore) ... 
+(gtk_menu_editor_smoke.py:3599683): Gdk-CRITICAL **: 22:57:42.824: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+
+(gtk_menu_editor_smoke.py:3599683): Gdk-CRITICAL **: 22:57:42.867: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+
+(gtk_menu_editor_smoke.py:3599683): Gdk-CRITICAL **: 22:57:42.869: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+
+(gtk_menu_editor_smoke.py:3599683): Gdk-CRITICAL **: 22:57:42.927: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+
+(gtk_menu_editor_smoke.py:3599683): Gdk-CRITICAL **: 22:57:42.929: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+
+(gtk_menu_editor_smoke.py:3599683): Gdk-CRITICAL **: 22:57:42.950: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+
+(gtk_menu_editor_smoke.py:3599683): Gdk-CRITICAL **: 22:57:42.953: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+
+(gtk_menu_editor_smoke.py:3599683): Gdk-CRITICAL **: 22:57:43.011: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+
+(gtk_menu_editor_smoke.py:3599683): Gdk-CRITICAL **: 22:57:43.013: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+ok
+test_real_widgets_stage_apply_search_multiselect_and_undo (__main__.RealMenuTests.test_real_widgets_stage_apply_search_multiselect_and_undo) ... 
+(gtk_menu_editor_smoke.py:3599683): Gdk-CRITICAL **: 22:57:43.341: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+ok
+test_restore_error_keeps_message_and_pending_work (__main__.RealMenuTests.test_restore_error_keeps_message_and_pending_work) ... 
+(gtk_menu_editor_smoke.py:3599683): Gdk-CRITICAL **: 22:57:43.694: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+Menu editor operation failed
+Traceback (most recent call last):
+  File "/home/yuri/Documentos/cinammon_menu/Canellia/Canellia@json/4.0/MenuEditorPage.py", line 242, in _run
+    result = action()
+             ^^^^^^^^
+  File "/home/yuri/Documentos/cinammon_menu/Canellia/Canellia@json/4.0/MenuEditorPage.py", line 552, in <lambda>
+    self._run(lambda: self.model.restore_category(self._category))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yuri/Documentos/cinammon_menu/Canellia/Canellia@json/4.0/menuEditorCore.py", line 647, in restore_category
+    self._change(change)
+  File "/home/yuri/Documentos/cinammon_menu/Canellia/Canellia@json/4.0/menuEditorCore.py", line 371, in _change
+    callback()
+  File "/home/yuri/Documentos/cinammon_menu/Canellia/Canellia@json/4.0/menuEditorCore.py", line 639, in change
+    raise EditorError('No system version is available for this category')
+_canellia_editor_12ddc75154ab.menuEditorCore.EditorError: No system version is available for this category
+ok
+test_seeded_launcher_operations_survive_commits_and_reload (__main__.RealMenuTests.test_seeded_launcher_operations_survive_commits_and_reload) ... ok
+test_test_launcher_executes_real_desktop_entry (__main__.RealMenuTests.test_test_launcher_executes_real_desktop_entry) ... 
+(gtk_menu_editor_smoke.py:3599683): Gdk-CRITICAL **: 22:57:54.375: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+ok
+test_unsaved_close_cancel_discard_and_apply (__main__.RealMenuTests.test_unsaved_close_cancel_discard_and_apply) ... 
+(gtk_menu_editor_smoke.py:3599683): Gdk-CRITICAL **: 22:57:54.734: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+
+(gtk_menu_editor_smoke.py:3599683): Gdk-CRITICAL **: 22:57:54.780: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+
+(gtk_menu_editor_smoke.py:3599683): Gdk-CRITICAL **: 22:57:54.781: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+
+(gtk_menu_editor_smoke.py:3599683): Gdk-CRITICAL **: 22:57:54.808: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+
+(gtk_menu_editor_smoke.py:3599683): Gdk-CRITICAL **: 22:57:54.818: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+
+(gtk_menu_editor_smoke.py:3599683): Gdk-CRITICAL **: 22:57:54.845: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+
+(gtk_menu_editor_smoke.py:3599683): Gdk-CRITICAL **: 22:57:54.846: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 20.875s
+
+OK
+test_batch_moving_mixed_custom_and_system_launchers_after_restart (__main__.RealMenuTests.test_batch_moving_mixed_custom_and_system_launchers_after_restart) ... ok
+test_category_can_be_shown_again_after_hiding_and_reload (__main__.RealMenuTests.test_category_can_be_shown_again_after_hiding_and_reload) ... ok
+test_category_removal_does_not_change_other_categories_or_launcher (__main__.RealMenuTests.test_category_removal_does_not_change_other_categories_or_launcher) ... ok
+test_create_category_and_launcher_are_visible_after_reload (__main__.RealMenuTests.test_create_category_and_launcher_are_visible_after_reload) ... ok
+test_drag_payload_moves_selected_apps_and_copy_retains_source (__main__.RealMenuTests.test_drag_payload_moves_selected_apps_and_copy_retains_source) ... /home/yuri/Documentos/cinammon_menu/Canellia/Canellia@json/5.8/MenuEditorPage.py:743: DeprecationWarning: Gtk.Widget.set_margin_left is deprecated
+  self.set_margin_left(8)
+/home/yuri/Documentos/cinammon_menu/Canellia/Canellia@json/5.8/MenuEditorPage.py:744: DeprecationWarning: Gtk.Widget.set_margin_right is deprecated
+  self.set_margin_right(8)
+
+(gtk_menu_editor_smoke.py:3600252): Gdk-CRITICAL **: 22:57:58.860: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+ok
+test_duplicate_edit_delete_and_restore_complete_lifecycle (__main__.RealMenuTests.test_duplicate_edit_delete_and_restore_complete_lifecycle) ... ok
+test_edit_hide_remove_restore_preserves_system_files (__main__.RealMenuTests.test_edit_hide_remove_restore_preserves_system_files) ... ok
+test_external_conflict_preserves_pending_edit (__main__.RealMenuTests.test_external_conflict_preserves_pending_edit) ... 
+(gtk_menu_editor_smoke.py:3600252): Gdk-CRITICAL **: 22:58:01.180: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+Unable to save menu changes
+Traceback (most recent call last):
+  File "/home/yuri/Documentos/cinammon_menu/Canellia/Canellia@json/5.8/MenuEditorPage.py", line 572, in _apply
+    backup = self.model.apply()
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/yuri/Documentos/cinammon_menu/Canellia/Canellia@json/5.8/menuEditorCore.py", line 653, in apply
+    backup = self.storage.commit(self.pending, self.expected)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yuri/Documentos/cinammon_menu/Canellia/Canellia@json/5.8/menuEditorCore.py", line 310, in commit
+    raise EditorError('Files changed outside this editor. Reload before applying: ' + str(path))
+_canellia_editor_cb27a0680be1.menuEditorCore.EditorError: Files changed outside this editor. Reload before applying: /tmp/canellia-gtk-r_9hpthr/system-data/applications/editor.desktop
+ok
+test_failure_then_reload_recovers_and_destroy_disconnects (__main__.RealMenuTests.test_failure_then_reload_recovers_and_destroy_disconnects) ... ok
+test_file_icons_and_invalid_icons_have_safe_fallback (__main__.RealMenuTests.test_file_icons_and_invalid_icons_have_safe_fallback) ... ok
+test_flatpak_alias_is_canonicalized_and_not_duplicated (__main__.RealMenuTests.test_flatpak_alias_is_canonicalized_and_not_duplicated) ... ok
+test_invalid_form_is_preserved_when_selection_changes (__main__.RealMenuTests.test_invalid_form_is_preserved_when_selection_changes) ... 
+(gtk_menu_editor_smoke.py:3600252): Gdk-CRITICAL **: 22:58:02.594: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+ok
+test_nested_categories_launcher_moves_and_user_override_conflicts (__main__.RealMenuTests.test_nested_categories_launcher_moves_and_user_override_conflicts) ... ok
+test_public_tree_reads_categories_and_round_trips_move (__main__.RealMenuTests.test_public_tree_reads_categories_and_round_trips_move) ... ok
+test_real_buttons_duplicate_move_remove_cancel_and_restore (__main__.RealMenuTests.test_real_buttons_duplicate_move_remove_cancel_and_restore) ... 
+(gtk_menu_editor_smoke.py:3600252): Gdk-CRITICAL **: 22:58:04.054: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+
+(gtk_menu_editor_smoke.py:3600252): Gdk-CRITICAL **: 22:58:04.104: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+
+(gtk_menu_editor_smoke.py:3600252): Gdk-CRITICAL **: 22:58:04.105: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+
+(gtk_menu_editor_smoke.py:3600252): Gdk-CRITICAL **: 22:58:04.168: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+
+(gtk_menu_editor_smoke.py:3600252): Gdk-CRITICAL **: 22:58:04.169: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+
+(gtk_menu_editor_smoke.py:3600252): Gdk-CRITICAL **: 22:58:04.193: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+
+(gtk_menu_editor_smoke.py:3600252): Gdk-CRITICAL **: 22:58:04.197: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+
+(gtk_menu_editor_smoke.py:3600252): Gdk-CRITICAL **: 22:58:04.256: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+
+(gtk_menu_editor_smoke.py:3600252): Gdk-CRITICAL **: 22:58:04.258: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+ok
+test_real_widgets_stage_apply_search_multiselect_and_undo (__main__.RealMenuTests.test_real_widgets_stage_apply_search_multiselect_and_undo) ... 
+(gtk_menu_editor_smoke.py:3600252): Gdk-CRITICAL **: 22:58:04.576: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+ok
+test_restore_error_keeps_message_and_pending_work (__main__.RealMenuTests.test_restore_error_keeps_message_and_pending_work) ... 
+(gtk_menu_editor_smoke.py:3600252): Gdk-CRITICAL **: 22:58:04.938: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+Menu editor operation failed
+Traceback (most recent call last):
+  File "/home/yuri/Documentos/cinammon_menu/Canellia/Canellia@json/5.8/MenuEditorPage.py", line 242, in _run
+    result = action()
+             ^^^^^^^^
+  File "/home/yuri/Documentos/cinammon_menu/Canellia/Canellia@json/5.8/MenuEditorPage.py", line 552, in <lambda>
+    self._run(lambda: self.model.restore_category(self._category))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yuri/Documentos/cinammon_menu/Canellia/Canellia@json/5.8/menuEditorCore.py", line 647, in restore_category
+    self._change(change)
+  File "/home/yuri/Documentos/cinammon_menu/Canellia/Canellia@json/5.8/menuEditorCore.py", line 371, in _change
+    callback()
+  File "/home/yuri/Documentos/cinammon_menu/Canellia/Canellia@json/5.8/menuEditorCore.py", line 639, in change
+    raise EditorError('No system version is available for this category')
+_canellia_editor_cb27a0680be1.menuEditorCore.EditorError: No system version is available for this category
+ok
+test_seeded_launcher_operations_survive_commits_and_reload (__main__.RealMenuTests.test_seeded_launcher_operations_survive_commits_and_reload) ... ok
+test_test_launcher_executes_real_desktop_entry (__main__.RealMenuTests.test_test_launcher_executes_real_desktop_entry) ... 
+(gtk_menu_editor_smoke.py:3600252): Gdk-CRITICAL **: 22:58:15.587: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+ok
+test_unsaved_close_cancel_discard_and_apply (__main__.RealMenuTests.test_unsaved_close_cancel_discard_and_apply) ... 
+(gtk_menu_editor_smoke.py:3600252): Gdk-CRITICAL **: 22:58:15.941: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+
+(gtk_menu_editor_smoke.py:3600252): Gdk-CRITICAL **: 22:58:15.980: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+
+(gtk_menu_editor_smoke.py:3600252): Gdk-CRITICAL **: 22:58:15.981: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+
+(gtk_menu_editor_smoke.py:3600252): Gdk-CRITICAL **: 22:58:16.021: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+
+(gtk_menu_editor_smoke.py:3600252): Gdk-CRITICAL **: 22:58:16.025: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+
+(gtk_menu_editor_smoke.py:3600252): Gdk-CRITICAL **: 22:58:16.038: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+
+(gtk_menu_editor_smoke.py:3600252): Gdk-CRITICAL **: 22:58:16.040: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 20.852s
+
+OK

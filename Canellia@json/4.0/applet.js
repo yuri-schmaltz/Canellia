@@ -749,6 +749,10 @@ class CanelliaApplet extends TextIconApplet {
         };
 
         switch (true) {
+        case symbol === Clutter.unicode_to_keysym("f".charCodeAt(0)) && ctrlKey:
+            global.stage.set_key_focus(this.display.searchView.searchEntry);
+            this.display.searchView.searchEntryText.set_selection(0, -1);
+            return Clutter.EVENT_STOP;
         case (symbol === Clutter.KEY_KP_Enter || symbol === Clutter.KP_Enter ||
                                             symbol === Clutter.KEY_Return) && ctrlKey:
         case symbol === Clutter.KEY_Menu && noModifiers:

@@ -1095,3 +1095,15 @@ msgstr "Propriedade do lançador não suportada"
 #: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
 msgid "XML entities are not supported"
 msgstr "Entidades XML não são suportadas"
+
+msgid "Menu width (pixels)"
+msgstr "Largura do menu (pixels)"
+
+msgid "Menu height (pixels)"
+msgstr "Altura do menu (pixels)"
+
+msgid "Applied when the panel menu is opened. The available screen area and minimum content size may limit the result."
+msgstr "Aplicado ao abrir o menu do painel. A área disponível na tela e o tamanho mínimo do conteúdo podem limitar o resultado."
+
+msgid "Remove the selected applications from this category only? They remain in other categories."
+msgstr "Remover os aplicativos selecionados apenas desta categoria? Eles permanecem nas outras categorias."

@@ -44,6 +44,7 @@ class _EditorHost:
         self._loading = self._disposed = self._external = False
         self._tree_signal = self._host_window = None
         self._refresh_id = 0
+        self._icon_cache = {}
         self._category = self._property_target = None
         self._draft_dirty = False
         self.connect('destroy', self._dispose)
@@ -78,15 +79,18 @@ class _EditorHost:
         toolbar.pack_start(self.filter, False, False, 0)
         self.reload_button = self._button('Reload', self._reload_clicked, toolbar)
         self._body.pack_start(toolbar, False, False, 0)
-        panels = Gtk.Paned(orientation=Gtk.Orientation.HORIZONTAL)
+        panels = Gtk.Grid(column_spacing=8, column_homogeneous=False)
+        panels.set_hexpand(True)
+        panels.set_vexpand(True)
         self.category_store = Gtk.TreeStore(str, str, str)
         self.category_tree = Gtk.TreeView(model=self.category_store)
         self.category_tree.set_headers_visible(False)
         self._name_column(self.category_tree, 'Categories', 0, 2)
         self.category_tree.get_selection().connect('changed', self._category_selected)
-        panels.pack1(self._scroll(self.category_tree, 140), resize=False, shrink=True)
-        right = Gtk.Paned(orientation=Gtk.Orientation.HORIZONTAL)
-        panels.pack2(right, resize=True, shrink=False)
+        category_panel = self._scroll(self.category_tree, 180)
+        category_panel.set_hexpand(True)
+        panels.attach(category_panel, 0, 0, 1, 1)
+        panels.attach(Gtk.Separator(orientation=Gtk.Orientation.VERTICAL), 1, 0, 1, 1)
         self.app_store = Gtk.ListStore(str, bool, str, str)
         self.app_tree = Gtk.TreeView(model=self.app_store)
         toggle = Gtk.CellRendererToggle()
@@ -96,8 +100,18 @@ class _EditorHost:
         self.app_tree.get_selection().set_mode(Gtk.SelectionMode.MULTIPLE)
         self.app_tree.get_selection().connect('changed', self._app_selected)
         self.app_tree.set_tooltip_column(0)
-        right.pack1(self._scroll(self.app_tree, 170), resize=True, shrink=True)
-        right.pack2(self._properties(), resize=True, shrink=True)
+        application_panel = self._scroll(self.app_tree, 170)
+        properties_panel = self._properties()
+        application_panel.set_hexpand(True)
+        properties_panel.set_hexpand(True)
+        panels.attach(application_panel, 2, 0, 1, 1)
+        panels.attach(Gtk.Separator(orientation=Gtk.Orientation.VERTICAL), 3, 0, 1, 1)
+        panels.attach(properties_panel, 4, 0, 1, 1)
+        # Share only content widths; separators keep their natural thin width.
+        self._column_sizes = Gtk.SizeGroup(mode=Gtk.SizeGroupMode.HORIZONTAL)
+        for panel in (category_panel, application_panel, properties_panel):
+            panel.set_vexpand(True)
+            self._column_sizes.add_widget(panel)
         self._body.pack_start(panels, True, True, 0)
         actions = Gtk.FlowBox()
         actions.set_selection_mode(Gtk.SelectionMode.NONE)
@@ -112,12 +126,10 @@ class _EditorHost:
         self.duplicate_button = self._button('Duplicate', self._duplicate, actions)
         self.remove_button = self._button('Remove', self._remove, actions)
         self._body.pack_start(actions, False, False, 0)
-        bulk = Gtk.Box(spacing=6)
-        self.show_button = self._button('Show', lambda *a: self._visibility(True), bulk)
-        self.hide_button = self._button('Hide', lambda *a: self._visibility(False), bulk)
-        self.restore_button = self._button('Restore selected', self._restore_selected, bulk)
-        self._body.pack_start(bulk, False, False, 0)
         footer = Gtk.Box(spacing=6)
+        self.show_button = self._button('Show', lambda *a: self._visibility(True), footer)
+        self.hide_button = self._button('Hide', lambda *a: self._visibility(False), footer)
+        self.restore_button = self._button('Restore selected', self._restore_selected, footer)
         self.undo_button = self._button('Undo', lambda *a: self._history(False), footer)
         self.redo_button = self._button('Redo', lambda *a: self._history(True), footer)
         self.status = Gtk.Label(xalign=0)
@@ -149,13 +161,32 @@ class _EditorHost:
         column = Gtk.TreeViewColumn(_(title))
         icon = Gtk.CellRendererPixbuf()
         column.pack_start(icon, False)
-        column.add_attribute(icon, 'icon-name', icon_index)
+        column.set_cell_data_func(icon, self._render_icon, icon_index)
         text = Gtk.CellRendererText()
         text.set_property('ellipsize', 3)
         column.pack_start(text, True)
         column.add_attribute(text, 'text', text_index)
         column.set_expand(True)
         tree.append_column(column)
+
+    @staticmethod
+    def _resolve_icon(value):
+        value = value or 'application-x-executable'
+        if Path(value).is_absolute():
+            from gi.repository import GdkPixbuf
+            try:
+                GdkPixbuf.Pixbuf.new_from_file_at_scale(value, 24, 24, True)
+                return Gio.FileIcon.new(Gio.File.new_for_path(value))
+            except GLib.Error:
+                return Gio.ThemedIcon.new('application-x-executable')
+        theme = Gtk.IconTheme.get_default()
+        return Gio.ThemedIcon.new(value if theme.has_icon(value) else 'application-x-executable')
+
+    def _render_icon(self, column, cell, model, iterator, index):
+        value = model[iterator][index]
+        if value not in self._icon_cache:
+            self._icon_cache[value] = self._resolve_icon(value)
+        cell.set_property('gicon', self._icon_cache[value])
 
     def _properties(self):
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
@@ -282,6 +313,7 @@ class _EditorHost:
         if self._category not in self.model.categories:
             self._category = None
         self._loading = True
+        self._icon_cache.clear()
         if categories or set(self._category_keys()) != set(self.model.categories):
             self.category_store.clear()
             all_iter = self.category_store.append(None, [_('All applications'), '@all', 'view-grid-symbolic'])
@@ -501,15 +533,21 @@ class _EditorHost:
         if not self._stage_draft():
             return
         ids = self._selected_ids()
-        if ids and self._confirm('System applications will be hidden for your user. Custom launchers will be removed. Installed programs remain installed.', 'Remove'):
-            self._run(lambda: self.model.remove(ids))
+        message = ('Remove the selected applications from this category only? They remain in other categories.'
+                   if self._category is not None else
+                   'System applications will be hidden for your user. Custom launchers will be removed. Installed programs remain installed.')
+        if ids and self._confirm(message, 'Remove'):
+            self._run(lambda: self.model.remove(ids, self._category))
 
     def _restore_selected(self, *args):
         if not self._stage_draft():
             return
         ids = self._selected_ids()
         if ids:
-            self._run(lambda: self.model.restore_applications(ids))
+            if self._category is not None:
+                self._run(lambda: self.model.set_visible(ids, True, self._category))
+            else:
+                self._run(lambda: self.model.restore_applications(ids))
         elif self._category:
             self._run(lambda: self.model.restore_category(self._category))
 
@@ -607,8 +645,55 @@ class _EditorHost:
         window = self._window()
         if window is not None and self._host_window is None:
             self._host_window = window
+            self._configure_window(window)
+            self._standardize_settings_controls(window)
             self._close_signal = window.connect('delete-event', self._on_close)
             self._key_signal = window.connect('key-press-event', self._on_key)
+
+    def _standardize_settings_controls(self, window):
+        layout_keys = {'applications-view-mode', 'sidebar-placement',
+                       'sidebar-favorites', 'description-placement'}
+        number_keys = {'custom-menu-width', 'custom-menu-height', 'category-icon-size',
+                       'apps-list-icon-size', 'apps-grid-icon-size', 'sidebar-icon-size',
+                       'menu-icon-size'}
+        combos, numbers, panel_text = [], [], None
+        def collect(widget):
+            nonlocal panel_text
+            key = getattr(widget, 'key', None)
+            control = getattr(widget, 'content_widget', None)
+            if key in layout_keys and isinstance(control, Gtk.ComboBox):
+                combos.append(control)
+            elif key in number_keys and isinstance(control, Gtk.SpinButton):
+                numbers.append(control)
+            elif key == 'menu-label' and isinstance(control, Gtk.Entry):
+                panel_text = control
+            if isinstance(widget, Gtk.Container):
+                for child in widget.get_children():
+                    collect(child)
+        collect(window)
+        self._settings_size_groups = []
+        for controls in (combos, numbers + ([panel_text] if panel_text else [])):
+            if not controls:
+                continue
+            group = Gtk.SizeGroup(mode=Gtk.SizeGroupMode.HORIZONTAL)
+            for control in controls:
+                if control is panel_text:
+                    control.set_width_chars(1)
+                group.add_widget(control)
+            self._settings_size_groups.append(group)
+
+    def _configure_window(self, window):
+        # Keep a consistent layout, bounded by the current monitor's usable area.
+        width, height = 1100, 780
+        display = window.get_display()
+        monitor = display.get_monitor_at_window(window.get_window()) if window.get_window() else display.get_primary_monitor()
+        if monitor is not None:
+            area = monitor.get_workarea()
+            width = min(width, max(1, area.width - 32))
+            height = min(height, max(1, area.height - 64))
+        window.set_default_size(width, height)
+        window.resize(width, height)
+        window.set_resizable(False)
 
     def _on_close(self, *args):
         if not self.model or not (self.model.dirty or self._draft_dirty):

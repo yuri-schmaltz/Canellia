@@ -135,6 +135,290 @@ class RealMenuTests(unittest.TestCase):
                 return
         self.fail('Application missing: ' + item_id)
 
+    def test_file_icons_and_invalid_icons_have_safe_fallback(self):
+        from gi.repository import GdkPixbuf
+        path = self.system / 'launcher.png'
+        pixbuf = GdkPixbuf.Pixbuf.new(GdkPixbuf.Colorspace.RGB, True, 8, 8, 8)
+        pixbuf.fill(0x336699ff)
+        pixbuf.savev(str(path), 'png', [], [])
+        self.assertIsInstance(MenuEditorPage._EditorHost._resolve_icon(str(path)), Gio.FileIcon)
+        self.assertIsInstance(MenuEditorPage._EditorHost._resolve_icon(str(path)+'-missing'), Gio.ThemedIcon)
+        self.assertIsInstance(MenuEditorPage._EditorHost._resolve_icon('folder'), Gio.ThemedIcon)
+
+    def test_flatpak_alias_is_canonicalized_and_not_duplicated(self):
+        model = self.source.load()
+        self.assertEqual(self.source._canonical_id('editor.desktop:flatpak'), 'editor.desktop')
+        self.assertEqual(self.source._canonical_id('custom:flatpak.desktop'), 'custom:flatpak.desktop')
+        model.remove(['editor.desktop'])
+        model.apply()
+        settle()
+        model = self.source.load()
+        self.assertNotIn('editor.desktop', [app.id for app in model.search()])
+        self.assertIn('editor.desktop', [app.id for app in model.search(visibility='hidden')])
+        model.restore_applications(['editor.desktop'])
+        model.apply()
+        settle()
+        self.assertTrue(self.source.load().applications['editor.desktop'].visible)
+
+    def test_category_removal_does_not_change_other_categories_or_launcher(self):
+        model = self.source.load()
+        model.move(['editor.desktop'], ('Games',), ('Tools',), add=True)
+        model.apply()
+        settle()
+        model = self.source.load()
+        original = model.applications['editor.desktop'].document.to_bytes()
+        model.remove(['editor.desktop'], ('Tools',))
+        self.assertTrue(model.applications['editor.desktop'].memberships[('Games',)])
+        self.assertEqual(model.applications['editor.desktop'].document.to_bytes(), original)
+        model.undo()
+        self.assertTrue(model.applications['editor.desktop'].memberships[('Tools',)])
+        model.redo()
+        model.apply()
+        settle()
+        model = self.source.load()
+        self.assertNotIn('editor.desktop', [app.id for app in model.search(category=('Tools',))])
+        self.assertIn('editor.desktop', [app.id for app in model.search(category=('Tools',), visibility='hidden')])
+        self.assertIn('editor.desktop', [app.id for app in model.search(category=('Games',))])
+        self.assertIn('editor.desktop', [app.id for app in model.search()])
+        self.assertEqual(model.applications['editor.desktop'].document.to_bytes(), original)
+        model.set_visible(['editor.desktop'], True, ('Tools',))
+        model.apply()
+        settle()
+        model = self.source.load()
+        self.assertTrue(model.applications['editor.desktop'].memberships[('Tools',)])
+        self.assertTrue(model.applications['editor.desktop'].memberships[('Games',)])
+
+    def test_duplicate_edit_delete_and_restore_complete_lifecycle(self):
+        model = self.source.load()
+        original = (self.system / 'applications/editor.desktop').read_bytes()
+        duplicate = model.duplicate('editor.desktop', ('Games',))
+        model.edit_application(duplicate, {'Name': 'Independent copy', 'Exec': '/usr/bin/true %u', 'Icon': 'folder'})
+        model.apply()
+        settle()
+        model = self.source.load()
+        self.assertEqual(model.applications['editor.desktop'].name, 'Editor')
+        self.assertEqual(model.applications[duplicate].name, 'Independent copy')
+        self.assertTrue(model.applications[duplicate].memberships[('Games',)])
+        model.move([duplicate], ('Tools',), ('Games',), add=True)
+        model.apply()
+        settle()
+        model = self.source.load()
+        model.remove([duplicate], ('Games',))
+        model.apply()
+        settle()
+        model = self.source.load()
+        self.assertTrue(model.applications[duplicate].memberships[('Tools',)])
+        self.assertFalse(model.applications[duplicate].memberships.get(('Games',), False))
+        model.remove([duplicate])
+        model.undo()
+        self.assertIn(duplicate, model.applications)
+        model.redo()
+        model.apply()
+        settle()
+        model = self.source.load()
+        self.assertNotIn(duplicate, model.applications)
+        self.assertFalse((Path(os.environ['XDG_DATA_HOME']) / 'applications' / duplicate).exists())
+        self.assertEqual((self.system / 'applications/editor.desktop').read_bytes(), original)
+
+    def test_batch_moving_mixed_custom_and_system_launchers_after_restart(self):
+        model = self.source.load()
+        created = [model.create_application(('Tools',), 'Batch '+str(i)) for i in range(8)]
+        for item_id in created:
+            model.edit_application(item_id, {'Exec': '/usr/bin/true'})
+        ids = ['editor.desktop'] + created
+        model.move(ids, ('Games',), ('Tools',))
+        model.apply()
+        settle()
+        model = self.source.load()
+        for item_id in ids:
+            self.assertTrue(model.applications[item_id].memberships[('Games',)])
+            self.assertFalse(model.applications[item_id].memberships.get(('Tools',), False))
+        model.move(ids, ('Tools',), ('Games',), add=True)
+        model.apply()
+        settle()
+        model = self.source.load()
+        model.remove(ids, ('Games',))
+        model.apply()
+        settle()
+        model = self.source.load()
+        for item_id in ids:
+            self.assertTrue(model.applications[item_id].memberships[('Tools',)])
+            self.assertFalse(model.applications[item_id].memberships.get(('Games',), False))
+        model.remove(created)
+        model.apply()
+        settle()
+        model = self.source.load()
+        self.assertFalse(set(created) & model.applications.keys())
+        self.assertIn('editor.desktop', model.applications)
+
+    def test_nested_categories_launcher_moves_and_user_override_conflicts(self):
+        model = self.source.load()
+        parent = model.create_category(('Tools',), 'Parent')
+        child = model.create_category(parent, 'Child')
+        item_id = model.create_application(child, 'Nested launcher')
+        model.edit_application(item_id, {'Exec': '/usr/bin/true', 'Categories': 'Utility;Game;'})
+        model.apply()
+        settle()
+        model = self.source.load()
+        self.assertIn(child, model.categories)
+        self.assertTrue(model.applications[item_id].memberships[child])
+        model.move([item_id], ('Games',), child)
+        model.apply()
+        settle()
+        model = self.source.load()
+        self.assertFalse(model.applications[item_id].memberships.get(child, False))
+        self.assertTrue(model.applications[item_id].memberships[('Games',)])
+        model.edit_application(item_id, {'Name': 'Pending rename'})
+        target = Path(os.environ['XDG_DATA_HOME']) / 'applications' / item_id
+        external = target.read_bytes() + b'# edited externally\n'
+        target.write_bytes(external)
+        with self.assertRaises(EditorError):
+            model.apply()
+        self.assertEqual(target.read_bytes(), external)
+        self.assertTrue(model.dirty)
+
+    def test_seeded_launcher_operations_survive_commits_and_reload(self):
+        import copy
+        import random
+        import itertools
+        for seed in (11, 73, 2026):
+            serial = itertools.count(1)
+            with self.subTest(seed=seed), patch.object(MenuEditorPage._editor_module('menuEditorCore').uuid, 'uuid4',
+                    side_effect=lambda: types.SimpleNamespace(hex=f'{next(serial):08x}{seed:024x}')):
+                self.setUp()
+                rng = random.Random(seed)
+                model = self.source.load()
+                oracle = {
+                    'editor.desktop': {'name': 'Editor', 'visible': True, 'custom': False, 'memberships': {('Tools',): True}},
+                    'game.desktop': {'name': 'Game', 'visible': True, 'custom': False, 'memberships': {('Games',): True}},
+                }
+                baseline = copy.deepcopy(oracle)
+                def verify():
+                    self.assertEqual(set(model.applications), set(oracle), f'seed={seed}, step={step}')
+                    for item_id, expected in oracle.items():
+                        actual = model.applications[item_id]
+                        self.assertEqual(actual.name, expected['name'], (seed, step, item_id))
+                        self.assertEqual(actual.visible, expected['visible'], (seed, step, item_id))
+                        for category in (('Tools',), ('Games',)):
+                            self.assertEqual(actual.memberships.get(category, False), expected['memberships'].get(category, False), (seed, step, item_id, category))
+                for step in range(60):
+                    operation = rng.choice(['create', 'duplicate', 'edit', 'move', 'add', 'local_remove', 'global_remove', 'visibility', 'undo_redo', 'discard'])
+                    item_id = rng.choice(sorted(oracle)) if oracle else None
+                    target = rng.choice([('Tools',), ('Games',)])
+                    if operation == 'create':
+                        name = f'Created {seed}-{step}'
+                        new_id = model.create_application(target, name)
+                        model.edit_application(new_id, {'Exec': '/usr/bin/true'})
+                        oracle[new_id] = {'name': name, 'visible': True, 'custom': True, 'memberships': {target: True}}
+                    elif operation == 'duplicate' and item_id:
+                        new_id = model.duplicate(item_id, target)
+                        oracle[new_id] = {'name': oracle[item_id]['name']+' (copy)', 'visible': True, 'custom': True, 'memberships': {target: True}}
+                    elif operation == 'edit' and item_id:
+                        name = f'Renamed {seed}-{step}'
+                        model.edit_application(item_id, {'Name': name})
+                        oracle[item_id]['name'] = name
+                    elif operation in ('move', 'add') and item_id:
+                        model.move([item_id], target, add=operation=='add')
+                        if operation == 'move':
+                            oracle[item_id]['memberships'] = {category: False for category in oracle[item_id]['memberships']}
+                        oracle[item_id]['memberships'][target] = True
+                    elif operation == 'local_remove' and item_id:
+                        model.remove([item_id], target)
+                        oracle[item_id]['memberships'][target] = False
+                    elif operation == 'global_remove' and item_id:
+                        model.remove([item_id])
+                        if oracle[item_id]['custom']:
+                            del oracle[item_id]
+                        else:
+                            oracle[item_id]['visible'] = False
+                    elif operation == 'visibility' and item_id:
+                        visible = not oracle[item_id]['visible']
+                        model.set_visible([item_id], visible)
+                        oracle[item_id]['visible'] = visible
+                        if visible and not any(oracle[item_id]['memberships'].values()):
+                            oracle[item_id]['memberships'] = {category: True for category in oracle[item_id]['memberships'] or {(): True}}
+                    elif operation == 'undo_redo' and item_id:
+                        before = copy.deepcopy(oracle)
+                        name = f'Undoable {seed}-{step}'
+                        model.edit_application(item_id, {'Name': name})
+                        oracle[item_id]['name'] = name
+                        after = copy.deepcopy(oracle)
+                        model.undo()
+                        oracle = before
+                        verify()
+                        model.redo()
+                        oracle = after
+                    elif operation == 'discard':
+                        model.discard()
+                        oracle = copy.deepcopy(baseline)
+                    verify()
+                    if step % 5 == 4 or step == 59:
+                        model.apply()
+                        settle()
+                        model = self.source.load()
+                        baseline = copy.deepcopy(oracle)
+                        verify()
+                        self.assertEqual((self.system / 'applications/editor.desktop').read_text(), APP)
+                        self.assertEqual((self.system / 'applications/game.desktop').read_text(), GAME)
+
+    def test_real_buttons_duplicate_move_remove_cancel_and_restore(self):
+        page = self.build()
+        page._category = ('Tools',)
+        page._refresh(categories=True)
+        self.select_app(page, 'editor.desktop')
+        before = set(page.model.applications)
+        page.duplicate_button.clicked()
+        duplicate = (set(page.model.applications) - before).pop()
+        page.fields['Name'].set_text('UI duplicate')
+        page.property_button.clicked()
+        self.assertEqual(page.model.applications['editor.desktop'].name, 'Editor')
+        def choose_destination():
+            for window in Gtk.Window.list_toplevels():
+                if isinstance(window, Gtk.Dialog) and not isinstance(window, Gtk.MessageDialog):
+                    for child in window.get_content_area().get_children():
+                        if isinstance(child, Gtk.ComboBoxText):
+                            child.set_active_id(page._encode_path(('Games',)))
+                    window.response(Gtk.ResponseType.OK)
+            return False
+        GLib.idle_add(choose_destination)
+        page.move_button.clicked()
+        self.assertFalse(page.model.applications[duplicate].memberships[('Tools',)])
+        self.assertTrue(page.model.applications[duplicate].memberships[('Games',)])
+        self.assertTrue(page._apply())
+        page._category = ('Games',)
+        page._refresh(categories=True)
+        self.select_app(page, duplicate)
+        def respond(response):
+            def callback():
+                for window in Gtk.Window.list_toplevels():
+                    if isinstance(window, Gtk.MessageDialog):
+                        window.response(response)
+                return False
+            GLib.idle_add(callback)
+        respond(Gtk.ResponseType.CANCEL)
+        page.remove_button.clicked()
+        self.assertFalse(page.model.dirty)
+        self.assertTrue(page.model.applications[duplicate].memberships[('Games',)])
+        respond(Gtk.ResponseType.OK)
+        page.remove_button.clicked()
+        self.assertTrue(page._apply())
+        self.assertNotIn(duplicate, [row[0] for row in page.app_store])
+        page.filter.set_active_id('hidden')
+        page._search_changed()
+        self.select_app(page, duplicate)
+        page.restore_button.clicked()
+        self.assertTrue(page._apply())
+        self.assertTrue(page.model.applications[duplicate].memberships[('Games',)])
+        page._category = None
+        page.filter.set_active_id('all')
+        page._refresh(categories=True)
+        self.select_app(page, duplicate)
+        respond(Gtk.ResponseType.OK)
+        page.remove_button.clicked()
+        self.assertTrue(page._apply())
+        self.assertNotIn(duplicate, page.model.applications)
+        self.assertIn('editor.desktop', page.model.applications)
+
     def test_public_tree_reads_categories_and_round_trips_move(self):
         model = self.source.load()
         self.assertIn(('Tools',), model.categories)

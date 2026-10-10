@@ -425,6 +425,14 @@ class EditorModel:
             self.pending[path] = data
 
     def _save_menu(self):
+        # CMenu omits Hidden launchers. Preserve their category associations in
+        # the user override, so a restart cannot turn restoration into a move.
+        for app in self.applications.values():
+            if not app.visible and (self.pending.get(self._app_target(app)) is not None or
+                                    app.document.get('X-Canellia-Category-Memberships')):
+                app.document.set('X-Canellia-Category-Memberships', json.dumps(
+                    [[list(path), visible] for path, visible in sorted(app.memberships.items())]))
+                self._save_app(app)
         self._stage(self.menu_path, self.menu.to_bytes())
 
     def _save_app(self, app):
@@ -455,7 +463,7 @@ class EditorModel:
         def change():
             for item_id in ids:
                 app = self.applications[item_id]
-                if category is None or visible:
+                if category is None:
                     app.document.set('Hidden', False)
                     app.document.set('NoDisplay', not visible)
                     self._save_app(app)
@@ -515,6 +523,12 @@ class EditorModel:
             document.set('NoDisplay', False)
             app = Application(new_id, document, memberships={target: True}, custom=True)
             self.applications[new_id] = app
+            # A copied Categories field otherwise lets CMenu allocate the copy
+            # back to the original categories, despite the chosen destination.
+            for path in self.categories:
+                if path and path != target:
+                    self.menu.membership(path, new_id, False)
+                    app.memberships[path] = False
             self._save_app(app)
             self.menu.membership(target, new_id, True)
             self.menu.text(target, 'AppDir', str(self.storage.data_home / 'applications'))
@@ -522,7 +536,12 @@ class EditorModel:
         self._change(change)
         return new_id
 
-    def remove(self, ids):
+    def remove(self, ids, category=None):
+        if category is not None:
+            if category not in self.categories:
+                raise EditorError('Unknown category')
+            self.set_visible(ids, False, category)
+            return
         def change():
             for item_id in ids:
                 app = self.applications[item_id]
@@ -644,7 +663,11 @@ class EditorModel:
         terms = folded(text).split()
         result = []
         for app in self.applications.values():
+            if app.document.get('Hidden') == 'true' and visibility != 'hidden':
+                continue
             if category is not None and category not in app.memberships:
+                continue
+            if category is not None and not app.memberships.get(category, False) and visibility != 'hidden':
                 continue
             visible = app.visible and (any(app.memberships.values()) if category is None else app.memberships.get(category, False))
             if visibility == 'visible' and not visible or visibility == 'hidden' and visible:

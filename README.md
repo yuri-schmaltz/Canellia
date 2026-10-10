@@ -34,7 +34,11 @@ and gettext installed to execute the regression suite.
    Apply, with Discard, Undo/Redo, conflict checks and automatic backups.
  * The Tips tab has been removed.
 
- * Fuzzy searching for app names.
+ * Fuzzy searching for app names, with accent-insensitive matching and exact
+   names ranked above partial matches.
+ * The editor displays file and theme icons. Removed system launchers stay
+   available through the Hidden filter for restoration. Flatpak launcher aliases
+   share one canonical desktop ID.
  * Filesystem browser and home directory file search.
  * Emoji browser & search.
  * Customisation options:

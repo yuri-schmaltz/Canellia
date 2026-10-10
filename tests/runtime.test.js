@@ -187,3 +187,20 @@ test('5.8: obsolete folder enumerations complete and close before returning', as
         assert.equal(completed, 1);
     }
 });
+
+for (const version of ['4.0', '5.8']) {
+    test(`${version}: exact names outrank prefixes and ignore accents`, () => {
+        const utils = load(version, 'utils.js', {
+            gi: {GLib: {get_user_data_dir: () => '/tmp'}, Gio: {}, St: {}, Cinnamon: {}},
+            gettext: {bindtextdomain() {}}, mainloop: {}, ui: {main: {}, tweener: {}}, byteArray: {},
+        });
+        const score = (query, text) => {
+            const match = utils.searchStr(query, text);
+            return version === '4.0' ? match.score : match;
+        };
+        assert(score('CALCULADORA', 'Calculadora') > score('CALCULADORA', 'Calculadora avançada'));
+        assert(score('EDITOR DE TEXTO', 'Editor de texto') > score('EDITOR DE TEXTO', 'Editor de texto alternativo'));
+        assert.equal(score('ACOES', 'Ações'), 1.5);
+        assert.equal(score('TEST', ''), 0);
+    });
+}

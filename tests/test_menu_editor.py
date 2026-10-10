@@ -275,3 +275,104 @@ class MenuEditorTests(unittest.TestCase):
     def test_malformed_xml_and_entities_are_rejected(self):
         for data in (b'<invalid/>', b'<Menu>', b'<!DOCTYPE Menu [<!ENTITY a "bad">]><Menu><Name>&a;</Name></Menu>'):
             with self.assertRaises(core.EditorError): core.MenuDocument(data)
+
+
+class LauncherFailureMatrixTests(unittest.TestCase):
+    setUp = MenuEditorTests.setUp
+    # Reuse fixtures, without inheriting the original test methods below.
+    def test_mixed_batch_failures_are_atomic(self):
+        operations = [
+            lambda: self.model.move(['editor.desktop', 'missing.desktop'], ('Games',)),
+            lambda: self.model.remove(['editor.desktop', 'missing.desktop']),
+            lambda: self.model.remove(['editor.desktop', 'missing.desktop'], ('Tools',)),
+            lambda: self.model.restore_applications(['editor.desktop', 'missing.desktop']),
+            lambda: self.model.set_visible(['editor.desktop', 'missing.desktop'], False),
+        ]
+        for operation in operations:
+            with self.subTest(operation=operation):
+                before = self.model._snapshot()
+                with self.assertRaises(KeyError):
+                    operation()
+                self.assertEqual(self.model._snapshot()[1:], before[1:])
+                self.assertEqual(self.model.menu.to_bytes(), before[0].to_bytes())
+                self.assertFalse(self.model.dirty)
+                self.assertFalse((self.storage.data_home / 'applications').exists())
+
+    def test_invalid_destinations_never_modify_the_launcher(self):
+        operations = [
+            lambda: self.model.move(['editor.desktop'], ('Missing',)),
+            lambda: self.model.duplicate('editor.desktop', ('Missing',)),
+            lambda: self.model.create_application(('Missing',), 'Invalid'),
+            lambda: self.model.remove(['editor.desktop'], ('Missing',)),
+        ]
+        for operation in operations:
+            with self.subTest(operation=operation), self.assertRaises(core.EditorError):
+                operation()
+            self.assertFalse(self.model.dirty)
+            self.assertEqual(self.source.read_bytes(), APP)
+
+    def test_unrelated_edit_does_not_copy_preexisting_hidden_launchers(self):
+        hidden = core.Application('hidden.desktop', core.DesktopFile(APP), self.source, APP, {('Tools',): True})
+        hidden.document.set('NoDisplay', True)
+        self.model.applications[hidden.id] = hidden
+        self.model.move(['editor.desktop'], ('Games',))
+        self.assertNotIn(self.storage.data_home / 'applications/hidden.desktop', self.model.pending)
+
+    def test_commit_failure_after_deletion_restores_launcher_and_menu(self):
+        launcher = self.storage.data_home / 'applications/custom.desktop'
+        menu = self.storage.config_home / 'menus/custom.menu'
+        launcher.parent.mkdir(parents=True)
+        menu.parent.mkdir(parents=True)
+        launcher.write_bytes(APP)
+        menu.write_bytes(b'original menu')
+        atomic = self.storage.atomic
+        def fail_menu(path, data):
+            if path == menu and data == b'changed menu':
+                raise OSError('simulated disk failure')
+            return atomic(path, data)
+        with patch.object(self.storage, 'atomic', side_effect=fail_menu):
+            with self.assertRaises(core.EditorError):
+                self.storage.commit({launcher: None, menu: b'changed menu'}, {launcher: APP, menu: b'original menu'})
+        self.assertEqual(launcher.read_bytes(), APP)
+        self.assertEqual(menu.read_bytes(), b'original menu')
+        self.storage.recover()
+        self.assertEqual(launcher.read_bytes(), APP)
+
+    def test_duplicate_preserves_actions_and_vendor_data_but_is_visible(self):
+        self.model.set_visible(['editor.desktop'], False)
+        item_id = self.model.duplicate('editor.desktop', ('Games',))
+        copy = self.model.applications[item_id]
+        self.assertTrue(copy.visible)
+        self.assertFalse(self.model.applications['editor.desktop'].visible)
+        data = copy.document.to_bytes()
+        self.assertIn(b'X-Vendor=keep', data)
+        self.assertIn(b'[Desktop Action New]', data)
+        self.assertEqual(copy.document.get('Exec'), '/usr/bin/true %f')
+        self.assertFalse(copy.memberships[('Tools',)])
+        self.model.apply()
+        self.assertEqual(self.source.read_bytes(), APP)
+
+    def test_create_then_remove_invalid_draft_leaves_no_desktop_file(self):
+        item_id = self.model.create_application(('Tools',), 'Unfinished')
+        self.model.remove([item_id])
+        self.model.apply()
+        self.assertNotIn(item_id, self.model.applications)
+        self.assertFalse((self.storage.data_home / 'applications' / item_id).exists())
+        self.assertFalse(self.model.dirty)
+
+    def test_long_edit_history_is_bounded_and_commit_clears_redo(self):
+        for index in range(180):
+            self.model.edit_application('editor.desktop', {'Name': 'Edit '+str(index)})
+        self.assertEqual(len(self.model.undo_stack), self.model.HISTORY_LIMIT)
+        for index in range(self.model.HISTORY_LIMIT):
+            self.model.undo()
+        self.assertEqual(self.model.applications['editor.desktop'].name, 'Edit 119')
+        self.assertEqual(self.source.read_bytes(), APP)
+        for index in range(self.model.HISTORY_LIMIT):
+            self.model.redo()
+        self.assertEqual(self.model.applications['editor.desktop'].name, 'Edit 179')
+        self.model.apply()
+        self.assertFalse(self.model.undo_stack)
+        self.assertFalse(self.model.redo_stack)
+        self.model.undo()
+        self.assertEqual(self.model.applications['editor.desktop'].name, 'Edit 179')

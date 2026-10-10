@@ -1285,3 +1285,15 @@ msgstr ""
 #: 4.0/MenuEditorPage.py 5.8/MenuEditorPage.py
 msgid "XML entities are not supported"
 msgstr ""
+
+msgid "Menu width (pixels)"
+msgstr ""
+
+msgid "Menu height (pixels)"
+msgstr ""
+
+msgid "Applied when the panel menu is opened. The available screen area and minimum content size may limit the result."
+msgstr ""
+
+msgid "Remove the selected applications from this category only? They remain in other categories."
+msgstr ""
