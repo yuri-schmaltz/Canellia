@@ -6,14 +6,15 @@ reais do usuário não são modificados pelos cenários. As duas implementaçõe
 
 ## Resultado final
 
-123 testes passaram: 72 de Python, 11 de JavaScript e 40 de GTK/CMenu
-(20 para cada implementação). As 360 operações combinadas e os 72 ciclos de
+151 testes passaram: 86 de Python, 23 de JavaScript e 42 de GTK/CMenu
+(21 para cada implementação). As 360 operações combinadas e os 72 ciclos de
 salvamento/recarregamento estão incluídos nos testes de GTK/CMenu.
 
-Registros: [verificações gerais](test-results/launchers-2026-10-09/checks.txt) e
-[GTK/CMenu](test-results/launchers-2026-10-09/gtk-cmenu.txt).
-Os registros incluem mensagens esperadas de conflitos simulados e avisos de
-janelas GTK fora da tela usadas pelos testes; nenhuma asserção falhou.
+Registros: [verificações gerais](test-results/gauntlet-2026-10-09/checks.txt) e
+[GTK/CMenu](test-results/gauntlet-2026-10-09/gtk-cmenu.txt).
+Os registros incluem mensagens esperadas de conflitos simulados; nenhuma
+asserção falhou. A rodada final usa janelas reais em tela isolada, com avisos
+críticos tratados como falhas. Veja a [validação 5.7.0](VALIDACAO-5.7.0.md).
 
 ## Cobertura
 
@@ -43,7 +44,7 @@ janelas GTK fora da tela usadas pelos testes; nenhuma asserção falhou.
 
 ```sh
 python3 scripts/check.py
-python3 tests/gtk_menu_editor_smoke.py
+bash scripts/run_gtk_suite.sh
 ```
 
 O primeiro comando requer Node.js 22+, gettext e Bash. O segundo requer uma

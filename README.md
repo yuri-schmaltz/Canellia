@@ -2,7 +2,7 @@
 
 Canellia
 ========
-_Version: 5.6.4 (local, unreleased)_ (installation and search robustness)
+_Version: 5.7.0 (local)_ — integrated editing, recovery tools and safer search
 
 Canellia is a full featured alternative to the standard Cinnamon menu with grid layout, an integrated menu editor and customisation options.
 
@@ -63,3 +63,21 @@ and gettext installed to execute the regression suite.
 #### Expert features (optional)
  * `Shift-Enter` — Run currently highlighted application as root user.
  * `Ctrl-d` — Open .desktop file of currently highlighted app in default text editor (opens file in user mode.)
+
+## Tools and recovery
+
+The first settings tab edits menus. The Tools tab adds launcher diagnostics,
+checked backup restoration, preference profiles (Compact/Grid/List), JSON
+import/export and a scaled appearance preview. Diagnostics report possible
+problems for review; they never uninstall applications or delete launchers.
+Profiles preserve menu edits and internal category state. Each application of a
+profile saves the previous preferences for restoration.
+
+Large application lists use pages of 200 items without discarding remaining
+items. Use the Previous/Next links or Ctrl+PageUp/Ctrl+PageDown. Ctrl+F focuses
+search. Application names have accessible labels and exact-name search takes
+priority. The calculator accepts arithmetic, powers, parentheses, named math
+functions and constants; it never executes input as JavaScript.
+
+Firefox and LibreWolf bookmarks use read-only SQLite snapshots through Python,
+including committed WAL data and native/Flatpak profiles. libgda is not required.

@@ -1297,3 +1297,258 @@ msgstr ""
 
 msgid "Remove the selected applications from this category only? They remain in other categories."
 msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+msgid "Diagnostics"
+msgstr ""
+
+msgid "Backups"
+msgstr ""
+
+msgid "Profiles"
+msgstr ""
+
+msgid "Preview"
+msgstr ""
+
+msgid "Inspect launchers without modifying or uninstalling applications."
+msgstr ""
+
+msgid "Run diagnostics"
+msgstr ""
+
+msgid "Application"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+msgid "Details"
+msgstr ""
+
+msgid "Edit selected launcher"
+msgstr ""
+
+msgid "Read error"
+msgstr ""
+
+msgid "Diagnostics completed:"
+msgstr ""
+
+msgid "Restoration checks for external changes and creates a new backup. Unsaved menu edits must be discarded or applied first."
+msgstr ""
+
+msgid "Backup"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Refresh"
+msgstr ""
+
+msgid "Restore selected backup"
+msgstr ""
+
+msgid "Open backup folder"
+msgstr ""
+
+msgid "Apply or discard pending menu edits before restoring a backup."
+msgstr ""
+
+msgid "Restore this backup? Current menu files will be backed up first."
+msgstr ""
+
+msgid "Backup restored. New backup:"
+msgstr ""
+
+msgid "Profiles change preferences only; launchers and menu edits are preserved."
+msgstr ""
+
+msgid "Compact"
+msgstr ""
+
+msgid "Apply preset"
+msgstr ""
+
+msgid "Export preferences"
+msgstr ""
+
+msgid "Import preferences"
+msgstr ""
+
+msgid "Restore previous preferences"
+msgstr ""
+
+msgid "Apply this profile? Current preferences will be backed up first."
+msgstr ""
+
+msgid "Preferences changed externally. Reopen settings before applying."
+msgstr ""
+
+msgid "Preferences saved. Backup:"
+msgstr ""
+
+msgid "No preferences backup is available."
+msgstr ""
+
+msgid "Import"
+msgstr ""
+
+msgid "Export"
+msgstr ""
+
+msgid "Profile is too large."
+msgstr ""
+
+msgid "Profile exported."
+msgstr ""
+
+msgid "Scaled preview of current preferences. It does not launch applications."
+msgstr ""
+
+msgid "Refresh preview"
+msgstr ""
+
+msgid "Menu dimensions:"
+msgstr ""
+
+msgid "Calculator"
+msgstr ""
+
+msgid "Editor"
+msgstr ""
+
+msgid "Terminal"
+msgstr ""
+
+msgid "Previous page"
+msgstr ""
+
+msgid "Next page"
+msgstr ""
+
+msgid "Searching…"
+msgstr ""
+
+msgid "Results:"
+msgstr ""
+
+msgid "No results found"
+msgstr ""
+
+msgid "Launcher is no longer available. Reload the menu."
+msgstr ""
+
+msgid "committed"
+msgstr ""
+
+msgid "pending"
+msgstr ""
+
+msgid "recovered"
+msgstr ""
+
+msgid "invalid"
+msgstr ""
+
+msgid "command"
+msgstr ""
+
+msgid "icon"
+msgstr ""
+
+msgid "duplicate"
+msgstr ""
+
+msgid "Command is empty or invalid"
+msgstr ""
+
+msgid "No icon is configured"
+msgstr ""
+
+msgid "Possible duplicate command; review before removing"
+msgstr ""
+
+msgid "Executable was not found"
+msgstr ""
+
+msgid "Icon file was not found"
+msgstr ""
+
+msgid "Icon is not available in the current theme"
+msgstr ""
+
+msgid "Office"
+msgstr ""
+
+msgid "Graphics"
+msgstr ""
+
+msgid "Games"
+msgstr ""
+
+msgid "Preferences"
+msgstr ""
+
+msgid "Invalid backup journal"
+msgstr ""
+
+msgid "Unsupported backup version"
+msgstr ""
+
+msgid "Incomplete backup journal"
+msgstr ""
+
+msgid "Invalid backup path"
+msgstr ""
+
+msgid "Invalid backup fingerprint"
+msgstr ""
+
+msgid "Cannot read backup journal"
+msgstr ""
+
+msgid "Invalid backup file"
+msgstr ""
+
+msgid "Backup file cannot be read"
+msgstr ""
+
+msgid "Backup content is damaged; restoration cancelled"
+msgstr ""
+
+msgid "Backup is outside the backup directory"
+msgstr ""
+
+msgid "Only completed backups can be restored"
+msgstr ""
+
+msgid "Files changed after this backup; restoration cancelled"
+msgstr ""
+
+msgid "Unsupported profile format or version"
+msgstr ""
+
+msgid "Invalid profile settings"
+msgstr ""
+
+msgid "Unknown or internal setting"
+msgstr ""
+
+msgid "Invalid value type"
+msgstr ""
+
+msgid "Value outside allowed range"
+msgstr ""
+
+msgid "Unknown option"
+msgstr ""
+
+msgid "Setting is too long"
+msgstr ""
+
+msgid "Unknown preset"
+msgstr ""

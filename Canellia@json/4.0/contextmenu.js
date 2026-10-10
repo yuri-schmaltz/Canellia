@@ -330,7 +330,8 @@ class ContextMenu {
         //Properties
         addMenuItem( new ContextMenuItem(this.appThis, _('Properties'), 'dialog-information',
             () => {
-                Util.spawn(["cinnamon-desktop-editor", "-mlauncher", "-o", app.desktop_file_path]);
+                Util.spawn(['python3', __meta.path + '/settingsWindow.py', '--instance',
+                    String(this.appThis.instance_id), '--select-launcher', app.id || app.get_id()]);
                 this.appThis.menu.close();
             }
         ));

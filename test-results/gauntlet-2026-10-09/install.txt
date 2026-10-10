@@ -1,0 +1,3 @@
+Validated Canellia 5.7.0.
+Canellia installed successfully.
+method return time=1791600734.482297 sender=:1.54 -> destination=:1.2054 serial=5497 reply_serial=2

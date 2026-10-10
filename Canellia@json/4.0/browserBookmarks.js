@@ -29,13 +29,6 @@ const Util = imports.misc.util;
 const {getChromiumProfileDirs} = require('./utils');
 const {runJsonScript} = require('./process');
 
-let Gda = null;
-try {
-    Gda = imports.gi.Gda;
-} catch(e) {
-    log("Canellia: Can't read firefox bookmarks, libgda not installed");
-}
-
 const readFileAsync = function(file, opts = {utf8: true}) {
     const {utf8} = opts;
     return new Promise(function(resolve, reject) {
@@ -65,118 +58,15 @@ const readJSONAsync = function(file) {
     });
 };
 
-const readFirefoxBookmarks = function(appInfo, profileDir) {
-    let connection, bookmarks = [];
-
-    let result;
-
-    if (!connection) {
-        try {
-            connection = Gda.Connection.open_from_string(
-                            'SQLite', 'DB_DIR=' + profileDir + ';DB_NAME=places.sqlite',
-                            null, Gda.ConnectionOptions.READ_ONLY);
-        } catch(e) {}
-    }
-
-    try {
-        result = connection.execute_select_command(
-            'SELECT moz_bookmarks.title, moz_places.url FROM moz_bookmarks ' +
-            'INNER JOIN moz_places ON (moz_bookmarks.fk = moz_places.id) ' +
-            'WHERE moz_bookmarks.fk NOT NULL AND moz_bookmarks.title NOT ' +
-            'NULL AND moz_bookmarks.type = 1'
-        );
-
-        // Gda binding seems buggy on Ubuntu 18.04 with error:
-        // "Unsupported type void, deriving from fundamental void"
-        if (!result) return [];
-
-        let nRows = result.get_n_rows();
-
-        const handleMeta = function(result, row) {
-            try {
-                return [result.get_value_at(0, row),
-                        result.get_value_at(1, row)];
-            } catch(e) {
-                return [null, null];
-            }
-        };
-
-        for (let row = 0; row < nRows; row++) {
-            let [name, uri] = handleMeta(result, row);
-
-            if (typeof name !== 'string' || typeof uri !== 'string') continue;
-            bookmarks.push({
-                app: appInfo,
-                name: name.replace(/\//g, '|'),
-                uri: uri
-            });
-        }
-    } catch(e) {
-        log("Canellia: error reading firefox/librewolf bookmarks file: " + e.message);
-    } finally {
-        if (connection) connection.close();
-    }
-    return bookmarks;
-};
-
-function readFirefoxProfiles(browser) {
-    if (!Gda) return [];
-
-    let profilesFile, profileDir, bookmarksFile;
-    let foundApps = Cinnamon.AppSystem.get_default().lookup_desktop_wmclass(browser);
-    let appInfo = foundApps.get_app_info();
-    let firefoxDir;
-    if (browser === 'firefox') {
-        firefoxDir = GLib.build_filenamev([GLib.get_home_dir(), '.mozilla', 'firefox']);
-    } else { //librewolf
-        firefoxDir = GLib.build_filenamev([GLib.get_home_dir(), '.librewolf']);
-    }
-    if (!foundApps || foundApps.length === 0) {
-        return [];
-    }
-
-    profilesFile = Gio.File.new_for_path(GLib.build_filenamev([firefoxDir, 'profiles.ini']));
-
-    if (!profilesFile.query_exists(null)) {
-        return [];
-    }
-    let groups;
-    let nGroups;
-
-    let keyFile = new GLib.KeyFile();
-
-    keyFile.load_from_file(profilesFile.get_path(), GLib.KeyFileFlags.NONE);
-
-    [groups, nGroups] = keyFile.get_groups();
-
-    for (let i = 0; i < nGroups; i++) {
-        let path;
-        let profileName;
-        let relative;
-
-        try {
-            profileName = keyFile.get_string(groups[i], 'Name');
-            path = keyFile.get_string(groups[i], 'Path');
-            relative = keyFile.get_boolean(groups[i], 'IsRelative');
-        } catch (e) {
-            continue;
-        }
-
-        if (['default','default-release', 'default-default'].includes(profileName)) {
-            if (relative) {
-                profileDir = GLib.build_filenamev([firefoxDir, path]);
-            } else {
-                profileDir = path;
-            }
-
-            bookmarksFile = Gio.File.new_for_path(GLib.build_filenamev([profileDir, 'places.sqlite']));
-
-            if (bookmarksFile.query_exists(null)) {
-                return readFirefoxBookmarks(appInfo, profileDir);
-            }
-        }
-    }
-    return [];
+async function readFirefoxProfiles(browser) {
+    const app = Cinnamon.AppSystem.get_default().lookup_desktop_wmclass(browser);
+    if (!app) return [];
+    const appInfo = app.get_app_info();
+    if (!appInfo) return [];
+    const bookmarks = await runJsonScript('firefoxBookmarks.py', [browser], []);
+    return bookmarks.filter(bookmark => bookmark && typeof bookmark.name === 'string' &&
+        typeof bookmark.uri === 'string' && /^https?:\/\//i.test(bookmark.uri))
+        .map(bookmark => Object.assign({}, bookmark, {app: appInfo}));
 }
 
 const readChromiumBookmarksFile = async function(path, appInfo) {
@@ -227,17 +117,14 @@ const getWebBookmarksAsync = function() {
         return Promise.resolve(bookmarks.map(bookmark => Object.assign({}, bookmark)));
     }
     if (pendingBookmarks) return pendingBookmarks.then(results => results.map(bookmark => Object.assign({}, bookmark)));
-    pendingBookmarks = Promise.resolve().then(() => Promise.all(
-        getChromiumProfileDirs().map(profile => readChromiumBookmarksFile(profile[0], profile[1]))
-    )).then(results => {
-        let found = [].concat(...results);
-        for (const browser of ['firefox', 'librewolf']) {
-            try {
-                found = found.concat(readFirefoxProfiles(browser));
-            } catch (error) {
-                global.logWarning(`Canellia: Unable to read ${browser} bookmarks: ${error.message}`);
-            }
-        }
+    pendingBookmarks = Promise.resolve().then(() => Promise.all([
+        ...getChromiumProfileDirs().map(profile => readChromiumBookmarksFile(profile[0], profile[1])),
+        ...['firefox', 'librewolf'].map(browser => readFirefoxProfiles(browser).catch(error => {
+            global.logWarning(`Canellia: Unable to read ${browser} bookmarks: ${error.message}`);
+            return [];
+        }))
+    ])).then(results => {
+        const found = [].concat(...results);
         const unique = new Map();
         found.forEach(bookmark => {
             if (!bookmark || typeof bookmark.name !== 'string' || typeof bookmark.uri !== 'string') return;

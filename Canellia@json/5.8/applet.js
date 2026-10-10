@@ -1,3 +1,4 @@
+const {calculate} = require('./calculator');
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const GLib = imports.gi.GLib;
@@ -188,12 +189,17 @@ class CanelliaApplet extends TextIconApplet {
             }
         };
 
+        const resizeDisplay = () => {
+            if (!this.willUnmount && this.display && !this.resizer.resizingInProgress) {
+                this.display.onMenuResized();
+            }
+        };
         this.settings = {};
         this.appletSettings = new AppletSettings(this.settings, __meta.uuid, this.instance_id);
         [
         { key: 'categories',                value: 'categories',            cb: null },
-        { key: 'custom-menu-height',        value: 'customMenuHeight',      cb: null },
-        { key: 'custom-menu-width',         value: 'customMenuWidth',       cb: null },
+        { key: 'custom-menu-height',        value: 'customMenuHeight',      cb: resizeDisplay },
+        { key: 'custom-menu-width',         value: 'customMenuWidth',       cb: resizeDisplay },
         { key: 'recent-apps',               value: 'recentApps',            cb: null },
         { key: 'search-start-folder',       value: 'searchStartFolder',     cb: null },
         { key: 'all-apps-old-style',        value: 'allAppsOldStyle',       cb: null },
@@ -433,8 +439,11 @@ class CanelliaApplet extends TextIconApplet {
     }
 
     addFavoriteAppToPos(add_id, pos_id) {
-        const pos = this.appFavorites._getIds().indexOf(pos_id);
-        if (pos >= 0) { //move
+        if (add_id === pos_id) return;
+        const ids = this.appFavorites._getIds();
+        const target = ids.indexOf(pos_id);
+        const pos = target < 0 ? ids.length : target;
+        if (ids.includes(add_id)) {
             this.appFavorites.moveFavoriteToPos(add_id, pos);
         } else {
             this.appFavorites.addFavoriteAtPos(add_id, pos);
@@ -622,9 +631,9 @@ class CanelliaApplet extends TextIconApplet {
                 focusedAppItemExists && !this.settings.showSidebar)) {
                 categoryButtons[currentlyActiveCategoryIndex].handleEnter();
             } else if (focusedAppItemExists && this.settings.showSidebar) {
-                sidebarButtons[0].handleEnter();
+                sidebarButtons[0]?.handleEnter();
             } else {
-                appButtons[0].handleEnter();
+                appButtons[0]?.handleEnter();
             }
         }
 
@@ -637,9 +646,9 @@ class CanelliaApplet extends TextIconApplet {
                 categoryButtons[currentlyActiveCategoryIndex].handleEnter();
             } else if (this.settings.showSidebar && (focusedCategoryExists ||
                 focusedAppItemExists && (this.searchActive || !this.settings.showCategories))) {
-                sidebarButtons[0].handleEnter();
+                sidebarButtons[0]?.handleEnter();
             } else {
-                appButtons[0].handleEnter();
+                appButtons[0]?.handleEnter();
             }
         }
 
@@ -681,7 +690,7 @@ class CanelliaApplet extends TextIconApplet {
                 } else if (focusedAppItemIndex > 0) {
                     appButtons[focusedAppItemIndex - 1].handleEnter();
                 } else {
-                    appButtons[appButtons.length - 1].handleEnter();
+                    appButtons[appButtons.length - 1]?.handleEnter();
                 }
             }
         };
@@ -704,7 +713,7 @@ class CanelliaApplet extends TextIconApplet {
                 } else if (appButtons[focusedAppItemIndex + 1]) {
                     appButtons[focusedAppItemIndex + 1].handleEnter();
                 } else {
-                    appButtons[0].handleEnter();
+                    appButtons[0]?.handleEnter();
                 }
             }
         };
@@ -725,7 +734,7 @@ class CanelliaApplet extends TextIconApplet {
                     if (appButtons[focusedAppItemIndex + 1]) {
                         appButtons[focusedAppItemIndex + 1].handleEnter();
                     } else {
-                        appButtons[0].handleEnter();
+                        appButtons[0]?.handleEnter();
                     }
                 } else { // grid view
                     if (appButtons[focusedAppItemIndex + 1]) {
@@ -751,10 +760,10 @@ class CanelliaApplet extends TextIconApplet {
                 if (categoryButtons[focusedCategoryIndex + 1]) {
                     categoryButtons[focusedCategoryIndex + 1].handleEnter();
                 } else {
-                    categoryButtons[0].handleEnter();
+                    categoryButtons[0]?.handleEnter();
                 }
             } else { // No focused item exists
-                appButtons[0].handleEnter();
+                appButtons[0]?.handleEnter();
             }
         };
 
@@ -774,7 +783,7 @@ class CanelliaApplet extends TextIconApplet {
                     if (focusedAppItemIndex > 0) {
                         appButtons[focusedAppItemIndex - 1].handleEnter();
                     } else {
-                        appButtons[appButtons.length - 1].handleEnter();
+                        appButtons[appButtons.length - 1]?.handleEnter();
                     }
                 } else {
                     if (focusedAppItemIndex > 0) {
@@ -785,7 +794,7 @@ class CanelliaApplet extends TextIconApplet {
                         }
                         appButtons[previous].handleEnter();
                     } else {
-                        appButtons[0].handleEnter(); // Effectively no change
+                        appButtons[0]?.handleEnter(); // Effectively no change
                     }
                 }
             } else if (focusedSidebarItemExists) {
@@ -800,10 +809,10 @@ class CanelliaApplet extends TextIconApplet {
                 if (focusedCategoryIndex > 0) {
                     categoryButtons[focusedCategoryIndex - 1].handleEnter();
                 } else {
-                    categoryButtons[categoryButtons.length - 1].handleEnter();
+                    categoryButtons[categoryButtons.length - 1]?.handleEnter();
                 }
             } else { // No focused item exists
-                appButtons[0].handleEnter();
+                appButtons[0]?.handleEnter();
             }
         };
 
@@ -901,24 +910,27 @@ class CanelliaApplet extends TextIconApplet {
                 this.menu.close();
             }
             return Clutter.EVENT_STOP;
+        case (symbol === Clutter.KEY_Page_Up || symbol === Clutter.KEY_Page_Down) && ctrlKey:
+            this.display.appsView.changePage(symbol === Clutter.KEY_Page_Up ? -1 : 1);
+            return Clutter.EVENT_STOP;
         case symbol === Clutter.KEY_Page_Up && noModifiers:
             leaveCurrentlyFocusedItem();
             if (focusedAppItemExists) {
-                appButtons[0].handleEnter();
+                appButtons[0]?.handleEnter();
             } else if (focusedSidebarItemExists) {
-                sidebarButtons[0].handleEnter();
+                sidebarButtons[0]?.handleEnter();
             } else {
-                categoryButtons[0].handleEnter();
+                categoryButtons[0]?.handleEnter();
             }
             return Clutter.EVENT_STOP;
         case symbol === Clutter.KEY_Page_Down && noModifiers:
             leaveCurrentlyFocusedItem();
             if (focusedAppItemExists) {
-                appButtons[appButtons.length - 1].handleEnter();
+                appButtons[appButtons.length - 1]?.handleEnter();
             } else if (focusedSidebarItemExists) {
-                sidebarButtons[sidebarButtons.length - 1].handleEnter();
+                sidebarButtons[sidebarButtons.length - 1]?.handleEnter();
             } else {
-                categoryButtons[categoryButtons.length - 1].handleEnter();
+                categoryButtons[categoryButtons.length - 1]?.handleEnter();
             }
             return Clutter.EVENT_STOP;
         default:
@@ -1144,6 +1156,8 @@ class CanelliaApplet extends TextIconApplet {
                         .concat(this.recentsEnabled ? this.searchRecent(pattern) : []);
             otherResults = this.settings.showPlaces ? this.searchPlaces(pattern) : [];
         }
+        this.display.appsView.headerText.set_text(_('Searching…'));
+        this.display.appsView.headerText.show();
         const emojiResults = [];
         const webBookmarksResults = [];
         let webHistoryResults = [];
@@ -1186,7 +1200,10 @@ class CanelliaApplet extends TextIconApplet {
             // Limit fileResults to 10
             fileResults.length = Math.min(fileResults.length, this.getNumberOfItemsToFitColumns(10));
 
-            let resultsStr = "";
+            const totalResults = applicationResults.length + fileResults.length + otherResults.length +
+                webBookmarksResults.length + webHistoryResults.length + emojiResults.length;
+            const resultStatus = totalResults ? _('Results:') + ' ' + totalResults : _('No results found');
+            let resultsStr = resultStatus;
             applicationResults.forEach(result => resultsStr += result.name);
             fileResults.forEach(result => resultsStr += result.name);
             otherResults.forEach(result => resultsStr += result.name);
@@ -1202,7 +1219,7 @@ class CanelliaApplet extends TextIconApplet {
 
 
             // Display results
-            this.display.appsView.populate_init(calculatorResult);
+            this.display.appsView.populate_init(calculatorResult || resultStatus);
             if (calculatorMode) {
                 this.calculatorHistory.forEach(result => {
                     this.display.appsView.populate_add([], `${result.sum} = ${result.result}`,
@@ -1241,10 +1258,10 @@ class CanelliaApplet extends TextIconApplet {
         //---calculator---
         let calculatorResult = null;
         let ans = null;
-        const exp = pattern_raw.replace(/([a-zA-Z][a-zA-Z0-9_]*)/g, (match) => `Math.${match}`);
+        const exp = pattern_raw;
 
         try {
-            ans = eval?.(`"use strict"; ${exp}`);
+            ans = calculate(exp);
             if (Number.isNaN(ans)) {
                 calculatorResult = _("Calculator: ") + ans;
                 calculatorMode = true;

@@ -6,7 +6,8 @@
             "layout",
             "behaviour",
             "search",
-            "appearance"
+            "appearance",
+            "tools"
         ],
         "editor": {
             "type": "custom",
@@ -126,6 +127,12 @@
                 "use-box-style",
                 "use-tile-style"
             ]
+        },
+        "tools": {
+            "type": "custom",
+            "title": "Tools",
+            "file": "ToolsPage.py",
+            "widget": "ToolsPage"
         }
     },
     "categories": {

@@ -62,9 +62,9 @@ class AppButton {
             this.label.style = 'font-weight: bold;';
         }
         //set label text
-        let name = this.app.name.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+        let name = GLib.markup_escape_text(this.app.name, -1);
         let description = this.app.description ?
-                            this.app.description.replace(/&/g, '&amp;').replace(/</g, '&lt;') : '';
+                            GLib.markup_escape_text(this.app.description, -1) : '';
         let markup = '<span>' + name + '</span>';
         if (this.appThis.settings.descriptionPlacement === DescriptionPlacement.UNDER && description) {
             description = description.replace(/\n/g, ' ');//remove formatting intended for tooltip
@@ -78,7 +78,8 @@ class AppButton {
         this.actor = new St.BoxLayout({
             vertical: !isListView,
             reactive: true,
-            accessible_role: Atk.Role.MENU_ITEM
+            accessible_role: Atk.Role.MENU_ITEM,
+            accessible_name: this.app.name
         });
 
         if (!isListView) {
@@ -230,7 +231,7 @@ class AppButton {
                 this.app.description;
             tooltipMarkup += '\n<span size="small">' + wordWrap(des) + '</span>';
         }
-        tooltipMarkup = tooltipMarkup.replace(/&/g, '&amp;');
+
         
         let [x, y] = this.actor.get_transformed_position();
         let {width, height} = this.actor;
@@ -400,6 +401,7 @@ class AppsView {
     constructor(appThis) {
         this.appThis = appThis;
         this.buttonStore = [];
+        this._buttonsByApp = new WeakMap();
         this.appsViewSignals = new SignalManager(null);
 
         this.applicationsListBox = new St.BoxLayout({ vertical: true });
@@ -445,17 +447,37 @@ class AppsView {
     }
 
     populate(appList, headerText = null) {
-        //too many actors in applicationsGridBox causes display errors, don't know why. Plus, it takes a long time
-        if (appList.length > 1000) {
-            appList.length = 1000; //truncate array
-            headerText = _('Too many entries - showing first 1000 entries only');
-        }
-        this.populate_init(headerText);
-        this.populate_add(appList, null);
-        this.populate_finish();
+        const pageSize = 200;
+        const list = appList.slice();
+        const render = offset => {
+            this.populate_init(headerText);
+            this.buttonStoreCleanup();
+            this.populate_add(list.slice(offset, offset + pageSize), null);
+            if (offset > 0) this.populate_add([], _('Previous page'), () => render(Math.max(0, offset - pageSize)));
+            if (offset + pageSize < list.length) this.populate_add([], _('Next page'), () => render(offset + pageSize));
+            if (list.length > pageSize) {
+                this.headerText.set_text((headerText ? headerText + '\n' : '') +
+                    `${offset + 1}–${Math.min(offset + pageSize, list.length)} / ${list.length}`);
+                this.headerText.show();
+            }
+            this._navigatePage = direction => {
+                const next = Math.max(0, Math.min(Math.floor((list.length - 1) / pageSize) * pageSize, offset + direction * pageSize));
+                if (next === offset) return false;
+                render(next);
+                this.focusFirstItem();
+                return true;
+            };
+            this.populate_finish();
+        };
+        render(0);
+    }
+
+    changePage(direction) {
+        return this._navigatePage ? this._navigatePage(direction) : false;
     }
 
     populate_init(headerText = null) {
+        this._navigatePage = null;
         this.applicationsListBox.hide();//hide while populating for performance.
         this.applicationsGridBox.hide();//
         this.clearApps();
@@ -496,11 +518,12 @@ class AppsView {
         }
 
         appList.forEach(app => {
-            let appButton = this.buttonStore.find(button => button.app === app);
+            let appButton = this._buttonsByApp.get(app);
 
             if (!appButton) {
                 appButton = new AppButton(this.appThis, app);
                 this.buttonStore.push(appButton);
+                this._buttonsByApp.set(app, appButton);
             }
             if (this.appThis.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
                 this.applicationsListBox.add_actor(appButton.actor);
@@ -599,8 +622,8 @@ class AppsView {
     getGridValues() {
         const appsBoxWidth = this.currentGridBoxWidth;
         const minColumnWidth = Math.max(140, this.appThis.settings.appsGridIconSize * 1.2);
-        const columns = Math.floor(appsBoxWidth / (minColumnWidth * global.ui_scale));
-        const columnWidth = Math.floor(appsBoxWidth / columns);
+        const columns = Math.max(1, Math.floor(appsBoxWidth / (minColumnWidth * global.ui_scale)));
+        const columnWidth = Math.max(1, Math.floor(appsBoxWidth / columns));
         
         return {columnWidth: columnWidth, columns: columns};
     }
@@ -641,6 +664,7 @@ class AppsView {
         //delete all buttons which won't be reused
         const buttonStore = this.buttonStore.filter(button => {
             if (button.app.deleteAfterUse) {
+                this._buttonsByApp.delete(button.app);
                 button.destroy();
                 return false;
             } else {
@@ -659,6 +683,7 @@ class AppsView {
         this.applicationsScrollBox.destroy();
         this.buttonStore.forEach(button => { if (button) button.destroy(); });
         this.buttonStore = [];
+        this._buttonsByApp = new WeakMap();
     }
 }
 

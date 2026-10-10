@@ -164,6 +164,10 @@ for path in stage.rglob('*.json'):
                 if node['widget'] not in classes:
                     raise ValueError('Missing custom settings class')
 for path in stage.rglob('*.js'):
+    for helper in re.findall(r"runJsonScript\(['\"]([^'\"]+\.py)['\"]", path.read_text()):
+        if not (path.parent / helper).is_file():
+            raise ValueError('Missing subprocess helper: ' + helper)
+
 
     for dependency in re.findall(r"require\(['\"](\./[^'\"]+)['\"]\)", path.read_text()):
         required_path = path.parent / (dependency + '.js')
@@ -172,7 +176,7 @@ for path in stage.rglob('*.js'):
 for path in stage.rglob('*.py'):
     tree = ast.parse(path.read_text(), filename=str(path))
     for node in ast.walk(tree):
-        if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and node.func.id == '_editor_module':
+        if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and node.func.id in ('_editor_module', '_module'):
             module = ast.literal_eval(node.args[0])
             if not (path.parent / (module + '.py')).is_file():
                 raise ValueError('Missing menu editor module: ' + module)

@@ -1,0 +1,73 @@
+{
+  "tests": [
+    {
+      "name": "open_and_grid",
+      "result": {
+        "columns": 3,
+        "visible": 109
+      }
+    },
+    {
+      "name": "keyboard_search_focus",
+      "result": {
+        "focused": true
+      }
+    },
+    {
+      "name": "exact_application_search",
+      "result": {
+        "matches": 2
+      }
+    },
+    {
+      "name": "calculator_query",
+      "result": {
+        "requested": true
+      }
+    },
+    {
+      "name": "calculator_result",
+      "result": {
+        "result": 14
+      }
+    },
+    {
+      "name": "no_results_query",
+      "result": {
+        "requested": true
+      }
+    },
+    {
+      "name": "no_results_status",
+      "result": {
+        "message": "No results found"
+      }
+    },
+    {
+      "name": "pagination_and_button_execution",
+      "result": {
+        "total": 450,
+        "page": 200,
+        "launched": true
+      }
+    },
+    {
+      "name": "repeated_open_close_and_favorites",
+      "result": {
+        "cycles": 12,
+        "favorites": 4,
+        "stored": 5,
+        "buttons": 109,
+        "duration_ms": 1333
+      }
+    },
+    {
+      "name": "keyboard_escape",
+      "result": {
+        "closed": true
+      }
+    }
+  ],
+  "started": "2026-10-10T02:52:46Z",
+  "status": "passed"
+}

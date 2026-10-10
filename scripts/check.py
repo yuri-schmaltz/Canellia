@@ -22,7 +22,7 @@ def main():
     for path in (ROOT / 'Canellia@json').rglob('*.py'):
         tree = ast.parse(path.read_text(), filename=str(path))
         for node in ast.walk(tree):
-            if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and node.func.id == '_editor_module':
+            if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and node.func.id in ('_editor_module', '_module'):
                 module = ast.literal_eval(node.args[0])
                 if not (path.parent / (module + '.py')).is_file():
                     raise SystemExit('Missing menu editor module: ' + module)
@@ -34,6 +34,10 @@ def main():
     for path in (ROOT / 'Canellia@json').rglob('*.json'):
         json.loads(path.read_text())
     for path in (ROOT / 'Canellia@json').rglob('*.js'):
+        for helper in re.findall(r"runJsonScript\(['\"]([^'\"]+\.py)['\"]", path.read_text()):
+            if not (path.parent / helper).is_file():
+                raise ValueError('Missing subprocess helper: ' + helper)
+
         run('node', '--check', str(path))
         for module in re.findall(r"require\(['\"](\./[^'\"]+)['\"]\)", path.read_text()):
             if not (path.parent / (module + '.js')).is_file():
@@ -58,7 +62,7 @@ def main():
     # Cinnamon requires version-specific entrypoints; common helpers stay identical.
     for name in ('process.js', 'browserHistory.js', 'browserData.py', 'getFavicons.py',
                  'searchHistory.py', 'search.py', 'searchEngine.py', 'MenuEditorPage.py',
-                 'menuEditorCore.py', 'menuEditorTree.py'):
+                 'menuEditorCore.py', 'menuEditorTree.py', 'settingsWindow.py', 'calculator.js', 'ToolsPage.py', 'projectTools.py', 'firefoxBookmarks.py'):
         if (ROOT / 'Canellia@json/4.0' / name).read_bytes() != (ROOT / 'Canellia@json/5.8' / name).read_bytes():
             raise SystemExit('Common helper diverged: ' + name)
     for path in ROOT.rglob('*.sh'):
@@ -66,7 +70,7 @@ def main():
     for path in (ROOT / 'Canellia@json/po').glob('*.po'):
         run('msgfmt', '--check', '-o', '/dev/null', str(path))
     run(sys.executable, '-W', 'error::ResourceWarning', '-m', 'unittest', 'discover', '-s', 'tests', '-v')
-    run('node', '--test', 'tests/runtime.test.js')
+    run('node', '--test', *[str(p.relative_to(ROOT)) for p in sorted((ROOT / 'tests').glob('*.test.js'))])
     print('All checks passed. Desktop smoke testing remains required before a release.')
 
 

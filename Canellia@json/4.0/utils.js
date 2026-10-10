@@ -18,7 +18,7 @@ function _(str) {
     return Gettext.dgettext('Canellia@json', str);
 }
 
-const wordWrap = text => text.match( /.{1,80}(\s|$|-|=|\+|_|&|\\)|\S+?(\s|$|-|=|\+|_|&|\\)/g ).join('\n');
+const wordWrap = text => (String(text ?? '').match( /.{1,80}(\s|$|-|=|\+|_|&|\\)|\S+?(\s|$|-|=|\+|_|&|\\)/g ) || []).join('\n');
 
 const graphemeBaseChars = s =>
 //decompose and remove discritics (blocks: Combining Diacritical Marks,

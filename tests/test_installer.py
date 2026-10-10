@@ -238,3 +238,8 @@ os.execv({real_mv!r}, [{real_mv!r}] + sys.argv[1:])
         self.assertEqual(translation.gettext('Menu editor'), 'Editor de menu')
         self.assertEqual(translation.gettext('Stage changes'), 'Atualizar item')
         self.assertEqual(translation.gettext('Apply'), 'Aplicar')
+
+    def test_missing_subprocess_helper_preserves_installation(self):
+        self.existing()
+        (self.source/'5.8/firefoxBookmarks.py').unlink()
+        self.assert_preserved(self.run_installer('--local'))

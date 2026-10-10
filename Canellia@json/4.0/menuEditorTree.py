@@ -148,6 +148,10 @@ class CinnamonMenuSource:
             if saved and not app.visible:
                 try:
                     rows = json.loads(saved)
+                    if isinstance(rows, dict):
+                        if rows.get('version') != 1:
+                            raise ValueError('Unsupported saved category version')
+                        rows = rows.get('categories')
                     if not isinstance(rows, list):
                         raise ValueError('Expected category list')
                     restored = {}

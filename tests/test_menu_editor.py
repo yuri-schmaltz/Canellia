@@ -36,7 +36,7 @@ class MenuEditorTests(unittest.TestCase):
     def test_editor_is_first_tab_and_tips_and_launcher_are_removed(self):
         for version in ('4.0', '5.8'):
             schema = json.loads((ROOT / 'Canellia@json' / version / 'settings-schema.json').read_text())
-            self.assertEqual(schema['layout']['pages'], ['editor', 'layout', 'behaviour', 'search', 'appearance'])
+            self.assertEqual(schema['layout']['pages'], ['editor', 'layout', 'behaviour', 'search', 'appearance', 'tools'])
             self.assertNotIn('tips', schema['layout'])
             self.assertNotIn('menu-editor-button', schema)
             self.assertFalse(any(key.startswith('info') for key in schema))

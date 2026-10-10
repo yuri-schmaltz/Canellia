@@ -1,3 +1,4 @@
+const {calculate} = require('./calculator');
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const GLib = imports.gi.GLib;
@@ -193,12 +194,17 @@ class CanelliaApplet extends TextIconApplet {
             }
         };
 
+        const resizeDisplay = () => {
+            if (!this.willUnmount && this.display && !this.resizer.resizingInProgress) {
+                this.display.onMenuResized();
+            }
+        };
         this.settings = {};
         this.appletSettings = new AppletSettings(this.settings, __meta.uuid, this.instance_id);
         [
         { key: 'categories',                value: 'categories',            cb: null },
-        { key: 'custom-menu-height',        value: 'customMenuHeight',      cb: null },
-        { key: 'custom-menu-width',         value: 'customMenuWidth',       cb: null },
+        { key: 'custom-menu-height',        value: 'customMenuHeight',      cb: resizeDisplay },
+        { key: 'custom-menu-width',         value: 'customMenuWidth',       cb: resizeDisplay },
         { key: 'recent-apps',               value: 'recentApps',            cb: null },
         { key: 'search-start-folder',       value: 'searchStartFolder',     cb: null },
         { key: 'all-apps-old-style',        value: 'allAppsOldStyle',       cb: null },
@@ -426,8 +432,11 @@ class CanelliaApplet extends TextIconApplet {
     }
 
     addFavoriteAppToPos(add_id, pos_id) {
-        const pos = this.appFavorites._getIds().indexOf(pos_id);
-        if (pos >= 0) { //move
+        if (add_id === pos_id) return;
+        const ids = this.appFavorites._getIds();
+        const target = ids.indexOf(pos_id);
+        const pos = target < 0 ? ids.length : target;
+        if (ids.includes(add_id)) {
             this.appFavorites.moveFavoriteToPos(add_id, pos);
         } else {
             this.appFavorites.addFavoriteAtPos(add_id, pos);
@@ -575,7 +584,7 @@ class CanelliaApplet extends TextIconApplet {
             !focusedSidebarItemExists && !focusedCategoryExists) {
             //todo: No focused item, ideally this shouldn't happen
             if (appButtons[0]) {
-                appButtons[0].handleEnter();
+                appButtons[0]?.handleEnter();
                 focusedAppItemIndex = 0;
                 focusedAppItemExists = true;
             }
@@ -618,17 +627,17 @@ class CanelliaApplet extends TextIconApplet {
                 } else if (focusedAppItemIndex > 0) {
                     appButtons[focusedAppItemIndex - 1].handleEnter();
                 } else {
-                    appButtons[appButtons.length - 1].handleEnter();
+                    appButtons[appButtons.length - 1]?.handleEnter();
                 }
             } else if (focusedSidebarItemExists) {
                 if (this.settings.sidebarPlacement === SidebarPlacement.LEFT ||
                                         this.settings.sidebarPlacement === SidebarPlacement.RIGHT) {
-                    appButtons[0].handleEnter();
+                    appButtons[0]?.handleEnter();
                 } else {
                     sidebarButtons[getPreviousSidebarItemIndex()].handleEnter();
                 }
             } else if (focusedCategoryExists) {
-                sidebarButtons[0].handleEnter();
+                sidebarButtons[0]?.handleEnter();
             }
         };
 
@@ -638,11 +647,11 @@ class CanelliaApplet extends TextIconApplet {
             } else if (focusedAppItemExists) {
                 if (this.settings.applicationsViewMode === ApplicationsViewMode.LIST &&
                     this.settings.showSidebar) {
-                    sidebarButtons[0].handleEnter();
+                    sidebarButtons[0]?.handleEnter();
                 } else if (appButtons[focusedAppItemIndex + 1]) {
                     appButtons[focusedAppItemIndex + 1].handleEnter();
                 } else {
-                    appButtons[0].handleEnter();
+                    appButtons[0]?.handleEnter();
                 }
             } else if (focusedSidebarItemExists) {
                 if (this.settings.sidebarPlacement === SidebarPlacement.LEFT ||
@@ -652,7 +661,7 @@ class CanelliaApplet extends TextIconApplet {
                     sidebarButtons[getNextSidebarItemIndex()].handleEnter();
                 }
             } else if (focusedCategoryExists) {
-                appButtons[0].handleEnter();
+                appButtons[0]?.handleEnter();
             }
         };
 
@@ -672,7 +681,7 @@ class CanelliaApplet extends TextIconApplet {
                     if (appButtons[focusedAppItemIndex + 1]) {
                         appButtons[focusedAppItemIndex + 1].handleEnter();
                     } else {
-                        appButtons[0].handleEnter();
+                        appButtons[0]?.handleEnter();
                     }
                 } else { // grid view
                     if (appButtons[focusedAppItemIndex + 1]) {
@@ -697,7 +706,7 @@ class CanelliaApplet extends TextIconApplet {
                 if (categoryButtons[focusedCategoryIndex + 1]) {
                     categoryButtons[focusedCategoryIndex + 1].handleEnter();
                 } else {
-                    categoryButtons[0].handleEnter();
+                    categoryButtons[0]?.handleEnter();
                 }
             }
         };
@@ -718,7 +727,7 @@ class CanelliaApplet extends TextIconApplet {
                     if (focusedAppItemIndex > 0) {
                         appButtons[focusedAppItemIndex - 1].handleEnter();
                     } else {
-                        appButtons[appButtons.length - 1].handleEnter();
+                        appButtons[appButtons.length - 1]?.handleEnter();
                     }
                 } else {
                     if (focusedAppItemIndex > 0) {
@@ -729,7 +738,7 @@ class CanelliaApplet extends TextIconApplet {
                         }
                         appButtons[previous].handleEnter();
                     } else {
-                        appButtons[0].handleEnter(); // Effectively no change
+                        appButtons[0]?.handleEnter(); // Effectively no change
                     }
                 }
             } else if (focusedSidebarItemExists) {
@@ -743,7 +752,7 @@ class CanelliaApplet extends TextIconApplet {
                 if (focusedCategoryIndex > 0) {
                     categoryButtons[focusedCategoryIndex - 1].handleEnter();
                 } else {
-                    categoryButtons[categoryButtons.length - 1].handleEnter();
+                    categoryButtons[categoryButtons.length - 1]?.handleEnter();
                 }
             }
         };
@@ -822,9 +831,9 @@ class CanelliaApplet extends TextIconApplet {
                 focusedAppItemExists && !this.settings.showSidebar)) {
                 categoryButtons[currentlyActiveCategoryIndex].handleEnter();
             } else if (focusedAppItemExists && this.settings.showSidebar) {
-                sidebarButtons[0].handleEnter();
+                sidebarButtons[0]?.handleEnter();
             } else {
-                appButtons[0].handleEnter();
+                appButtons[0]?.handleEnter();
             }
             return Clutter.EVENT_STOP;
         case (symbol === Clutter.KEY_ISO_Left_Tab || symbol === Clutter.ISO_Left_Tab ||
@@ -838,9 +847,9 @@ class CanelliaApplet extends TextIconApplet {
                 categoryButtons[currentlyActiveCategoryIndex].handleEnter();
             } else if (this.settings.showSidebar && (focusedCategoryExists ||
                 focusedAppItemExists && (this.searchActive || !this.settings.showCategories))) {
-                sidebarButtons[0].handleEnter();
+                sidebarButtons[0]?.handleEnter();
             } else {
-                appButtons[0].handleEnter();
+                appButtons[0]?.handleEnter();
             }
             return Clutter.EVENT_STOP;
         case symbol === Clutter.Tab && altKey:
@@ -853,24 +862,27 @@ class CanelliaApplet extends TextIconApplet {
                 this.menu.close();
             }
             return Clutter.EVENT_STOP;
+        case (symbol === Clutter.KEY_Page_Up || symbol === Clutter.KEY_Page_Down) && ctrlKey:
+            this.display.appsView.changePage(symbol === Clutter.KEY_Page_Up ? -1 : 1);
+            return Clutter.EVENT_STOP;
         case symbol === Clutter.KEY_Page_Up && noModifiers:
             leaveCurrentlyFocusedItem();
             if (focusedAppItemExists) {
-                appButtons[0].handleEnter();
+                appButtons[0]?.handleEnter();
             } else if (focusedSidebarItemExists) {
-                sidebarButtons[0].handleEnter();
+                sidebarButtons[0]?.handleEnter();
             } else {
-                categoryButtons[0].handleEnter();
+                categoryButtons[0]?.handleEnter();
             }
             return Clutter.EVENT_STOP;
         case symbol === Clutter.KEY_Page_Down && noModifiers:
             leaveCurrentlyFocusedItem();
             if (focusedAppItemExists) {
-                appButtons[appButtons.length - 1].handleEnter();
+                appButtons[appButtons.length - 1]?.handleEnter();
             } else if (focusedSidebarItemExists) {
-                sidebarButtons[sidebarButtons.length - 1].handleEnter();
+                sidebarButtons[sidebarButtons.length - 1]?.handleEnter();
             } else {
-                categoryButtons[categoryButtons.length - 1].handleEnter();
+                categoryButtons[categoryButtons.length - 1]?.handleEnter();
             }
             return Clutter.EVENT_STOP;
         default:
@@ -1082,6 +1094,8 @@ class CanelliaApplet extends TextIconApplet {
         }
         
         let otherResults = [];
+        this.display.appsView.headerText.set_text(_('Searching…'));
+        this.display.appsView.headerText.show();
         const emojiResults = [];
         const webBookmarksResults = [];
         let webHistoryResults = [];
@@ -1118,7 +1132,8 @@ class CanelliaApplet extends TextIconApplet {
             primaryResults.length = Math.min(primaryResults.length, this.getNumberOfItemsToFitColumns(10));
 
             //Display results
-            this.display.appsView.populate_init(calculatorResult);
+            const totalResults = primaryResults.length + otherResults.length + webBookmarksResults.length + webHistoryResults.length + emojiResults.length;
+            this.display.appsView.populate_init(calculatorResult || (totalResults ? _('Results:') + ' ' + totalResults : _('No results found')));
             if (primaryResults.length > 0) {
                 this.display.appsView.populate_add(primaryResults, _('Applications and files'));
             }
@@ -1146,22 +1161,11 @@ class CanelliaApplet extends TextIconApplet {
         //=======search providers==========
         //---calculator---
         let calculatorResult = null;
-        const replacefn = (match) => {//Replace eg. "sqrt" with "Math.sqrt"
-            if (['E','LN10','LN2','LOG10E','LOG2E','PI','SQRT1_2','SQRT2','PI','abs',
-                'acos','acosh','asin','asinh','atan','atanh','cbrt','ceil','clz32','cos',
-                'cosh','exp','expm1','floor','fround','hypot','imul','log','log10','log1p',
-                'log2','max','min','pow','random','round','sign','sin','sinh','sqrt',
-                'tan','tanh','trunc'].includes(match)) {
-                return 'Math.' + match;
-            } else {
-                return match;
-            }
-        };
         let ans = null;
-        const exp = pattern_raw.replace(/([a-zA-Z0-9_]+)/g, replacefn);
+        const exp = pattern_raw;
         
         try {
-            ans = eval(exp);
+            ans = calculate(exp);
         } catch(e) {
             const r = /[\(\)\+=/\*\.;,]/
             const probablyMath = r.test(exp);

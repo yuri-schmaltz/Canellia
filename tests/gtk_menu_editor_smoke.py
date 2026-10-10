@@ -43,6 +43,15 @@ gi.require_version('Gdk', '3.0')
 from gi.repository import Gdk, Gio, GLib, Gtk
 assert Gtk.init_check()[0], 'GTK requires a display; use xvfb-run'
 Gtk.Settings.get_default().set_property('gtk-icon-theme-name', 'CanelliaTest')
+
+class SnapshotWindow(Gtk.Window):
+    def get_pixbuf(self):
+        return Gdk.pixbuf_get_from_window(self.get_window(), 0, 0,
+            self.get_allocated_width(), self.get_allocated_height())
+
+# A nested X server permits real windows and strict GLib checks without
+# interacting with the user's desktop. Offscreen mode remains available.
+TestWindow = SnapshotWindow if os.environ.get('CANELLIA_REAL_WINDOWS') else Gtk.OffscreenWindow
 version = sys.argv[-1]
 settings = types.ModuleType('JsonSettingsWidgets')
 settings.SettingsPage = type('SettingsPage', (Gtk.Box,), {})
@@ -120,7 +129,7 @@ class RealMenuTests(unittest.TestCase):
             self.page = (MenuEditorPage.MenuEditorPage({}, {}) if version == '5.8' else
                          MenuEditorPage.MenuEditorWidget({}, 'menu-editor', {}))
         self.assertIsNotNone(self.page.model, self.page.status.get_text())
-        self.window = Gtk.OffscreenWindow()
+        self.window = TestWindow()
         self.window.set_default_size(800, 700)
         self.window.add(self.page)
         self.window.show_all()
@@ -418,6 +427,63 @@ class RealMenuTests(unittest.TestCase):
         self.assertTrue(page._apply())
         self.assertNotIn(duplicate, page.model.applications)
         self.assertIn('editor.desktop', page.model.applications)
+
+    def test_tools_profiles_preview_and_diagnostics_use_isolated_settings(self):
+        schema = json.loads((ROOT / 'Canellia@json' / version / 'settings-schema.json').read_text())
+        for node in schema.values():
+            if isinstance(node, dict) and 'default' in node:
+                node['value'] = node['default']
+        class Handler:
+            def __init__(self):
+                self.settings = schema
+                self.filepath = str(Path(os.environ['XDG_CONFIG_HOME']) / '15.json')
+                Path(self.filepath).write_text(json.dumps(schema))
+                self.notify_callback = None
+                self.updates = []
+            def get_value(self, key): return self.settings[key]['value']
+            def do_key_update(self, key): self.updates.append(key)
+            def pause_monitor(self): pass
+            def resume_monitor(self): pass
+            def save_settings(self): pass
+        handler = Handler()
+        module = MenuEditorPage._editor_module('ToolsPage')
+        self.page = module.ToolsPage({}, handler)
+        self.window = TestWindow()
+        self.window.add(self.page)
+        self.window.set_default_size(1000, 700)
+        self.window.show_all()
+        drain()
+        before = handler.settings['categories']['value']
+        self.assertTrue(self.page._apply_profile(module.tools.preset('list', schema), confirm=False))
+        self.assertEqual(handler.get_value('applications-view-mode'), 0)
+        self.assertEqual(handler.get_value('categories'), before)
+        self.assertEqual(json.loads(Path(handler.filepath).read_text())['custom-menu-height']['value'], 600)
+        backups = list((Path(os.environ['XDG_STATE_HOME']) / 'canellia/settings-backups').glob('*.json'))
+        self.assertEqual(len(backups), 1)
+        # Validation and stale preferences must fail before touching the JSON.
+        original = Path(handler.filepath).read_bytes()
+        bad = module.tools.preset('grid', handler.settings)
+        bad['settings']['custom-menu-width'] = float('nan')
+        with self.assertRaises(module.tools.ProfileError):
+            self.page._apply_profile(bad, confirm=False)
+        self.assertEqual(Path(handler.filepath).read_bytes(), original)
+        external = json.loads(original)
+        external['custom-menu-width']['value'] = 700
+        Path(handler.filepath).write_text(json.dumps(external))
+        changed = Path(handler.filepath).read_bytes()
+        with self.assertRaises(module.tools.ProfileError):
+            self.page._apply_profile(module.tools.preset('compact', handler.settings), confirm=False)
+        self.assertEqual(Path(handler.filepath).read_bytes(), changed)
+        Path(handler.filepath).write_bytes(original)
+        self.page._confirm = lambda text: True
+        self.page._restore_preferences()
+        self.assertEqual(handler.get_value('applications-view-mode'), 1)
+        self.assertEqual(len(list(backups[0].parent.glob('*.json'))), 2)
+        handler.save_settings()
+        self.page._scan()
+        self.assertGreaterEqual(len(self.page.issues), 2)
+        self.assertTrue(self.page.preview_box.get_children())
+        self.assertIsNotNone(self.window.get_pixbuf())
 
     def test_public_tree_reads_categories_and_round_trips_move(self):
         model = self.source.load()

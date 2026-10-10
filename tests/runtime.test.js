@@ -204,3 +204,63 @@ for (const version of ['4.0', '5.8']) {
         assert.equal(score('TEST', ''), 0);
     });
 }
+
+for (const version of ['4.0', '5.8']) {
+    test(`${version}: Firefox bookmarks work without libgda and tolerate corrupt profile entries`, async () => {
+        const appInfo = {get_icon: () => 'browser-icon'};
+        const imports = {gi: {Gio: {}, GLib: {}, Cinnamon: {AppSystem: {get_default: () => ({
+            lookup_desktop_wmclass: browser => browser === 'firefox' ? {get_app_info: () => appInfo} : null,
+        })}}}, misc: {util: {spawn() {}}}, byteArray: {}};
+        let calls = 0;
+        const {getWebBookmarksAsync} = load(version, 'browserBookmarks.js', imports, {
+            './utils': {getChromiumProfileDirs: () => []},
+            './process': {runJsonScript: async (script, args, fallback) => {
+                calls++;
+                assert.equal(script, 'firefoxBookmarks.py');
+                assert.deepEqual(plain(args), ['firefox']);
+                assert.deepEqual(plain(fallback), []);
+                return [{name: 'Personal', uri: 'https://example.com'}, null,
+                    {name: 'Unsafe', uri: 'javascript:alert(1)'}];
+            }},
+        });
+        const results = await getWebBookmarksAsync();
+        assert.deepEqual(plain(results.map(({name, uri}) => ({name, uri}))), [{name:'Personal', uri:'https://example.com'}]);
+        await getWebBookmarksAsync();
+        assert.equal(calls, 1);
+    });
+}
+
+for (const version of ['4.0','5.8']) {
+    test(`${version}: favorite insertion, reordering, append and self-drop preserve identities`, () => {
+        const imports = {gi:{}, ui:{main:{},popupMenu:{},appFavorites:{},applet:{TextIconApplet:class{}},searchProviderManager:{},settings:{}},misc:{util:{},gnomeSession:{},screenSaver:{},signalManager:{}}};
+        const {CanelliaApplet} = load(version,'applet.js',imports,{},'\nmodule.exports={CanelliaApplet};');
+        const instance = Object.create(CanelliaApplet.prototype);
+        let stored=['one','two'];
+        instance.appFavorites={
+            _getIds:()=>stored.slice(),
+            moveFavoriteToPos(id,pos){stored=stored.filter(value=>value!==id);stored.splice(pos,0,id);},
+            addFavoriteAtPos(id,pos){if(!stored.includes(id))stored.splice(pos,0,id);},
+        };
+        instance.addFavoriteAppToPos('new','two');
+        assert.deepEqual(stored,['one','new','two']);
+        instance.addFavoriteAppToPos('two','one');
+        assert.deepEqual(stored,['two','one','new']);
+        instance.addFavoriteAppToPos('two','unknown-target');
+        assert.deepEqual(stored,['one','new','two']);
+        instance.addFavoriteAppToPos('new','new');
+        assert.deepEqual(stored,['one','new','two']);
+        assert.equal(new Set(stored).size,stored.length);
+    });
+}
+
+for (const version of ['4.0','5.8']) {
+    test(`${version}: blank, missing and escaped tooltip text remains safe`, () => {
+        const utils=load(version,'utils.js',{
+            gi:{GLib:{get_user_data_dir:()=>'/tmp'},Gio:{},St:{},Cinnamon:{}},
+            gettext:{bindtextdomain(){}},mainloop:{},ui:{main:{},tweener:{}},byteArray:{},
+        });
+        for(const value of ['',null,undefined]) assert.equal(utils.wordWrap(value),'');
+        assert.equal(utils.wordWrap('A < B & C'),'A < B & C');
+        assert.equal(utils.wordWrap('A'.repeat(300)).replace(/\n/g,''),'A'.repeat(300));
+    });
+}

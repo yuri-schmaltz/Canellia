@@ -268,19 +268,95 @@ class UserStorage:
 
     def _recover(self):
         for journal in sorted(self.state_home.glob('backups/*/journal.json')):
-            record = json.loads(journal.read_text())
+            record = self._journal(journal)
             if record['status'] != 'pending':
                 continue
+            recovery = []
             for entry in reversed(record['files']):
                 path = self.safe(entry['path'])
                 current = read_bytes(path)
                 digest = hashlib.sha256(current).hexdigest() if current is not None else None
                 if digest not in (entry['before_hash'], entry['after_hash']):
                     raise EditorError('Recovery conflict; backup retained at: ' + str(journal.parent))
-                original = (journal.parent / entry['backup']).read_bytes() if entry['backup'] else None
+                original = self._backup_original(journal.parent, entry)
+                recovery.append((path, original))
+            # Validate the whole transaction before restoring any file.
+            for path, original in recovery:
                 self.atomic(path, original)
             record['status'] = 'recovered'
             self.atomic(journal, json.dumps(record).encode())
+
+    @staticmethod
+    def _journal(path):
+        try:
+            if path.stat().st_size > 4 * 1024 * 1024 or path.is_symlink():
+                raise EditorError('Invalid backup journal: ' + str(path))
+            record = json.loads(path.read_text())
+            if (not isinstance(record, dict) or record.get('version', 1) != 1 or
+                record.get('status') not in ('pending', 'committed', 'recovered') or
+                not isinstance(record.get('files'), list) or len(record['files']) > 10000):
+                raise EditorError('Unsupported backup version: ' + str(path))
+            for entry in record['files']:
+                if not isinstance(entry, dict) or not {'path', 'backup', 'before_hash', 'after_hash'} <= entry.keys():
+                    raise EditorError('Incomplete backup journal')
+                if not isinstance(entry['path'], str):
+                    raise EditorError('Invalid backup path')
+                for key in ('before_hash', 'after_hash'):
+                    value = entry[key]
+                    if value is not None and (not isinstance(value, str) or not re.fullmatch(r'[0-9a-f]{64}', value)):
+                        raise EditorError('Invalid backup fingerprint')
+            return record
+        except (OSError, ValueError, AttributeError) as error:
+            raise EditorError('Cannot read backup journal: ' + str(path)) from error
+
+    @staticmethod
+    def _backup_original(backup, entry):
+        original = None
+        if entry['backup'] is not None:
+            filename = entry['backup']
+            if not isinstance(filename, str) or Path(filename).name != filename:
+                raise EditorError('Invalid backup file')
+            source = backup / filename
+            if source.is_symlink():
+                raise EditorError('Invalid backup file')
+            try:
+                original = source.read_bytes()
+            except OSError as error:
+                raise EditorError('Backup file cannot be read') from error
+        digest = hashlib.sha256(original).hexdigest() if original is not None else None
+        if digest != entry['before_hash']:
+            raise EditorError('Backup content is damaged; restoration cancelled')
+        return original
+
+    def list_backups(self):
+        result = []
+        for journal in sorted(self.state_home.glob('backups/*/journal.json'), reverse=True):
+            try:
+                record = self._journal(journal)
+                result.append({'path': journal.parent, 'status': record.get('status', 'invalid'),
+                               'count': len(record['files'])})
+            except EditorError:
+                result.append({'path': journal.parent, 'status': 'invalid', 'count': 0})
+        return result
+
+    def restore_backup(self, backup):
+        backup = Path(backup).absolute()
+        root = self.state_home / 'backups'
+        if backup.parent != root or backup.is_symlink():
+            raise EditorError('Backup is outside the backup directory')
+        record = self._journal(backup / 'journal.json')
+        if record.get('status') != 'committed':
+            raise EditorError('Only completed backups can be restored')
+        changes, expected = {}, {}
+        for entry in record['files']:
+            path = self.safe(entry['path'])
+            current = read_bytes(path)
+            digest = hashlib.sha256(current).hexdigest() if current is not None else None
+            if digest != entry['after_hash']:
+                raise EditorError('Files changed after this backup; restoration cancelled: ' + str(path))
+            original = self._backup_original(backup, entry)
+            changes[path], expected[path] = original, current
+        return self.commit(changes, expected)
 
     def recover(self):
         with self._lock():
@@ -311,7 +387,7 @@ class UserStorage:
             originals = {self.safe(path): read_bytes(path) for path in changes}
             backup = self.state_home / 'backups' / (time.strftime('%Y%m%d-%H%M%S') + '-' + uuid.uuid4().hex[:8])
             backup.mkdir(parents=True, mode=0o700)
-            record = {'status': 'pending', 'files': []}
+            record = {'version': 1, 'status': 'pending', 'files': []}
             for index, (path, original) in enumerate(originals.items()):
                 filename = str(index) + '.bak' if original is not None else None
                 if filename:
@@ -431,7 +507,7 @@ class EditorModel:
             if not app.visible and (self.pending.get(self._app_target(app)) is not None or
                                     app.document.get('X-Canellia-Category-Memberships')):
                 app.document.set('X-Canellia-Category-Memberships', json.dumps(
-                    [[list(path), visible] for path, visible in sorted(app.memberships.items())]))
+                    {'version': 1, 'categories': [[list(path), visible] for path, visible in sorted(app.memberships.items())]}))
                 self._save_app(app)
         self._stage(self.menu_path, self.menu.to_bytes())
 

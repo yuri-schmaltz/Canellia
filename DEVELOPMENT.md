@@ -1,8 +1,8 @@
 # Canellia development and release checks
 
-This checkout contains unreleased robustness changes, version **5.6.4**. The
-upstream repository still controls its own releases. Use the local installer to
-try this checkout; the default installer downloads upstream, not your edits.
+This checkout contains Canellia **5.7.0**. The installer uses this checkout by
+default. Remote archives require explicit URLs; no other project's release is
+used implicitly.
 
 ## Structure
 
@@ -168,3 +168,49 @@ reload or discard the valid installed files.
 For new settings, add defaults and validate existing user configurations. For
 new search providers, follow `process.js` and the existing search-generation
 checks: bound the work, handle malformed data and ignore obsolete results.
+
+## Recovery tools and versioned data
+
+`projectTools.py` validates version 1 `canellia-profile` documents against the
+settings schema. It rejects internal keys, unknown options, invalid types,
+nonfinite numbers and values outside their allowed range. ToolsPage saves
+preference snapshots under `$XDG_STATE_HOME/canellia/settings-backups`, then
+atomically replaces the settings JSON and updates native bindings. Exported
+profiles contain preferences only, never launcher files.
+
+Menu journals now declare version 1; legacy journals without a version remain
+readable. Restore verifies each current file against the post-save hash, validates
+the original backup hash, and commits restoration as a new reversible transaction.
+Recovery preflights every file before writing. Invalid/future journals are kept
+and shown as invalid rather than silently discarded. Category membership metadata
+now has an explicit version; the existing list format remains supported.
+
+`calculator.js` implements a bounded arithmetic parser (512 characters, 256
+tokens, 32 nested primaries, 16 function arguments). Application buttons use a
+WeakMap for reuse and large application lists expose 200-item pages. Ctrl+PageUp
+and Ctrl+PageDown navigate pages. Preference dimensions update the current
+menu without rebuilding unrelated components.
+
+`firefoxBookmarks.py` reads native and Flatpak Firefox/LibreWolf profile lists,
+snapshots databases read-only with a time limit, excludes unsafe URL schemes and
+caps profiles/results. It replaces the optional libgda path. Browser providers
+run concurrently; one corrupt provider does not suppress the others.
+
+Additional session checks, from a running Cinnamon session with Python GI:
+
+```sh
+python3 scripts/desktop_runtime_smoke.py --instance 15 --output /tmp/canellia-runtime.json
+python3 scripts/native_settings_smoke.py
+```
+
+The runtime suite opens/closes the actual applet, checks search, arithmetic,
+empty results, page navigation and a safe `/usr/bin/true` launch, then restores
+menu state and dimensions. Favorites remain unchanged. The native settings suite
+uses temporary preferences/state while reading real installed launchers; it
+captures all Tools subpages and validates profiles without applying them to the
+user's settings. Its screenshots are written under `test-results`.
+
+For strict GTK validation, use `bash scripts/run_gtk_suite.sh`. It opens real
+windows in an isolated Xvfb/Xephyr display and treats GLib critical warnings as
+errors. This avoids the GDK origin warnings caused by Gtk.OffscreenWindow while
+preserving full widget and screenshot coverage. Xephyr requires an X11 session.

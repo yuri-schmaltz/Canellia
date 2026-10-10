@@ -56,6 +56,17 @@ class _EditorHost:
         self._build()
         self._reload()
 
+    def select_launcher(self, item_id):
+        if not self.model or item_id not in self.model.applications:
+            return False
+        self._category = None
+        self.search.set_text('')
+        app = self.model.applications[item_id]
+        self.filter.set_active_id('all' if app.visible else 'hidden')
+        self._refresh(categories=True, selected=[item_id])
+        self.fields['Name'].grab_focus()
+        return True
+
     def _button(self, label, callback, box):
         button = Gtk.Button(label=_(label))
         button.connect('clicked', callback)

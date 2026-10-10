@@ -50,7 +50,7 @@ msgid "Settings"
 msgstr ""
 
 msgid "Files"
-msgstr ""
+msgstr "Arquivos"
 
 msgid "Other search results"
 msgstr "Outros resultados da pesquisa"
@@ -1110,3 +1110,258 @@ msgstr "Aplicado ao abrir o menu do painel. A área disponível na tela e o tama
 
 msgid "Remove the selected applications from this category only? They remain in other categories."
 msgstr "Remover os aplicativos selecionados apenas desta categoria? Eles permanecem nas outras categorias."
+
+msgid "Tools"
+msgstr "Ferramentas"
+
+msgid "Diagnostics"
+msgstr "Diagnóstico"
+
+msgid "Backups"
+msgstr "Backups"
+
+msgid "Profiles"
+msgstr "Perfis"
+
+msgid "Preview"
+msgstr "Prévia"
+
+msgid "Inspect launchers without modifying or uninstalling applications."
+msgstr "Inspecione lançadores sem modificar ou desinstalar aplicativos."
+
+msgid "Run diagnostics"
+msgstr "Executar diagnóstico"
+
+msgid "Application"
+msgstr "Aplicativo"
+
+msgid "Type"
+msgstr "Tipo"
+
+msgid "Details"
+msgstr "Detalhes"
+
+msgid "Edit selected launcher"
+msgstr "Editar lançador selecionado"
+
+msgid "Read error"
+msgstr "Erro de leitura"
+
+msgid "Diagnostics completed:"
+msgstr "Diagnóstico concluído:"
+
+msgid "Restoration checks for external changes and creates a new backup. Unsaved menu edits must be discarded or applied first."
+msgstr "A restauração verifica alterações externas e cria um novo backup. Aplique ou descarte as edições pendentes antes de restaurar."
+
+msgid "Backup"
+msgstr "Backup"
+
+msgid "Status"
+msgstr "Estado"
+
+msgid "Refresh"
+msgstr "Recarregar"
+
+msgid "Restore selected backup"
+msgstr "Restaurar backup selecionado"
+
+msgid "Open backup folder"
+msgstr "Abrir pasta de backups"
+
+msgid "Apply or discard pending menu edits before restoring a backup."
+msgstr "Aplique ou descarte as edições pendentes antes de restaurar um backup."
+
+msgid "Restore this backup? Current menu files will be backed up first."
+msgstr "Restaurar este backup? Os arquivos atuais do menu serão salvos em um novo backup."
+
+msgid "Backup restored. New backup:"
+msgstr "Backup restaurado. Novo backup:"
+
+msgid "Profiles change preferences only; launchers and menu edits are preserved."
+msgstr "Os perfis alteram apenas as preferências; os lançadores e as edições do menu são preservados."
+
+msgid "Compact"
+msgstr "Compacto"
+
+msgid "Apply preset"
+msgstr "Aplicar predefinição"
+
+msgid "Export preferences"
+msgstr "Exportar preferências"
+
+msgid "Import preferences"
+msgstr "Importar preferências"
+
+msgid "Restore previous preferences"
+msgstr "Restaurar preferências anteriores"
+
+msgid "Apply this profile? Current preferences will be backed up first."
+msgstr "Aplicar este perfil? As preferências atuais serão salvas em um backup."
+
+msgid "Preferences changed externally. Reopen settings before applying."
+msgstr "As preferências foram alteradas externamente. Reabra as configurações antes de aplicar."
+
+msgid "Preferences saved. Backup:"
+msgstr "Preferências salvas. Backup:"
+
+msgid "No preferences backup is available."
+msgstr "Não há backup de preferências disponível."
+
+msgid "Import"
+msgstr "Importar"
+
+msgid "Export"
+msgstr "Exportar"
+
+msgid "Profile is too large."
+msgstr "O perfil é muito grande."
+
+msgid "Profile exported."
+msgstr "Perfil exportado."
+
+msgid "Scaled preview of current preferences. It does not launch applications."
+msgstr "Prévia em escala das preferências atuais. Não inicia aplicativos."
+
+msgid "Refresh preview"
+msgstr "Atualizar prévia"
+
+msgid "Menu dimensions:"
+msgstr "Dimensões do menu:"
+
+msgid "Calculator"
+msgstr "Calculadora"
+
+msgid "Editor"
+msgstr "Editor"
+
+msgid "Terminal"
+msgstr "Terminal"
+
+msgid "Previous page"
+msgstr "Página anterior"
+
+msgid "Next page"
+msgstr "Próxima página"
+
+msgid "Searching…"
+msgstr "Pesquisando…"
+
+msgid "Results:"
+msgstr "Resultados:"
+
+msgid "No results found"
+msgstr "Nenhum resultado encontrado"
+
+msgid "Launcher is no longer available. Reload the menu."
+msgstr "O lançador não está mais disponível. Recarregue o menu."
+
+msgid "committed"
+msgstr "Concluído"
+
+msgid "pending"
+msgstr "Pendente"
+
+msgid "recovered"
+msgstr "Recuperado"
+
+msgid "invalid"
+msgstr "Inválido"
+
+msgid "command"
+msgstr "Comando"
+
+msgid "icon"
+msgstr "Ícone"
+
+msgid "duplicate"
+msgstr "Duplicado"
+
+msgid "Command is empty or invalid"
+msgstr "O comando está vazio ou é inválido"
+
+msgid "No icon is configured"
+msgstr "Nenhum ícone configurado"
+
+msgid "Possible duplicate command; review before removing"
+msgstr "Possível comando duplicado; revise antes de remover"
+
+msgid "Executable was not found"
+msgstr "O executável não foi encontrado"
+
+msgid "Icon file was not found"
+msgstr "O arquivo de ícone não foi encontrado"
+
+msgid "Icon is not available in the current theme"
+msgstr "O ícone não está disponível no tema atual"
+
+msgid "Office"
+msgstr "Escritório"
+
+msgid "Graphics"
+msgstr "Gráficos"
+
+msgid "Games"
+msgstr "Jogos"
+
+msgid "Preferences"
+msgstr "Preferências"
+
+msgid "Invalid backup journal"
+msgstr "Registro de backup inválido"
+
+msgid "Unsupported backup version"
+msgstr "Versão de backup não suportada"
+
+msgid "Incomplete backup journal"
+msgstr "Registro de backup incompleto"
+
+msgid "Invalid backup path"
+msgstr "Caminho de backup inválido"
+
+msgid "Invalid backup fingerprint"
+msgstr "Verificação do backup inválida"
+
+msgid "Cannot read backup journal"
+msgstr "Não foi possível ler o registro do backup"
+
+msgid "Invalid backup file"
+msgstr "Arquivo de backup inválido"
+
+msgid "Backup file cannot be read"
+msgstr "Não foi possível ler o arquivo de backup"
+
+msgid "Backup content is damaged; restoration cancelled"
+msgstr "O conteúdo do backup está danificado; restauração cancelada"
+
+msgid "Backup is outside the backup directory"
+msgstr "O backup está fora da pasta de backups"
+
+msgid "Only completed backups can be restored"
+msgstr "Apenas backups concluídos podem ser restaurados"
+
+msgid "Files changed after this backup; restoration cancelled"
+msgstr "Os arquivos foram alterados após este backup; restauração cancelada"
+
+msgid "Unsupported profile format or version"
+msgstr "Formato ou versão de perfil não suportado"
+
+msgid "Invalid profile settings"
+msgstr "Preferências do perfil inválidas"
+
+msgid "Unknown or internal setting"
+msgstr "Preferência desconhecida ou interna"
+
+msgid "Invalid value type"
+msgstr "Tipo de valor inválido"
+
+msgid "Value outside allowed range"
+msgstr "Valor fora do intervalo permitido"
+
+msgid "Unknown option"
+msgstr "Opção desconhecida"
+
+msgid "Setting is too long"
+msgstr "O valor da preferência é muito longo"
+
+msgid "Unknown preset"
+msgstr "Predefinição desconhecida"
