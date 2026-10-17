@@ -117,11 +117,7 @@ class CanelliaApplet extends TextIconApplet {
         this.iconTheme = Gtk.IconTheme.get_default();
         this.signals.connect(this.iconTheme, 'changed', () => this._updateIconAndLabel());
         this.signals.connect(this.appSystem, 'installed-changed', () => {
-            this.apps.installedChanged();
-            this._scheduleTimeout(1000, () => {
-                refreshDisplay();
-                return GLib.SOURCE_REMOVE;
-            });
+            this._onInstalledAppsChanged(refreshDisplay);
         });
         this.signals.connect(this.appFavorites, 'changed', () => {
             if (this.display) { // Check if display is initialised.
@@ -280,6 +276,16 @@ class CanelliaApplet extends TextIconApplet {
 
     on_applet_added_to_panel() {
         this._onShowHomeFolderChange();
+    }
+
+    _onInstalledAppsChanged(refreshDisplay) {
+        if (this.willUnmount) return;
+        this.apps.installedChanged();
+        this._cancelTimeout(this.installedRefreshTimeoutId);
+        this.installedRefreshTimeoutId = this._scheduleTimeout(1000, () => {
+            this.installedRefreshTimeoutId = null;
+            refreshDisplay();
+        });
     }
 
     _scheduleTimeout(delay, callback) {
@@ -551,7 +557,7 @@ class CanelliaApplet extends TextIconApplet {
             this._endSearchMode();
         }
         this.display.clearFocusedActors();
-        this.display.appsView.clearAppsView(); // For quicker reopening of menu.
+        this.display.appsView.releaseTransientButtons();
     }
 
     _onMenuKeyPress(actor, event) {
@@ -1052,11 +1058,10 @@ class CanelliaApplet extends TextIconApplet {
                     this.display.appsView.populate(folderContents.results, headerText);
                 });
             } else if (categoryId === 'all' && !this.settings.allAppsOldStyle) {
-                this.display.appsView.populate_init();
-                this.display.appsView.populate_add(this.apps.listApplications('allApps'));
-                this.display.appsView.populate_add(
-                                this.apps.listApplications('allSettings'), _("Settings"));
-                this.display.appsView.populate_finish();
+                this.display.appsView.populate_sections([
+                    [this.apps.listApplications('allApps'), null],
+                    [this.apps.listApplications('allSettings'), _('Settings')]
+                ]);
             } else {//other applications categories
                 this.display.appsView.populate(this.apps.listApplications(categoryId));
             }
@@ -1997,7 +2002,7 @@ class Apps { // This obj provides the .app objects for all the applications cate
     constructor(appSystem) {
         this._appsByCategory = {};
         this._dirs = [];
-        this._knownApps = [];
+        this._knownApps = new Set();
         this._appsNeedRefresh = false;
         this._newInstance = true;
         this.appSystem = appSystem;
@@ -2009,8 +2014,8 @@ class Apps { // This obj provides the .app objects for all the applications cate
     }
 
     _initAppCategories() {
-        const apps_sort = arr => arr.sort((a, b) => a.name.localeCompare(b.name, undefined,
-                                                {sensitivity: "base", ignorePunctuation: true}));
+        const collator = new Intl.Collator(undefined, {sensitivity: "base", ignorePunctuation: true});
+        const apps_sort = arr => arr.sort((a, b) => collator.compare(a.name, b.name));
         this._dirs = [];
         this._appsByCategory = {};
         const iter = this.appSystem.get_tree().get_root_directory().iter();
@@ -2038,8 +2043,7 @@ class Apps { // This obj provides the .app objects for all the applications cate
             const prefIdB = prefCats.indexOf(b.dirId.toUpperCase());
             if (prefIdA < 0 && prefIdB >= 0) return -1;
             if (prefIdA >= 0 && prefIdB < 0) return 1;
-            return a.get_name().localeCompare(b.get_name(), undefined,
-                                              {sensitivity: "base", ignorePunctuation: true});
+            return collator.compare(a.get_name(), b.get_name());
         });
 
         //create "All applications" categories
@@ -2061,12 +2065,8 @@ class Apps { // This obj provides the .app objects for all the applications cate
         this._appsByCategory.allSettings = Array.from(new Set(allSettings)); // remove duplicates
         apps_sort(this._appsByCategory.allSettings);
         // Remove apps from allSettings if they're also in allApps.
-        this._appsByCategory.allApps.forEach(app => {
-            const i = this._appsByCategory.allSettings.findIndex(a => a === app);
-            if (i > -1) {
-                this._appsByCategory.allSettings.splice(i, 1);
-            }
-        })
+        const applicationSet = new Set(this._appsByCategory.allApps);
+        this._appsByCategory.allSettings = this._appsByCategory.allSettings.filter(app => !applicationSet.has(app));
 
         this._appsNeedRefresh = false;
         this._newInstance = false;
@@ -2092,11 +2092,11 @@ class Apps { // This obj provides the .app objects for all the applications cate
                 app.id = id;
                 app.desktop_file_path = entry.get_desktop_file_path();
 
-                if (this._knownApps.indexOf(id) < 0) { // unknown app
+                if (!this._knownApps.has(id)) { // unknown app
                     if (!this._newInstance) {
                         app.newAppShouldHighlight = true;
                     }
-                    this._knownApps.push(id);
+                    this._knownApps.add(id);
                 }
             } else if (nextType === CMenu.TreeItemType.DIRECTORY) {
                 const subDir = iter.get_directory();

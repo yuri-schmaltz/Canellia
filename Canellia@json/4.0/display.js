@@ -166,6 +166,7 @@ class Display {
         //---set middlePane actors to appsHeight
         this.appsView.applicationsScrollBox.height = appsHeight;
         this.categoriesView.groupCategoriesWorkspacesScrollBox.height = appsHeight;
+        this.categoriesView.syncHeight();
 
         if (this.appThis.settings.showSidebar) {
             //find sidebarOuterBox vertical padding

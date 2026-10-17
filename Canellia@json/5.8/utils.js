@@ -137,24 +137,49 @@ class NewTooltip {
     }
 }
 
+// Bounded caches share immutable text/query preparation across search providers.
+const normalizedSearchText = new Map();
+const preparedSearchQueries = new Map();
+function normalizeSearchText(text) {
+    let normalized = normalizedSearchText.get(text);
+    if (normalized !== undefined) return normalized;
+    normalized = graphemeBaseChars(text).toLocaleUpperCase();
+    if (text.length <= 4096) {
+        if (normalizedSearchText.size >= 512) normalizedSearchText.delete(normalizedSearchText.keys().next().value);
+        normalizedSearchText.set(text, normalized);
+    }
+    return normalized;
+}
+function prepareSearchQuery(query) {
+    let prepared = preparedSearchQueries.get(query);
+    if (prepared) return prepared;
+    const escaped = escapeRegExp(query);
+    prepared = {boundary: new RegExp('\\b' + escaped), fuzzy: new RegExp('[' + escaped + ']+', 'g')};
+    if (query.length <= 256) {
+        if (preparedSearchQueries.size >= 64) preparedSearchQueries.delete(preparedSearchQueries.keys().next().value);
+        preparedSearchQueries.set(query, prepared);
+    }
+    return prepared;
+}
+
 //===================================================
 const searchStrPart = (q, str, noFuzzySearch, noSubStringSearch) => {
     if (!str || !q) {
         return 0; //match score = 0
     }
 
-    const str2 = graphemeBaseChars(str).toLocaleUpperCase();
+    const str2 = normalizeSearchText(str);
     //q is already graphemeBaseChars().toLocaleUpperCase() in _doSearch()
     let score = 0, bigrams_score = 0;
 
-    if (new RegExp('\\b'+escapeRegExp(q)).test(str2)) { //match substring from beginning of words
+    if (prepareSearchQuery(q).boundary.test(str2)) { //match substring from beginning of words
         const foundPosition = str2.indexOf(q);
         score = (foundPosition === 0) ? 1.21 : 1.2;//slightly higher score if from beginning
     } else if (!noSubStringSearch && str2.indexOf(q) !== -1) { //else match substring
         score = 1.1;
     } else if (!noFuzzySearch){ //else fuzzy match
         //find longest substring of str2 made up of letters from q
-        const found = str2.match(new RegExp('[' + escapeRegExp(q) + ']+','g'));
+        const found = str2.match(prepareSearchQuery(q).fuzzy);
         let length = 0;
         let longest;
         if (found) {
@@ -189,7 +214,7 @@ const searchStrPart = (q, str, noFuzzySearch, noSubStringSearch) => {
 };
 
 const searchStr = (q, str, noFuzzySearch = false, noSubStringSearch = false) => {
-    if (q && str && graphemeBaseChars(str).toLocaleUpperCase() === q) return 1.5;
+    if (q && str && normalizeSearchText(str) === q) return 1.5;
     const separatorIndex = q.indexOf(" ");
     if (separatorIndex < 1) {
         return searchStrPart(q, str, noFuzzySearch, noSubStringSearch);

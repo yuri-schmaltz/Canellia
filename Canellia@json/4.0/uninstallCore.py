@@ -89,6 +89,10 @@ def resolve(path, item_id=None):
                 continue
             ref, scope = fields
             parts = ref.split('/')
+            # flatpak list commonly omits the app/ prefix for application refs.
+            if len(parts) == 3:
+                parts.insert(0, 'app')
+                ref = '/'.join(parts)
             if len(parts) == 4 and parts[:2] == ['app', flatpak_id] and (
                     not arch or parts[2] == arch) and (not branch or parts[3] == branch):
                 matches.append(Installation('flatpak', ref, scope))

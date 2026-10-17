@@ -240,6 +240,7 @@ class CategoryButton {
     }
 
     destroy() {
+        clearButtonTimeout();
         this.signals.disconnectAllSignals();
         this.label.destroy();
         if (this.icon) {
@@ -255,11 +256,12 @@ class CategoriesView {
     constructor(appThis) {
         this.appThis = appThis;
         this.buttons = [];
+        this.layoutSignals = new SignalManager(null);
 
         this.categoriesBox = new St.BoxLayout({ style_class: 'menu-categories-box', vertical: true });
         this.groupCategoriesWorkspacesWrapper =
                                 new St.BoxLayout({/*style: 'max-width: 185px;',*/ vertical: true });
-        this.groupCategoriesWorkspacesWrapper.add(this.categoriesBox, { });
+        this.groupCategoriesWorkspacesWrapper.add(this.categoriesBox, { expand: true, y_fill: true });
 
         this.groupCategoriesWorkspacesScrollBox =
                                 new St.ScrollView({ style_class: 'vfade menu-categories-scrollbox' });
@@ -267,6 +269,8 @@ class CategoriesView {
         this.groupCategoriesWorkspacesScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.NEVER);
         this.groupCategoriesWorkspacesScrollBox.set_auto_scrolling(this.appThis.settings.enableAutoScroll);
         this.groupCategoriesWorkspacesScrollBox.set_mouse_scrolling(true);
+        this.layoutSignals.connect(this.groupCategoriesWorkspacesScrollBox, 'notify::height', () => this.syncHeight());
+        this.layoutSignals.connect(this.groupCategoriesWorkspacesScrollBox, 'style-changed', () => this.syncHeight());
         if (!this.appThis.settings.showCategories) {
             this.groupCategoriesWorkspacesScrollBox.width = 0;
         }
@@ -275,6 +279,7 @@ class CategoriesView {
     update() {
         //Put all enabled categories into newButtons[] in default order by reusing the
         //buttons in this.buttons[] or by creating new CategoryButton.
+        const oldButtons = this.buttons;
         const newButtons = [];
 
         //Add 'All applications'
@@ -363,8 +368,31 @@ class CategoriesView {
         this.appThis.settings.categories = this.buttons.map(button => button.id);
 
         //populate categoriesBox with buttons
+        const retained = new Set(this.buttons);
+        oldButtons.forEach(button => { if (!retained.has(button)) button.destroy(); });
         this.categoriesBox.remove_all_children();
-        this.buttons.forEach(button => this.categoriesBox.add_actor(button.actor));
+        this.buttons.forEach(button => this.categoriesBox.add(button.actor, { y_fill: true }));
+        this.syncHeight();
+    }
+
+    syncHeight() {
+        const viewport = this.groupCategoriesWorkspacesScrollBox;
+        if (viewport.height <= 0) return;
+        // Subtract theme padding/borders, retaining the categories' own padding.
+        const contentHeight = viewport.get_theme_node().adjust_for_height(viewport.height);
+        const height = Math.max(0, this.groupCategoriesWorkspacesWrapper.get_theme_node()
+            .adjust_for_height(contentHeight));
+        if (this.categoriesBox.height !== height) this.categoriesBox.set_height(height);
+        const node = this.categoriesBox.get_theme_node();
+        const spacing = node.get_length('spacing');
+        const count = this.buttons.length;
+        if (!count) return;
+        const available = Math.max(count, Math.round(node.adjust_for_height(height) - spacing * (count - 1)));
+        this.buttons.forEach((button, index) => {
+            // Distribute remainder pixels instead of losing fractions in each row.
+            const rowHeight = Math.round((index + 1) * available / count) - Math.round(index * available / count);
+            if (button.actor.height !== rowHeight) button.actor.set_height(rowHeight);
+        });
     }
 
     setSelectedCategoryStyle(categoryId) {
@@ -397,6 +425,7 @@ class CategoriesView {
     }
 
     destroy() {
+        this.layoutSignals.disconnectAllSignals();
         this.buttons.forEach(button => button.destroy());
         this.buttons = [];
         this.categoriesBox.destroy();

@@ -86,15 +86,19 @@ class AppButton {
             this.setGridButtonWidth();
         }
 
+        const content = isListView ? this.actor : new St.BoxLayout({ vertical: true });
+        if (!isListView) {
+            this.actor.add(content, { expand: true, x_fill: true, y_fill: false, y_align: St.Align.MIDDLE });
+        }
         if (this.icon && this.applet.getAppIconSize() > 0) {
-            this.actor.add(this.icon, {
+            content.add(this.icon, {
                 x_fill: false,
                 y_fill: false,
                 x_align: St.Align.MIDDLE,
                 y_align: St.Align.MIDDLE
             });
         }
-        this.actor.add(this.label, {
+        content.add(this.label, {
             x_fill: false,
             y_fill: false,
             x_align: isListView ? St.Align.START : St.Align.MIDDLE,
@@ -478,6 +482,11 @@ class AppsView {
         this.applet = applet;
         this.buttonStore = [];
         this._buttonsByApp = new WeakMap();
+        this._buttonsByActor = new WeakMap();
+        this._activeButtons = [];
+        this._activeButtonSet = new Set();
+        this._gridRevision = 0;
+        this._gridHeightState = null;
         this.appsViewSignals = new SignalManager(null);
 
         this.applicationsListBox = new St.BoxLayout({ vertical: true });
@@ -502,6 +511,11 @@ class AppsView {
         this.bugfixBox.add_actor(this.applicationsBoxWrapper);
         this.applicationsScrollBox = new St.ScrollView(
                                             { style_class: 'vfade menu-applications-scrollbox' });
+        this.appsViewSignals.connect(this.applicationsScrollBox, 'notify::height', () => this.syncGridHeight());
+        this.appsViewSignals.connect(this.applicationsGridBox, 'style-changed', () => {
+            this._gridRevision++;
+            this.syncGridHeight();
+        });
         const vscrollApplications = this.applicationsScrollBox.get_vscroll_bar();
         this.appsViewSignals.connect(vscrollApplications, 'scroll-start',
                                                 () => { this.applet.menu.passEvents = true; });
@@ -528,6 +542,7 @@ class AppsView {
     }
 
     populate(appList, headerText = null) {
+        if (appList.length <= 200 && this._reusePopulation([[appList, null]], headerText)) return;
         const pageSize = 200;
         const list = appList.slice();
         const render = offset => {
@@ -551,6 +566,44 @@ class AppsView {
             this.populate_finish();
         };
         render(0);
+        if (appList.length <= pageSize) this._rememberPopulation([[appList, null]], headerText);
+    }
+
+    _reusePopulation(sections, headerText) {
+        const saved = this._populationSignature;
+        if (!saved || saved.headerText !== headerText || saved.sections.length !== sections.length ||
+                saved.mode !== this.applet.settings.applicationsViewMode) return false;
+        const grid = this.getGridValues();
+        if (saved.columns !== grid.columns || saved.columnWidth !== grid.columnWidth) return false;
+        if (!sections.every(([apps, title], index) => saved.sections[index][0] === apps && saved.sections[index][1] === title && saved.lengths[index] === apps.length)) return false;
+        this.leaveAppsViewFocusedActor();
+        this.syncGridHeight();
+        return true;
+    }
+
+    _rememberPopulation(sections, headerText) {
+        // Only installation-backed catalogs are stable; live files/search/recents refresh normally.
+        if (!sections.every(([apps]) => apps.every(app => app.isApplication && !app.deleteAfterUse))) {
+            this._populationSignature = null;
+            return;
+        }
+        this._populationSignature = { sections, lengths: sections.map(([apps]) => apps.length),
+            headerText, mode: this.applet.settings.applicationsViewMode, ...this.getGridValues() };
+    }
+
+    populate_sections(sections, headerText = null) {
+        if (this._reusePopulation(sections, headerText)) return;
+        this.populate_init(headerText);
+        sections.forEach(([apps, title]) => this.populate_add(apps, title));
+        this.populate_finish();
+        this._rememberPopulation(sections, headerText);
+    }
+
+    releaseTransientButtons() {
+        if (this._activeButtons.some(button => button.app.deleteAfterUse)) {
+            this.clearAppsView();
+            this.buttonStoreCleanup();
+        }
     }
 
     changePage(direction) {
@@ -558,6 +611,8 @@ class AppsView {
     }
 
     populate_init(headerText = null) {
+        this._populationSignature = null;
+        this._gridRevision++;
         this._navigatePage = null;
         this.applicationsListBox.hide();//hide while populating for performance.
         //this.applicationsGridBox.hide();//gridBox is slower when hidden!
@@ -578,6 +633,8 @@ class AppsView {
     }
 
     populate_add(appList, subheadingText = null, subheadingClickAction = null) {
+        const gridValues = this.getGridValues();
+        this._gridRevision++;
         const gridLayout = this.applicationsGridLayout.layout_manager;
 
         if (subheadingText) {
@@ -594,12 +651,13 @@ class AppsView {
                     subheading.subheadingBox,
                     this.column,
                     this.rownum,
-                    this.getGridValues().columns,
+                    gridValues.columns,
                     1
                 );
                 this.rownum++;
             }
 
+            subheading.subheadingBox.layout_row = this.rownum - 1;
             subheading.subheadingBox.show();
             this.subheadings.push(subheading);
         }
@@ -611,21 +669,29 @@ class AppsView {
                 appButton = new AppButton(this.applet, app);
                 this.buttonStore.push(appButton);
                 this._buttonsByApp.set(app, appButton);
+                this._buttonsByActor.set(appButton.actor, appButton);
             }
             if (this.applet.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
                 this.applicationsListBox.add_actor(appButton.actor);
             } else {
-                appButton.setGridButtonWidth();// In case menu has been resized.
+                appButton.actor.width = gridValues.columnWidth;// In case menu has been resized.
                 gridLayout.attach(appButton.actor, this.column, this.rownum, 1, 1);
+                appButton.actor.layout_row = this.rownum;
                 appButton.actor.layout_column = this.column;//used for key navigation
                 this.column++;
 
-                if (this.column > this.getGridValues().columns - 1) {
+                if (this.column > gridValues.columns - 1) {
                     this.column = 0;
                     this.rownum++;
                 }
             }
 
+            if (this._activeButtonSet.has(appButton)) {
+                this._activeButtons.splice(this._activeButtons.indexOf(appButton), 1);
+            } else {
+                this._activeButtonSet.add(appButton);
+            }
+            this._activeButtons.push(appButton);
             appButton._setButtonStyleNormal();
         });
     }
@@ -638,6 +704,7 @@ class AppsView {
         }
 
         this.currentGridViewColumnCount = this.getGridValues().columns;
+        this.syncGridHeight();
     }
 
     focusFirstItem() {
@@ -649,6 +716,7 @@ class AppsView {
     }
 
     resizeGrid() {
+        this._gridRevision++;
         this.applicationsGridBox.hide();//for performance
 
         const newcolumnCount = this.getGridValues().columns;
@@ -673,6 +741,7 @@ class AppsView {
                     actor.has_style_class_name('menu-application-button-selected')) {
                     actor.width = newColumnWidth;
                     gridLayout.attach(actor, column, rownum, 1, 1);
+                    actor.layout_row = rownum;
                     actor.layout_column = column;//used for key navigation
                     column++;
                     if (column > newcolumnCount - 1) {
@@ -685,6 +754,7 @@ class AppsView {
                         rownum++;
                     }
                     gridLayout.attach(actor, column, rownum, newcolumnCount, 1);
+                    actor.layout_row = rownum;
                     rownum++;
                 }
             });
@@ -693,10 +763,55 @@ class AppsView {
 
         this.applicationsGridBox.show();
         this.currentGridViewColumnCount = newcolumnCount;
+        this.syncGridHeight();
+    }
+
+    syncGridHeight() {
+        if (this.applet.settings.applicationsViewMode !== ApplicationsViewMode.GRID) return;
+        const actors = this.applicationsGridLayout.get_children();
+        if (!actors.length || this.applicationsScrollBox.height <= 0) return;
+        let available = this.applicationsScrollBox.get_theme_node()
+            .adjust_for_height(this.applicationsScrollBox.height);
+        if (this.bugfixBox) available = this.bugfixBox.get_theme_node().adjust_for_height(available);
+        available = this.applicationsBoxWrapper.get_theme_node().adjust_for_height(available);
+        if (this.headerText.visible) {
+            available -= this.headerText.get_preferred_height(-1)[1];
+            available -= this.applicationsBoxWrapper.get_theme_node().get_length('spacing');
+        }
+        available = this.applicationsGridBox.get_theme_node().adjust_for_height(available);
+        const state = {available, width: this.applicationsGridBox.width,
+            revision: this._gridRevision, node: this.applicationsGridBox.get_theme_node()};
+        const previous = this._gridHeightState;
+        if (previous && Object.keys(state).every(key => state[key] === previous[key])) return;
+        this._gridHeightState = state;
+        const rows = new Map();
+        actors.forEach(actor => {
+            actor.set_height(-1);
+            const row = actor.layout_row;
+            const minimum = actor.get_preferred_height(actor.width)[1];
+            rows.set(row, Math.max(rows.get(row) || 0, minimum));
+        });
+        const spacing = this.applicationsGridLayout.layout_manager.row_spacing;
+        const natural = Array.from(rows.values()).reduce((sum, height) => sum + height, 0)
+            + spacing * (rows.size - 1);
+        // Keep scrolling when all rows cannot fit without clipping icons or labels.
+        if (natural >= available) return;
+        const extra = available - natural;
+        const heights = new Map();
+        let index = 0;
+        rows.forEach((height, row) => {
+            heights.set(row, height + Math.round((index + 1) * extra / rows.size)
+                - Math.round(index * extra / rows.size));
+            index++;
+        });
+        actors.forEach(actor => {
+            const height = heights.get(actor.layout_row);
+            if (actor.height !== height) actor.set_height(height);
+        });
     }
 
     getGridValues() {
-        const gridBoxUsableWidth = this.applet.display.currentGridBoxUsableWidth;
+        const gridBoxUsableWidth = Math.max(1, this.applet.display.currentGridBoxUsableWidth || 200 * global.ui_scale);
         const minColumnWidth = Math.max(140, this.applet.settings.appsGridIconSize * 1.2);
         const columns = Math.max(1, Math.floor(gridBoxUsableWidth / (minColumnWidth * global.ui_scale)));
         const columnWidth = Math.max(1, Math.floor(gridBoxUsableWidth / columns));
@@ -705,14 +820,8 @@ class AppsView {
     }
 
     getActiveButtons() {
-        const activeButtons = [];
-        this.getActiveContainer().get_children().forEach(child => {
-            const foundButton = this.buttonStore.find(button => button.actor === child);
-            if (foundButton) {
-                activeButtons.push(foundButton);
-            }
-        });
-        return activeButtons;
+        // Preserve display order without crossing into Clutter or scanning the cache.
+        return this._activeButtons.slice();
     }
 
     clearAppsView() {
@@ -724,7 +833,11 @@ class AppsView {
         }
         this.subheadings = [];
 
+        this._populationSignature = null;
         this.getActiveContainer().remove_all_children();
+        this._activeButtons = [];
+        this._activeButtonSet = new Set();
+        this._gridRevision++;
     }
 
     leaveAppsViewFocusedActor() {
@@ -741,12 +854,16 @@ class AppsView {
         const buttonStore = this.buttonStore.filter(button => {
             if (button.app.deleteAfterUse) {
                 this._buttonsByApp.delete(button.app);
+                this._buttonsByActor.delete(button.actor);
+
                 button.destroy();
                 return false;
             } else {
                 return true;
             } });
         this.buttonStore = buttonStore;
+        this._activeButtons = this._activeButtons.filter(button => this._buttonsByActor.has(button.actor));
+        this._activeButtonSet = new Set(this._activeButtons);
     }
 
     destroy() {
@@ -760,6 +877,11 @@ class AppsView {
         this.buttonStore.forEach(button => { if (button) button.destroy(); });
         this.buttonStore = [];
         this._buttonsByApp = new WeakMap();
+        this._buttonsByActor = new WeakMap();
+        this._activeButtons = [];
+        this._activeButtonSet = new Set();
+        this._gridRevision = 0;
+        this._gridHeightState = null;
     }
 }
 

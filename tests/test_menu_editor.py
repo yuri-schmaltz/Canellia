@@ -376,3 +376,25 @@ class LauncherFailureMatrixTests(unittest.TestCase):
         self.assertFalse(self.model.redo_stack)
         self.model.undo()
         self.assertEqual(self.model.applications['editor.desktop'].name, 'Edit 179')
+
+
+class DesktopCacheTests(unittest.TestCase):
+    def test_cached_values_preserve_duplicates_actions_and_escapes(self):
+        document = core.DesktopFile(b'[Desktop Entry]\nName=First\nName=Second\\sname\nExec=/usr/bin/true\n[Desktop Action New]\nName=Action\n')
+        self.assertEqual(document.get('Name'), 'Second name')
+        self.assertEqual(document.get('Name'), 'Second name')
+        self.assertEqual(document.get('Missing', 'Default\\nline'), 'Default\nline')
+        document.lines[2] = 'Name=Direct change'
+        self.assertEqual(document.get('Name'), 'Direct change')
+        self.assertIn(b'Name=Action', document.to_bytes())
+
+    def test_deepcopy_cache_never_cross_contaminates_undo_state(self):
+        import copy
+        document = core.DesktopFile(APP)
+        before = document.get('Name')
+        snapshot = copy.deepcopy(document)
+        document.set('Name', 'Changed')
+        self.assertEqual(document.get('Name'), 'Changed')
+        self.assertEqual(snapshot.get('Name'), before)
+        snapshot.set('Comment', 'Snapshot only')
+        self.assertNotEqual(snapshot.get('Comment'), document.get('Comment'))

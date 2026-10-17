@@ -107,6 +107,15 @@ trata retorno não zero de `mint-remove-flatpak` como motivo para oferecer
 remoção do lançador. Isso confirma a relevância da resolução anterior à
 delegação e do fluxo próprio para Flatpaks. O diálogo de remoção não foi aberto.
 
+Na atualização do applet, a consulta no sistema hospedeiro revelou que
+`flatpak list --columns=ref,installation` retorna referências no formato
+`ID/arquitetura/branch`, sem `app/`. O resolver foi corrigido para aceitar
+ambos os formatos, com regressão para o formato observado. A consulta real
+identificou Brave como pacote `brave-browser` pelo lançador original e
+Godot, FreeCAD e Arduino IDE2 como Flatpaks na instalação de sistema.
+A instalação do applet e sua recarga pelo D-Bus foram executadas com sucesso.
+Essas verificações não executaram desinstalações.
+
 As duas versões agora usam `uninstallApplication.py` e `uninstallCore.py`.
 O helper antigo virou um ponto de entrada de compatibilidade. A identificação
 consulta `X-Flatpak` e os refs instalados, preservando arquitetura, branch e

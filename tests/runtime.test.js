@@ -264,3 +264,55 @@ for (const version of ['4.0','5.8']) {
         assert.equal(utils.wordWrap('A'.repeat(300)).replace(/\n/g,''),'A'.repeat(300));
     });
 }
+
+for (const version of ['4.0', '5.8']) {
+    test(`${version}: installation event bursts coalesce and removal cancels pending refresh`, () => {
+        const pending = new Map();
+        let next = 1;
+        const GLib = {PRIORITY_DEFAULT: 0, SOURCE_REMOVE: false,
+            timeout_add(priority, delay, callback) { const id = next++; pending.set(id, {delay, callback}); return id; },
+            source_remove(id) { pending.delete(id); }};
+        const imports = {gi: {GLib}, ui: {
+            main: {keybindingManager: {removeHotKey() {}}}, popupMenu: {}, appFavorites: {},
+            applet: {TextIconApplet: class {}}, searchProviderManager: {}, settings: {},
+        }, misc: {util: {}, gnomeSession: {}, screenSaver: {}, signalManager: {}}};
+        const {CanelliaApplet} = load(version, 'applet.js', imports, {}, '\nmodule.exports={CanelliaApplet};');
+        const instance = Object.create(CanelliaApplet.prototype);
+        instance._timeoutIds = new Set();
+        instance.willUnmount = false;
+        let dirtied = 0, refreshed = 0;
+        instance.apps = {installedChanged() { dirtied++; }};
+        const refresh = () => { refreshed++; };
+        for (let i = 0; i < 100; i++) instance._onInstalledAppsChanged(refresh);
+        assert.equal(dirtied, 100);
+        assert.equal(pending.size, 1);
+        assert.equal(instance._timeoutIds.size, 1);
+        const [id, timer] = [...pending.entries()][0];
+        assert.equal(timer.delay, 1000);
+        pending.delete(id);
+        timer.callback();
+        assert.equal(refreshed, 1);
+        assert.equal(instance.installedRefreshTimeoutId, null);
+        instance._onInstalledAppsChanged(refresh);
+        instance.on_applet_removed_from_panel();
+        assert.equal(pending.size, 0);
+        instance._onInstalledAppsChanged(refresh);
+        assert.equal(pending.size, 0);
+        assert.equal(refreshed, 1);
+    });
+    test(`${version}: category destruction cancels pending hover activation`, async () => {
+        const imports = {gi: {}, ui: {dnd: {}}, misc: {signalManager: {}}};
+        const {CategoryButton, schedule} = load(version, 'categoriesview.js', imports, {},
+            '\nmodule.exports={CategoryButton,schedule:callback=>{buttonTimeoutId=setTimeout(callback,10);}};');
+        const button = Object.create(CategoryButton.prototype);
+        let activated = 0, destroyed = 0;
+        button.signals = {disconnectAllSignals() {}};
+        button.label = {destroy() { destroyed++; }};
+        button.actor = {destroy() { destroyed++; }};
+        schedule(() => { activated++; });
+        button.destroy();
+        await new Promise(resolve => setTimeout(resolve, 25));
+        assert.equal(activated, 0);
+        assert.equal(destroyed, 2);
+    });
+}

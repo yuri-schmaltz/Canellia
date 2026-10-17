@@ -49,6 +49,8 @@ class DesktopFile:
     def __init__(self, data=None):
         self.lines = (data.decode('utf-8').splitlines() if data else
                       ['[Desktop Entry]', 'Type=Application'])
+        self._parsed_lines = None
+        self._values = {}
         if '[Desktop Entry]' not in self.lines:
             raise EditorError('Missing [Desktop Entry] group')
 
@@ -64,11 +66,28 @@ class DesktopFile:
     def __eq__(self, other):
         return isinstance(other, DesktopFile) and self.lines == other.lines
 
-    def get(self, key, default=''):
-        values = [value for _, name, value in self._positions() if name == key]
-        value = values[-1] if values else default
+    def __deepcopy__(self, memo):
+        clone = self.__class__.__new__(self.__class__)
+        memo[id(self)] = clone
+        clone.lines = self.lines.copy()
+        # Parsed tuples and string values are immutable; rebuild rather than mutate.
+        clone._parsed_lines = self._parsed_lines
+        clone._values = self._values
+        return clone
+
+    @staticmethod
+    def _decode(value):
         return re.sub(r'\\([sntr\\])', lambda m: {
             's': ' ', 'n': '\n', 't': '\t', 'r': '\r', '\\': '\\'}[m[1]], value)
+
+    def get(self, key, default=''):
+        lines = tuple(self.lines)
+        if self._parsed_lines != lines:
+            self._values = {name: self._decode(value) for _, name, value in self._positions()}
+            self._parsed_lines = lines
+        if key in self._values:
+            return self._values[key]
+        return self._decode(default) if default else default
 
     def localized(self, key):
         language = (os.environ.get('LC_ALL') or os.environ.get('LC_MESSAGES') or
@@ -450,7 +469,7 @@ class EditorModel:
             raise
         # Retain only the records affected by each command. Keeping a complete
         # catalog for every undo step scales poorly on large application menus.
-        after = self._snapshot()
+        after = (self.menu, self.categories, self.applications, self.pending)
         def difference(old, new):
             return {key: old.get(key) for key in old.keys() | new.keys() if old.get(key) != new.get(key)}
         old_categories = difference(before[1], after[1])
@@ -458,8 +477,8 @@ class EditorModel:
         if not old_categories and not old_apps and before[3] == after[3] and before[0].to_bytes() == after[0].to_bytes():
             return
         old = (before[0], old_categories, old_apps, before[3])
-        new = (after[0], {key: after[1].get(key) for key in old_categories},
-               {key: after[2].get(key) for key in old_apps}, after[3])
+        new = copy.deepcopy((after[0], {key: after[1].get(key) for key in old_categories},
+                             {key: after[2].get(key) for key in old_apps}, after[3]))
         self.undo_stack.append((old, new))
         del self.undo_stack[:-self.HISTORY_LIMIT]
         self.redo_stack.clear()
@@ -751,7 +770,9 @@ class EditorModel:
             if visibility == 'custom' and not (app.custom or (app.source and self.storage.data_home in app.source.parents) or
                                              self.pending.get(self._app_target(app)) is not None):
                 continue
-            haystack = folded(' '.join((app.name, app.document.get('Exec'), app.document.localized('Comment'), app.id)))
-            if all(term in haystack for term in terms):
-                result.append(app)
+            if terms:
+                haystack = folded(' '.join((app.name, app.document.get('Exec'), app.document.localized('Comment'), app.id)))
+                if not all(term in haystack for term in terms):
+                    continue
+            result.append(app)
         return sorted(result, key=lambda app: folded(app.name))

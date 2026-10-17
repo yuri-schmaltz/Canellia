@@ -48,9 +48,10 @@ class UninstallTests(unittest.TestCase):
 
     def test_named_installation_and_auxiliary_desktop(self):
         path = self.launcher(self.user, name='org.example.Editor-handler.desktop', command='flatpak run org.example.Editor --open-url %U', extra='X-Flatpak=org.example.Editor\n')
-        with patch.object(core, 'run', return_value=result('app/org.example.Editor/aarch64/stable\twork\n')):
+        with patch.object(core, 'run', return_value=result('org.example.Editor/aarch64/stable\twork\n')):
             found = core.resolve(path)
         self.assertIn('--installation=work', found[0].command())
+        self.assertEqual(found[0].identity, 'app/org.example.Editor/aarch64/stable')
 
     def test_flatpak_query_error_does_not_mean_absent(self):
         path = self.launcher(self.user, command='flatpak run org.example.Editor', extra='X-Flatpak=org.example.Editor\n')
@@ -119,6 +120,8 @@ class UninstallFlowTests(unittest.TestCase):
         self.ui = importlib.util.module_from_spec(spec)
         with patch.dict(sys.modules, {'gi': gi, 'gi.repository': repository, 'uninstallCore': core}):
             spec.loader.exec_module(self.ui)
+        # Installed locale catalogs must not change assertions in UI tests.
+        self.ui._ = lambda text: text
         self.args = patch.object(sys, 'argv', ['uninstallApplication.py', '/test/editor.desktop', 'editor.desktop'])
         self.args.start()
         self.addCleanup(self.args.stop)
